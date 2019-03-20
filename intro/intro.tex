@@ -1,0 +1,57 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+%
+% ----- copyright and title pages
+%
+\Title{The Search for \tnbb\ to Excited States in \Ge{76} using the \MJD}
+\Author{Ian Guinn}
+\Year{2019}
+\Program{Department of Physics}
+
+\Chair{Jason Detwiler}{Associate Professor}{Department of Physics}
+\Signature{First committee member}
+\Signature{Next committee member}
+\Signature{etc}
+
+\copyrightpage
+\titlepage  
+
+%
+% ----- abstract
+%
+\setcounter{page}{-1}
+\input{intro/abstract.tex}
+ 
+%
+% ----- contents & etc.
+%
+\tableofcontents
+\listoffigures
+%\listoftables  % I have no tables
+ 
+%
+% ----- glossary 
+%
+\chapter*{Glossary}      % starred form omits the `chapter x'
+\addcontentsline{toc}{chapter}{Glossary}
+\thispagestyle{plain}
+%
+\input{intro/glossary.tex}
+
+%
+% ----- acknowledgments
+%
+\acknowledgments{
+  Thanks!
+}
+
+%
+% ----- dedication
+%
+\dedication{\begin{center}to me\end{center}}
+
+\end{document}

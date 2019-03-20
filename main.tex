@@ -1,0 +1,22 @@
+\documentclass [11pt, proquest] {thesis}[2015/03/03]
+\setcounter{tocdepth}{1}  % Print the chapter and sections to the toc
+
+\usepackage{subfiles}
+\usepackage{mystyle}
+
+\begin{document}
+
+\prelimpages
+\subfile{intro/intro.tex}
+
+\textpages
+\subfile{ch1/ch1.tex}
+
+\bibliographystyle{plain}
+\bibliography{thesis}
+
+\appendix
+%\subfile{appxa/appxa.tex}
+
+\include{vita}
+\end{document}

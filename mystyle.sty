@@ -1,19 +1,46 @@
 \ProvidesPackage{mystyle}
 
+%\RequirePackage[maxbibnames=3, backend=biber]{biblatex}
 \RequirePackage{graphicx,epstopdf}
 \RequirePackage{subfigure}
 \RequirePackage{url}
 \RequirePackage{amstext}
+\RequirePackage{amsmath}
 
 
-\newcommand{\cpp}{C\protect\raisebox{.25ex}{++}\ }  % formats C++ correctly
 \newcommand{\MJ}{M{\footnotesize AJORANA}}
 \newcommand{\Demo}{D{\footnotesize EMON\-STRAT\-OR}}
 \newcommand{\MJD}{\MJ\ \Demo}
+\newcommand{\Gerda}{\textsc{Gerda}}
+\newcommand{\bb}{${\beta \beta}$}
 \newcommand{\znbb}{${0 \nu \beta \beta}$}
 \newcommand{\tnbb}{${2 \nu \beta \beta}$}
+\newcommand{\bbes}{\bb E.S.}
 
+%programming stuff
+\newcommand{\cpp}{C\protect\raisebox{.25ex}{++}\ }  % formats C++ correctly
+\newcommand{\TTree}{\texttt{TTree}}
+\newcommand{\Mage}{\textsc{MaGe}}
+\newcommand{\geant}{\textsc{Geant4}}
+
+%isotope macros
 \newcommand{\iso}[2]{$^{#1}$#2}
 \newcommand{\Ge}[1]{\iso{#1}{Ge}}
+\newcommand{\Se}[1]{\iso{#1}{Se}}
+\newcommand{\Th}[1]{\iso{#1}{Th}}
+\newcommand{\Co}[1]{\iso{#1}{Co}}
+
+%spin parity state macros
+\newcommand{\SP}[3]{$#1^{#2}_{#3}$}
+\newcommand{\gs}{\sp{0}{+}{g.s.}}
+
+\newcommand{\md}{multi-detector event}
+\newcommand{\msmd}{multi-site event}
+\newcommand{\mssd}{multi-site waveform}
+\newcommand{\Md}{Multi-detector event}
+\newcommand{\Msmd}{Multi-site event}
+\newcommand{\Mssd}{Multi-site waveform}
+
+
 
 \endinput

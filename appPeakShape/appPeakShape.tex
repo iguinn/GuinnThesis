@@ -1,0 +1,94 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+
+\documentclass[/main.tex]{subfiles}
+\graphicspath{{./pics/}{ch4/pics/}}
+\begin{document}
+
+\onlyinsubfile{\appendix}
+\chapter{Peak Shape Description and Measurement} \label{app:peakshape}
+
+\section{Peak Shape Function and Parameters}
+A moneenergetic energy peak in the \MJD\ is typically modelled using the following peakshape function
+\begin{equation}
+  \begin{aligned}
+    \mathrm{PS}(E; A, \mu, \sigma, f_{tail}, \tau, h_{step}) &= A\big((1-f_{tail})\mathrm{Gaus}(E; \mu, \sigma) \\&+ f_{tail}\cdot\mathrm{ExGaus}(E; \mu, \sigma, \tau) \\&+ \frac{h_{step}}{2}\mathrm{erfc}(\frac{E-\mu}{\sqrt{2}\sigma})\big)
+  \end{aligned}
+\end{equation}
+where $A$ is the total area of the peak.
+The peak shape consists of a Gaussian component:
+\begin{equation}
+  \mathrm{Gaus}(E; \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}\mathrm{exp}(-\frac{(E-\mu)^2}{2\sigma^2})
+\end{equation}
+and a low energy (LE) tail, defined as an exponentially modified Gaussian (exGaus) component:
+\begin{equation}
+  \mathrm{ExGaus}(E; \mu, \sigma, \tau) = \frac{1}{2|\tau|} \mathrm{erfc}(\mathrm{sgn}(\tau)\frac{(E-\mu) + \frac{\sigma^2}{\tau}}{\sqrt{2}\sigma})\mathrm{exp}(\frac{E-\mu}{\tau}+\frac{\sigma^2}{\tau^2})
+\end{equation}
+$\sigma$ represents the gaussian width, $\tau$ represents the length of the LE tail, and $f_{tail}$ represents the fraction of the peak contained in the LE tail.
+Note that this formulation of the ExGaus function allows for negative values of $\tau$, resulting in a high energy tail instead of a low energy tail.
+These three parameters combine to define the width of the peak, while $\mu$ represents the mean of the Gaussian component; note that the mean of the peak as a whole will be lower due to the LE tail.
+The LE tail originates from position dependant factors in the detectors that cause energy loss, including charge trapping and transition layers.
+Finally, the peak shape contains a step component, described by the complementary error function (erfc), where $h_{step}$ defines the fraction of the peak amplitude that appears in the step.
+The step is caused by factors that cause enough energy loss to pull events entirely out of the peak, such as low angle scattering of a $\gamma$ before entering a detector and detector transition layers.
+Events in the step component are not considered part of the full energy peak, and the step is primarily a factor for calibration events which must pass through the copper cryostat which is not true of events that originate in the detectors.
+For this reason, the step is not considered when optimizing the signal ROI.
+The peak shape function is shown in figure~\ref{fig:peakshape}.
+\\
+This peak shape function can be optionally extended with the addition of a high energy tail as follows:
+\begin{equation}
+  \begin{aligned}
+    \mathrm{PS}(E; A, \mu, \sigma, f_{LT}, \tau_{LT}, f_{HT}, \tau_{HT}, h_{step}) &= A\big((1-f_{LT}-f_{HT})\mathrm{Gaus}(E; \mu, \sigma) \\&+ f_{LT}\cdot\mathrm{ExGaus}(E; \mu, \sigma, \tau_{LT}) \\&+ f_{HT}\cdot\mathrm{ExGaus}(E; \mu, \sigma, -\tau_{HT}) \\&+ \frac{h_{step}}{2}\mathrm{erfc}(\frac{E-\mu}{\sqrt{2}\sigma})\big)
+  \end{aligned}
+\end{equation}
+Typically, no high energy tail is used, meaning $f_{HT}=0$.
+A high energy tail is necessary only if an abnormal peakshape appears.
+This can occur if the energy filter parameters are mis-set, or if peaks other than full energy $\gamma$ peaks are being fit, as is the case in section~\ref{sec:co56}, where the single- and double-escape peaks are used.
+\\
+A simultaneous fit of many peaks in a calibration spectrum is performed in order to define the peak shape parameters at all energies.
+The peak shape parameters are defined as independant functions of energies and several hyperparameters as follows
+\begin{itemize}
+\item $A$ is independant of energy, since it depends on the relative intensities and the different detection efficiencies of each $\gamma$.
+\item $\mu$ is also independant of energy.
+  $\mu$ is ostensibly linear with respect to energy; however, due to local and global energy nonlinearities, in order to avoid systematic errors in the other peak shape parameters, this parameter is treated as independant.
+\item $\sigma$ is defined as follows
+  \begin{equation}
+    \sigma(E) = \sqrt{\sigma_0^2 + \sigma_1^2E + \sigma_2^2E^2}
+  \end{equation}
+  $\sigma_0$ arises primarily from electronic noise. $\sigma_1$ arises primarily from the Fano factor $F$, and is ostensibly
+  \begin{equation}
+    \sigma_1^2 = (2.35)^2F\epsilon E
+  \end{equation}
+  where $F=0.08$ and $\epsilon=2.96$~eV is the electron-hole production energy.
+  In actuality, other factors also contribute to $\sigma_1$, so it is measured to be larger than expected.
+  $\sigma_2$ arises from a variety of systematic energy uncertainties, including charge trapping, gain drift and small errors in energy calculation.
+\item $f_{tail}$ is defined to be constant with respect to energy.
+\item $\tau$ is defined as linear with respect to energy
+  \begin{equation}
+    \tau(E) = \tau_0 + \tau_1
+  \end{equation}
+  $\tau_1$ arises primarily from charge trapping and transition layer events, each of which cause charge loss.
+  $\tau_0$, while expected to be zero, is necessary in order to obtain a strong fit result.
+\item $h_{step}$ is defined as
+  \begin{equation}
+    h_{step}(E) = \frac{h_0}{E^2} + h_1E^{-0.88}
+  \end{equation}
+  $h_0$ arises from low angle scattering of $\gamma$s as they approach the detector.
+  The inverse square energy dependance can be analytically derived\cite{2016Oberer}.
+  The second power law term arises from transition layer events, and the power of -0.88 was empirically measured in simulations and data as described in section~\ref{sec:stepheight}.
+\end{itemize}
+
+\section{Performing a Simultaneous Fit} \label{sec:fitter}
+\section{Computing Auxiliary Parameters}
+\section{The Step Height Model} \label{sec:stepheight}
+
+\section{GAT Implementation}
+Implementations of the peak shape function, the parameter gradient of the peak shape function, the CDF of the peak shape function, and functions calculating various auxillary parameters such as the FWHM, centroid and standard deviation are included in \texttt{GATPeakShapeUtil.hh}.
+Implementation of an energy range with a single peak on top of a quadratic background, along with tools for fitting this energy region are included in \texttt{GATPeakShape.hh}.
+Implementation of an energy region with multiple peaks included, with the peakshape parameters determined by functions of energy and various hyperparameters are included in \texttt{GATMultiPeakRegion.hh}.
+Implementation of the multi peak fitter, which manages many \texttt{GATMultiPeakRegion}s and the various parameter functions and hyperparameters, as well as many tools for computing auxiliary parameters at various energies, are included in \texttt{GATMultiPeakFitter.hh}.
+Implementation of a combined likelihood function to be used for simultaneous fitting is included in \texttt{GATGlobalFitFCN.hh}.
+Implementation of the HMC algorithm described in section~\ref{sec:fitter} is contained in \texttt{GATHybridMonteCarlo.hh}.
+\\
+
+\end{document}

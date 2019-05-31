@@ -2,11 +2,21 @@
 
 %\RequirePackage[maxbibnames=3, backend=biber]{biblatex}
 \RequirePackage{graphicx,epstopdf}
-\RequirePackage{subfigure}
+%\RequirePackage{subcaption}
+\RequirePackage{subfig}
+\RequirePackage{hyperref}
 \RequirePackage{url}
 \RequirePackage{amstext}
 \RequirePackage{amsmath}
+\RequirePackage{multirow}
+\RequirePackage{makecell}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{tabu}
+\RequirePackage{longtable}
+\RequirePackage[figuresright]{rotating}
+\RequirePackage{adjustbox}
 
+\pdfminorversion=7
 
 \newcommand{\MJ}{M{\footnotesize AJORANA}}
 \newcommand{\Demo}{D{\footnotesize EMON\-STRAT\-OR}}
@@ -15,8 +25,12 @@
 \newcommand{\bb}{${\beta \beta}$}
 \newcommand{\znbb}{${0 \nu \beta \beta}$}
 \newcommand{\tnbb}{${2 \nu \beta \beta}$}
-\newcommand{\bbes}{\bb E.S.}
-
+\newcommand{\bbes}{\bb~E.S.}
+\newcommand{\hl}[1]{$T^{#1}_{1/2}$}
+\newcommand{\Qbb}{$Q_{\beta\beta}$}
+\newcommand{\Qval}{$Q$-value}
+\newcommand{\e}[1]{\times 10^{#1}} %assumed use inside of equation mode
+\newcommand{\hlinethick}{\tabucline[2pt]{-}}
 %programming stuff
 \newcommand{\cpp}{C\protect\raisebox{.25ex}{++}\ }  % formats C++ correctly
 \newcommand{\TTree}{\texttt{TTree}}
@@ -29,11 +43,15 @@
 \newcommand{\Se}[1]{\iso{#1}{Se}}
 \newcommand{\Th}[1]{\iso{#1}{Th}}
 \newcommand{\Co}[1]{\iso{#1}{Co}}
+\newcommand{\Tl}[1]{\iso{#1}{Tl}}
+\newcommand{\Bi}[1]{\iso{#1}{Bi}}
 
 %spin parity state macros
 \newcommand{\SP}[3]{$#1^{#2}_{#3}$}
-\newcommand{\gs}{\sp{0}{+}{g.s.}}
+\newcommand{\gs}{\SP{0}{+}{g.s.}}
+\newcommand{\decaySP}[3]{$0^+_{g.s.}\xrightarrow{#1\nu\beta\beta}#2^+_{#3}$}
 
+\newcommand{\sd}{single-detector event}
 \newcommand{\md}{multi-detector event}
 \newcommand{\msmd}{multi-site event}
 \newcommand{\mssd}{multi-site waveform}

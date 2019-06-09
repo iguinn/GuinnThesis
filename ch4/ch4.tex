@@ -255,7 +255,7 @@ The efficiency is defined by the CDF of the Gaussian and LE tail components
     \epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma, f_{tail}, \tau) &= \frac{1}{2}\big(\mathrm{erfc}(\frac{E_{low}-\mu}{\sqrt{2}\sigma}) - \mathrm{erfc}(\frac{E_{high}-\mu}{\sqrt{2}\sigma})\big) \\& + f_{tail}\tau\big(\mathrm{ExGaus}(E_{high}; \mu, \sigma, \tau)-\mathrm{ExGaus}(E_{low}; \mu, \sigma, \tau)\big)
   \end{aligned}
 \end{equation}
-The optimal ROI is numerically calculated by minimizing $\frac{1}{\hat\Gamma(E_{low}, E_{high}, \overline B)}$ with respect to $E_{low}$ and $E_{high}$ using the minuit minimizer\cite{ref:minuit}.
+The optimal ROI is numerically calculated by minimizing $\frac{1}{\hat\Gamma(E_{low}, E_{high}, \overline B)}$ with respect to $E_{low}$ and $E_{high}$ using the minuit minimizer\cite{minuit}.
 \\
 \subsection{Background ROI Selection}
 For each peak, a background ROI of width $50--100$~keV surrounding the peak is selected.

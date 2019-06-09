@@ -3,7 +3,7 @@
 \makeatother
 
 \documentclass[/main.tex]{subfiles}
-\graphicspath{{./pics/}{ch4/pics/}}
+\graphicspath{{./pics/}{appPeakShape/pics/}}
 \begin{document}
 
 \onlyinsubfile{\appendix}
@@ -73,14 +73,83 @@ The peak shape parameters are defined as independant functions of energies and s
   \begin{equation}
     h_{step}(E) = \frac{h_0}{E^2} + h_1E^{-0.88}
   \end{equation}
-  $h_0$ arises from low angle scattering of $\gamma$s as they approach the detector.
-  The inverse square energy dependance can be analytically derived\cite{2016Oberer}.
-  The second power law term arises from transition layer events, and the power of -0.88 was empirically measured in simulations and data as described in section~\ref{sec:stepheight}.
+  The inverse square term arises from low angle scattering of $\gamma$s as they approach the detector.
+  The second power law term arises from transition layer events, and the power of -0.88 was empirically measured in simulations and data.
+  This model is described in greater detail in section~\ref{sec:stepheight}.
 \end{itemize}
 
 \section{Performing a Simultaneous Fit} \label{sec:fitter}
+Because of the large number of fit parameters ($\sim35$~parameters are used for weekly calibrations and $\sim100$~parameters are used with high statistics calibrations to perform more detailed characterizations of parameters), and because of the highly correlated nature of some of the parameters, the fit result is heavily dependant on the initial parameter guess.
+To ensure convergence on the global minimum of the negative log-likelihood in a timely manner, Hamiltonian Monte Carlo (HMC) is used\cite{DUANE1987}\cite{2012Neal}.
+HMC is a Markov Chain Monte Carlo (MCMC) technique that uses the parameter gradient of the negative log-likelihood in order to take large steps through the parameter space with a high acceptance rate.
+Several adaptations to the step sizes are applied, which prevent the algorithm used from exactly converging to the posterior described by the log-likelihood with a flat prior.
+First, the step size is increased by a factor of 1.1 after each successful step and decreased by a factor of 1.2 after each unsuccessful step.
+This adaptation asymptotically results in an acceptance rate of $\sim2/3$, a target suggested by \ref{2012Neal}.
+Second, the mass scale matrix is adapted to equal the diagonal elements of the Fisher information metric between each step.
+This adaptation is based on Riemann Manifold HMC\cite{Girolami2011}, although it does not properly evolve the metric between steps and will therefore fail to converge exactly.
+The combination of these adaptations results in a quick and reliable convergence that approximates the posterior, and is very useful as a burn-in when fitting.
+The adaptations above are combined are run over 200~HMC steps, using the leapfrog algorithm with 50 leapfrog steps for each HMC step.
+In addition, the evaluation of the parameter gradient of the negative log-likelihood is performed analytically, which helps to speed up evaluation and ensure reliability.
+\\
+After this HMC burn in is performed, the minimum negative log-likelihood sample is used as an initial parameter guess for a gradient descent fit.
+The Minuit fitting package is used to perform this fit\cite{minuit}.
+Minuit evaluates for the parameters that maximize the likelihood and uses the Hessian matrix to obtain a covariance matrix.
+This result is used to obtain the values and errors of the calibration parameters.
+\\
 \section{Computing Auxiliary Parameters}
+In addition to the bare parameters used to describe this peakshape model, other auxiliary parameters are often useful to calculate when using this model to characterize detectors.
+Examples of such parameters include the values of the individual peakshape parameters for an arbitrary peak energy, and other parameters that can be derived from the peakshape function such as the peak centroid or full width at half max (FWHM).
+The peak centroid is used for the first stage of calibration and the FWHM is used when optimizing the ROI for a peak.
+It is not ideal to numerically compute these parameters directly from the data, because such a measurement would be biased by the background or by the step component of the peakshape, which is not intrisic to the detectors.
+To do this, first we calculate the value of the detector-intrisic peak shape parameters (i.e. $\mu$, $\sigma$, $f_{LE}$, $\tau_{LE}$, $f_{HE}$ and $\tau_{HE}$ at the desired energy using the functions used to describe each parameter.
+From here, derived parameters can be calculated; for example, the centroid is
+\begin{equation}
+  \mathrm{cen}(\mu, \sigma, f_{LE}, \tau_{LE}, f_{HE}, \tau_{HE})=\mu - f_{LE}\cdot\tau_{LE} + f_{HE}\cdot\tau_{HE}
+\end{equation}
+and the FWHM is numerically calculated by finding the half max energies and taking the difference between them, assuming no background and no step.
+The uncertainties on these parameters is computed from the covariance matrix.
+For parameter $\theta$:
+\begin{equation}
+  \sigma_\theta^2= \sum_{i=0}^{N}\sum_{j=0}^{N} \frac{\partial\theta}{\partial p_i} \Sigma_{i,j} \frac{\partial\theta}{\partial p_j}
+\end{equation}
+where $p_i$ are the set of model parameters.
+\\
 \section{The Step Height Model} \label{sec:stepheight}
+The dependancy of the step height on energy is described by
+\begin{equation}
+  h_{step}(E) = \frac{h_0}{E^2} + h_1E^{-h_2}
+\end{equation}
+The inverse square component arises from low angle scattering of $\gamma$s as they approach the detectors.
+This inverse square dependence can be analytically derived by taking the Compton scattering differential cross section in the limit as scattering angle approaches 0\cite{2016Oberer}.
+$h_0$ increases linearly with the thickness of shielding between the source and the detector.
+As a result, the model parameters measured are valid only for $\gamma$s from the calibration source; peaks generated by other sources may have different steps, and peaks generated from a source internal to the detector would be expected to measure $h_0=0$.
+\\
+The second power law term arises from the transition layer of the detectors.
+Because of this model is nonlinear, floating the power parameter results in unreliable fitting for the standard 90-minute calibration runs, so $h_2$ is empirically measured using both data and simulations to be -0.88.
+Many simulations of the \Th{228} calibration source were run using the dead layer model described in equation~\ref{eq:dlmodel}, and the thickness of the transition layer varied between 0~and 2~mm.
+For each simulation, a simultaneous fit of many peaks was performed, floating all of the step height parameters.
+The values of $h_2$ measured are shown in figure~\ref{fig:stepheightpars_sim}, and have a stable value of -0.88 for dead layer thickness of $<1$~mm.
+Typical dead layer thicknesses for detectors are $\sim0.5$~mm.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{hs2_tl}
+  \caption[Simulated dependance of $h_2$ on transition layer thickness] {\label{fig:stepheightpars_sim}
+    Values of $h_2$ from the step height model measured using a simultaneous peak fit for simulations of the \Th{228} calibration source using different transition layer thicknesses.
+  }
+\end{figure}
+To measure this parameter from data, many peaks in a long calibration run were used.
+A fit was then performed for each detector, floating $h_2$ and fixing $h_{0}$.
+The value of $h_0$ is fixed to a value extracted from a fit of a calibration simulation that does not include the dead layer.
+The values of $h_2$ were measured from simultaneous fits of the spectrum measured for each detector in a long calibration run, and are shown in figure~\ref{fig:stepheightpars_dat}.
+The measured values have large systematic uncertainties that are not accounted for in the fits, but the mean is consistent with the value of -0.88 measured using the simulations.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{hs2}
+  \caption[Measured values of $h_2$ in calibration data] {\label{fig:stepheightpars_sim}
+    Values of $h_2$ from the step height model measured using a simultaneous peak fit of the measured \Th{228} calibration spectrum. $h_0$ was fixed to values measured from simulations.
+  }
+\end{figure}
+
 
 \section{GAT Implementation}
 Implementations of the peak shape function, the parameter gradient of the peak shape function, the CDF of the peak shape function, and functions calculating various auxillary parameters such as the FWHM, centroid and standard deviation are included in \texttt{GATPeakShapeUtil.hh}.

@@ -11,7 +11,7 @@
 
 \section{Peak Shape Function and Parameters}
 A moneenergetic energy peak in the \MJD\ is typically modelled using the following peakshape function
-\begin{equation}
+\begin{equation} \label{eq:peakshape}
   \begin{aligned}
     \mathrm{PS}(E; A, \mu, \sigma, f_{tail}, \tau, h_{step}) &= A\big((1-f_{tail})\mathrm{Gaus}(E; \mu, \sigma) \\&+ f_{tail}\cdot\mathrm{ExGaus}(E; \mu, \sigma, \tau) \\&+ \frac{h_{step}}{2}\mathrm{erfc}(\frac{E-\mu}{\sqrt{2}\sigma})\big)
   \end{aligned}
@@ -33,6 +33,13 @@ Finally, the peak shape contains a step component, described by the complementar
 The step is caused by factors that cause enough energy loss to pull events entirely out of the peak, such as low angle scattering of a $\gamma$ before entering a detector and detector transition layers.
 Events in the step component are not considered part of the full energy peak, and the step is primarily a factor for calibration events which must pass through the copper cryostat which is not true of events that originate in the detectors.
 For this reason, the step is not considered when optimizing the signal ROI.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{peakshape}
+  \caption[Peak shape function]{\label{fig:peakshape}
+    A 2614~keV calibration peak fitted to the peakshape function described by equation~\ref{eq:peakshape}. The Gaussian component is shown in teal, the low energy tail in gold, the step in dashed red, and the combined peak shape in red.
+  }
+\end{figure}
 The peak shape function is shown in figure~\ref{fig:peakshape}.
 \\
 This peak shape function can be optionally extended with the addition of a high energy tail as follows:
@@ -77,7 +84,14 @@ The peak shape parameters are defined as independant functions of energies and s
   The second power law term arises from transition layer events, and the power of -0.88 was empirically measured in simulations and data.
   This model is described in greater detail in section~\ref{sec:stepheight}.
 \end{itemize}
-
+The fit result of a simultaneous fit of 18 peaks from a 6~hour long \Th{228} calibration run is shown in figure~\ref{fig:simultaneousfit}.
+\begin{figure}[p]
+  \centering
+  \includegraphics[width=0.8\textwidth]{fitResults}
+  \caption[Simultaneous peak fit of \Th{228} calibration]{\label{fig:simultaneousfit}
+    A simultaneous fit of 18 peaks from a 6~hour long \Th{228} calibration run)
+  }
+\end{figure}
 \section{Performing a Simultaneous Fit} \label{sec:fitter}
 Because of the large number of fit parameters ($\sim35$~parameters are used for weekly calibrations and $\sim100$~parameters are used with high statistics calibrations to perform more detailed characterizations of parameters), and because of the highly correlated nature of some of the parameters, the fit result is heavily dependant on the initial parameter guess.
 To ensure convergence on the global minimum of the negative log-likelihood in a timely manner, Hamiltonian Monte Carlo (HMC) is used\cite{DUANE1987}\cite{2012Neal}.

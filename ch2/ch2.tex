@@ -8,12 +8,316 @@
 \graphicspath{{./pics/}{ch2/pics/}}
 
 \onlyinsubfile{\textpages}
-\chapter{Overview of  \MJD}
+\chapter{Overview of the \MJD}
 
+The \textsc{Majorana} Collaboration is studying \bb -decay in \Ge{76} and is currently operating an array of High Purity Germanium (HPGe) detectors called the \MJD\cite{mjd2014}.
+The goal of the next generation of \znbb\ searches is a sensitivity to \mbb\ of $\sim15$~meV, which corresponds to a half-life sensitivity in \Ge{76} of $\sim10^{28}$~y.
+To reach this goal, an exposure on the order of several tonne-years will be required, with background levels in the region of interest of the decay of $<0.1$~cts/FWHM-t-y, as shown in figure~\ref{fig:sensitivity}.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{sensitivityplot}
+  \caption[Detection sensitivity to \znbb\ in \Ge{76}]{\label{fig:sensitivity}
+    Detection sensitivity of a \znbb\ search in \Ge{76} as a function of isotopic exposure and the level of backgrounds in the region of interest. A blue band is drawn showing the next generation sensitivity goal.
+  }
+\end{figure}
+With these future needs in mind, the \MJD\ was built with the following primary goals:
+\begin{itemize}
+\item Demonstrate backgrounds low enough to justify building \bb -decay experiment involving $\sim1$~tonne of \Ge{76}. The goal for the \MJD\ is a background rate of $<3$~background counts per tonne-year of isotopic exposure in a 4~keV region of interest around the 2039~keV Q-value of \znbb\ in \Ge{76}.
+\item Demonstrate the scalability of the design and techniques of the \MJD\ towards a tonne-scale experiment.
+\item Set competitive limits on the half-life of \znbb\ and on \mbb\ with other leading searches such as KamLAND-Zen and \Gerda \cite{kamlandzen, gerda}.
+\item Search for additional physics beyond the Standard Model. This includes searches for bosonic dark matter, solar axions, Pauli exclusion principle violation, electron decay, lightly ionizing particles, and trinucleon decay\cite{mjdlowE2017, mjdlips2019, mjdtrinuc2019}. As discussed in section~\ref{sec:bsmes}, the search for \bbes\ has implications for some models beyond the standard model physics.
+\end{itemize}
+This chapter will describe the design of the \MJD\ and progress towards meeting these goals, with a focus on the most relevant elements of the experiment to the search for \bbes.
 
+\section{Experimental Design}
+The \MJD\ is using P-type Point Contact (PPC)\cite{Luke1989, Barbeau2007} HPGe detectors to search for \znbb.
+PPC HPGe detectors are cylindrical semiconductor detectors that collect the positively charged electron holes at a small point-like contact with a diameter of a few mm.
+This differs from the more common coaxial detector geometry, where both the electrons and holes are collected along much larger electrodes that extend coaxially along the detector.
+The PPC geometry offers several advantages in performing a low background search for \znbb.
+First, PPC HPGe detectors have intrisically low electronic noise due to a much lower capacitance than coaxial detectors.
+This results in an improved energy resolution and lower energy thresholds.
+Additionally, the PPC geometry slows down the drift velocity of the eletctrons and holes, enabling pulse shape analysis (PSA) techniques to discriminate between single- and multi-site events.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.5\textwidth]{ppcfieldmodel}
+  \caption[Electric field model of a PPC detector]{\label{fig:ppcdet}
+    A model of a PPC detector with diameter 5~cm and length 5~cm. The color map represents the strength of the electric field, the black lines represent the drift path of the holes and electrons, and the grey lines represent the isochrons, or surfaces of equal charge collection time. The isochrons are separated by 100~ns, which is long enough to enable PSA techniques.
+  }
+\end{figure}
+Figure~\ref{fig:ppcdet} shows a model of the electric fields within a PPC detector, which enable these PSA techniques.
+\\
+
+\begin{figure}[h]
+  \centering
+  \subfloat[Natural Detector]{\includegraphics[height=6cm]{begedetector}}~
+  \subfloat[Enriched Detector]{\includegraphics[height=6cm]{ortecdetector}}
+  \caption[Natural and enriched detector photos]{\label{fig:detphotos}
+    A photo of a natural detector with the BEGe geometry and an enriched detector. Note the LMFE electronics on top of the natural detector. The point contact, with copper pin inserted, is visible at the top of the enriched detector.
+  }
+\end{figure}
+Two types of PPC detectors are used for the \MJD.
+Many of the detectors use germanium with the natural isotopic abundance (7.8\% \Ge{76}), manufactured by CANBERRA using the Broad Energy Germanium (BEGe) detector geometry, and referred to as natural detectors.
+The remaining detectors use Germanium that has been isotopically enriched to $88.1\pm0.7\%$ in \Ge{76}, manufactured by AMETEK/Ortec using a detector geometry with greater volume to surface area ratio than the BEGe detectors, and are referred to as enriched detectors.
+Photographs of both an enriched and natural detector are shown in fiture~\ref{fig:detphotos}.
+By isotopically enriching the germanium used to manufacture the detectors, they act as both the source and the detector of \znbb, with the result that all kinetic energy from a \znbb\ is detected, which ensures a high detection efficiency.
+Furthermore, the manufacturing processes for HPGe detectors require a high material purity, which ensures intrisically low backgrounds inside of the detectors.
+\\
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\textwidth]{Modular_Design}
+  \caption[Modular design of the \MJD]{\label{fig:modulardesign}
+    Each stage in the staged design of the \MJD, from a detector to a module.
+  }
+\end{figure}
+Because a single HPGe detector has a mass of $\sim0.5-1.1$~kg, in order to collect a high exposure, we build an array of detectors.
+This has the further advantage that the detectors in the array help shield one another, resulting in lower backgrounds as the size of the array increases.
+The \MJD\ used a staged, modular construction approach that is designed to be scalable towards a tonne-scale \znbb\ search.
+Each detector is placed in interchangable detector mounts, to which the first stage preamplifier and signal and high voltage electronics cables are attached.
+These mounts are stacked into strings of 4-5 detectors, which are arranged into arrays of 7 strings, and the arrays are placed into cryostats.
+The detectors, electronics, cooling and vacuum  hardware are operated independantly for each cryostat, and the combination of this hardware and the detector array is refered to as a module.
+Figure~\ref{fig:modulardesign} shows the various stages of a module.
+\\
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{modules}
+  \caption[Layout of all strings in both modules with natural and enriched detectors labelled]{ \label{fig:modules}
+    Layout of all strings in both modules. The center string for each module is furthest to the left, and the other strings are on the outside. Enriched detectors are colored green, and natural detectors are colored blue.
+  }
+\end{figure}
+The \MJD\ has been constructed with two modules, shown in figure~\ref{fig:modules}.
+Module~1 contains 20~enriched detectors, totalling 16.9~kg in mass, and 9~natural detectors, totalling 5.6~kg.
+Module~2 contains 15~enriched detectors, totalling 12.9~kg, and 14~natural detectors, totalling 8.8~kg.
+In total, the total mass of \Ge{76} is 27.4~kg, 26.3~kg of which is contained in the enriched detectors.
+\\
+To meet the stringent background requirements of the \MJD, the detector and cryostat components are built out of extra clean materials.
+The cryostat and detector mount structures are built out of copper that has been electroformed underground\cite{mjdeforming}.
+Insulating components consist of NXT-85, a low background Teflon.
+The first stage preamplifier electronics, called Low Mass Front End (LMFE) boards, are mounted directly on top of the detector mounts, and are specially designed to minimize the amount of material required.
+The high voltage and signal cables are manufactured by Axon' to minimize the component mass, and both use specially designed low mass, low background electrical connectors\cite{mjdHV, mjdsig}.
+Exposure to the surface, where a high cosmic ray flux can cosmogenically activate radioactive isotopes such as \Co{60}, is minimized and tracked for all components, particularly the detectors and copper components\cite{mjdptdb}.
+Components are machined underground in a class 1000 clean room environment, and kept in nitrogen purged environments as much as possible in order to avoid exposure to Radon.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{bgassay}
+  \caption[Background predictions based on component assays]{\label{fig:assay}
+    Prediction of contribution to backgrounds in the ROI around 2039~keV from different sources, based on component assays and simulations.
+  }
+\end{figure}
+An extensive radioassay campaign was carried out to verify the low backgrounds of the components and the manufacturing procedures\cite{mjdassay}.
+The results of this assay campaign are shown in figure~\ref{fig:assay}, and predict a background index of $<2.2$~cts/FWHM-t-y, with primordial isotopes in the LMFE boards and the lead shield as the dominant background contributions.
+\\
+Each cryostat is placed inside of a graded shield in order to further reduce backgrounds.
+Each layer of the shield is constructed from successiveley cleaner materials in order, consisting from outer- to inner-most layer of:
+\begin{itemize}
+\item High density polyethylene panels that reduce the energy of incoming environmental neutrons, and borated polyethylene to capture the neutrons
+\item Scintillating acrylic veto panels that act as an active muon veto, to be described in greater detail in section~\ref{sec:veto}
+\item A mostly-sealed aluminum box that is continuously purged with scrubbed nitrogen gas in order to purge the interior of radon gas
+\item A 45~cm thick lead shield
+\item A 5~cm thick shield manufactured from commercially available Oxygen-Free High thermal Conductivity (OHFC) copper
+\item A 5~cm thick shield manufactured from underground electroformed copper that has not been exposed to surface cosmic ray flux
+\end{itemize}
+\begin{figure}
+  \centering
+  \subfloat[Crossectional Diagram]{\includegraphics[width=\textwidth]{ShieldDiagram}}\\
+  \subfloat[Lead Shield]{\includegraphics[width=0.45\textwidth]{leadshield}}~
+  \subfloat[Overfloor]{\includegraphics[width=0.5\textwidth]{overfloor}}
+  \caption[Diagram of the \MJD\ shield]{\label{fig:shield}
+    Top: A crossectional diagram showing the different layers of the shield. Bottom left: The lead shield and outer copper shield, prior to installation of other shield layers. Bottom right: The overfloor, atop which the shield is installed. The polyethylene and veto panels are visible.
+  }
+\end{figure}
+Figure~\ref{fig:shield} contains a drawing of the shield and module hardware.
+In addition to this shielding, the entire experiment is hosted at the Davis Campus of the Sanford Underground Research Facility (SURF) in Lead, South Dakota, 4850', with an overburden of $\sim4300$~m.w.e\cite{surf}.
+\\
+\section{Energy Measurement}
+
+\subsection{Charge Signal Collection}
+\begin{figure}
+  \centering
+  \subfloat[Circuit Diagram]{\includegraphics[width=.55\textwidth]{lmfediagram}}
+  ~\subfloat[LMFE Board]{\includegraphics[width=.4\textwidth]{lmfephoto}}
+  \caption[LMFE circuit diagram and photo]{\label{fig:lmfe}
+    A circuit diagram and labelled photo of an LMFE board. The convergence of the traces on the board act as a charge-integrating capacitor.
+  }
+\end{figure}
+When an event occurs inside of a PPC HPGe detector, a cloud of free conduction band electrons and positively charged valance band vacancies called holes is produced.
+Under the influence of a high voltage applied across the detector (1-5~kV), the electrons drift towards the $n^+$ contact and the holes towards the $p^+$ contact, inducing a charge signal at the $p^+$ contact.
+The total charge produced is proportional to the energy of the event, with one electron-hole pair produced for every 0.7~eV of energy deposited.
+The induced charge signal is measured by the LMFE board, which is a charge sensitive preamplifier that is resistively coupled to ground\cite{barton2012}.
+The LMFE is mounted directly on each detector mount, offset by $<1$~cm, in order to minimize electronics noise and crosstalk between electronics channels.
+The LMFE is connected by electronic cables to a second stage amplifier outside of the lead shield.
+The second stage amplifier produces two separate signals, with differing gains; the low gain channel saturates at higher energies, while the high gain channel has better noise characteristics at lower energies.
+For the analysis presented here, events from the high gain channel will be primarily used.
+This circuit results in a typical peakshape that is approximately exponential, with a tail of $\sim72~\mu$s.
+The LMFE board additionally has a capacitively-coupled pulser line that can produce artificial pulses of a fixed energy that can be used to monitor the stability of the electronics.
+A circuit diagram and photo for the LMFE board is shown in figure~\ref{fig:lmfe}.
+A waveform shaped by these electronics can be seen in figure~\ref{fig:trapfilter}.
+\\
+For each detector, the signal from both channels is digitized using GRETINA digitizer cards, developed by the GRETINA experiment\cite{zimmermann2012}.
+The \MJD\ signals are digitized at a freqency of 100~MHz, with 14 bits of precision.
+A built in field-programmable gate array applies a pole-zero correction and trapezoidal filter independantly to each channel (these will be discussed in the next section).
+Each channel is independantly triggered using a leading edge discrimination on the trap-filtered waveform, and records 2020 samples per waveform.
+The digitizers are further capable of presumming samples by factors of 2, 4, 8 or 16, enabling variable length traces.
+Furthermore, the ditizizers can multi-sample, using a different presumming factor for different portions of the waveform.
+Multi-sampling enables a high sampling frequency for the rising edge of the waveform, which aids the PSA techniques that depend on the waveform risetime, and a low sampling frequency for the falling tail and baseline of the waveforms, which improves baseline measurement, energy estimation, and PSA techniques that utilize the exponential tail of the waveform.
+For \MJD\ data, for different datasets, multi-sampling is either disabled, resulting in $\sim20~\mu$s waveforms with a single sampling frequency of 100~MHz, or enabled with the falling tail sampled at 25~MHz, resulting in $\sim40~\mu$s waveforms.
+Each digitized pulse is recorded and reanalyzed offline, using the software described in section~\ref{sec:software}.
+\\
+\subsection{Energy Estimation}
+\begin{figure}
+  \centering
+  \subfloat[Raw Waveform]{\includegraphics[width=.33\textwidth]{rawWF}}
+  \subfloat[Pole-zero Correction]{\includegraphics[width=.33\textwidth]{PZWF}}
+  \subfloat[Trapezoidal Filter]{\includegraphics[width=.33\textwidth]{trapWF}}
+  \caption[Pole-zero correction and trapezoidal filter]{\label{fig:trapfilter}
+    Left: A raw waveform as shaped by the signal electronics, with a time constant of $\sim72~\mu$s\\
+    Center: the same waveform after pole-zero correction, with a (nearly) flat top
+    Right: the same waveform after application of a trapezoidal filter
+  }
+\end{figure}
+The energy of a waveform is estimated using a trapezoidal filter implemented in software.
+Trapezoidal filters are nearly optimal filters for energy estimation, enabling low noise measurements while avoiding ballistic deficit\cite{Radeka1972, knoll}.
+The trapezoidal filter has a flat top length of $2~\mu$s and a ramp-time of $4~\mu$s.
+The pole-zero constant is optimized independantly for each detector in order to produce a flat-top for the trapezoids, and the maximum value of the trapezoid is selected as the energy estimator.
+An example of a pole-zero correction and trapezoidal filter application is shown in figure~\ref{fig:trapfilter}.
+The energy measured in this fashion is named \texttt{trapENF}.
+\\
+\subsection{Additional Energy Corrections}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{dignonlin}
+  \caption[Integral digitizer nonlinearity]{\label{fig:localnonlin}
+    The shift in the value of each ADC bin that is applied in order to achieve a linear digitizer response with respect to voltage. This is measured by integrating over the width of each ADC bin, and is referred to as Integral nonlinearity.
+  }
+\end{figure}
+A second energy estimator has been implemented that corrects for several systematic errors in the \texttt{trapENF} estimator\cite{energyunidoc}.
+First, nonlinearities in the digitizer response are corrected for.
+The GRETINA digitizers have an unusually large nonlinearity, which manifests as a periodic sawtooth-shaped error, as shown in figure~\ref{fig:localnonlin}.
+The size of this nonlinearity is measured by applying external, ramping signals from waveform generators in order to measure the width of each ADC bin.
+The resulting size of this nonlinearity before correction can shift measured energies by as much as 0.8~keV in the high gain readout.
+Before applying a trapezoidal filter, each waveform sample is corrected by the measured integral nonlinearity value, reducing the size of the ADC nonlinearity to $<0.1$~keV.
+The residual nonlinearity in energy response after applying this correction is referred to as the local nonlinearity.
+\\
+\begin{figure}
+  \centering
+  \subfloat[Modified Pole-Zero]{\includegraphics[height=6cm]{ctcorrection}}
+  \subfloat[FWHM Optimization]{\includegraphics[height=6.4cm]{fwhmoptimization}}
+  \caption[Charge Trapping Correction]{\label{fig:ctcorr}
+    On the left, three waveforms are shown with different pole-zero constants applied. For the flat top pole-zero constant (blue), the tops are misalligned due to a loss of charge from charge trapping. For the charge trapping corrected pole zero constant (green), the tops are no longer flat, but they align perfectly, resulting in improved energy resolution. On the right, we see the FWHM of a 2614~keV $\gamma$ peak as a function of the pole-zero constant. By optimizing the FWHM, we can identify the correct time constant to use for the charge trapping correction. 
+  }
+\end{figure}
+A second correction is applied to correct for charge trapping.
+Charge trapping is a phenomenon in which local impurities in a HPGe detector capture electrons or holes as they drift to the $n^+$ and $p^+$ contacts, respectively.
+This results in a loss of charge collection that is dependant on the origin location of the charge cloud within the detector.
+This charge loss distorts the detector response, producing a low-energy tail in the peak shape, and degrades the energy resolution.
+The resolution degradation increases linearly as a function of hit energy, and at energies near the Q-value, this is a dominant contribution to the peak width.
+Charge trapping can be modelled as an exponential loss of charge with respect to the drift time of the charge inside of the HPGe crystal.
+To correct for this, we modify the pole-zero time constant so that the flat-top of the trapezoidal filter decays with the same time-constant as the charge trapping.
+As a result of this change, the measured waveform response after full charge collection will be identical, with respect to the origin time of the charge cloud, as shown in figure~\ref{fig:ctcorr}.
+The resulting pole-zero time $\tau$ is described by:
+\begin{equation}
+  \frac{1}{\tau} = \frac{1}{\tau_{PZ}} + \frac{1}{\tau_{CT}}
+\end{equation}
+where $\tau_{PZ}$ is the flat-top pole-zero time constant, and $\tau_{CT}$ is the charge trapping time constant.
+The value of $\tau$ is chosen to optimize the FWHM measured for a 2614~keV peak from a \Th{228} calibration spectrum, using the energy estimator described here.
+This optimization is shown in figure~\ref{fig:ctcorr}.
+\\
+\begin{figure}
+  \centering
+  \subfloat[\texttt{trapE} vs \texttt{trapENF}]{\includegraphics[width=0.53\textwidth]{trapEvtrapENF}}
+  \subfloat[Improvement in Energy Resolution]{\includegraphics[width=0.47\textwidth]{ctimprovement}}
+  \caption[Improvement in energy resolution from charge trapping correction]{\label{fig:trapenf}
+    The energy resolution is improved as a result of applying the charge trapping and digitizer nonlinearity corrections in a $\sim31\%$ improvement in energy resolution on average.
+  }
+\end{figure}
+However, because the trapezoid no longer has a flat top, the maximum value is no longer useful as an energy estimator; instead, the amplitude of the trapezoid at a fixed time relative to the origin time of the trapezoid is used.
+This technique is referred to as a ``fixed-time pickoff.''
+A short trapezoidal filter with a rise-time of $1~\mu$s and a flat-top of $1.5~\mu$s is used, with the final crossing of a fixed threshold value used to estimate the origin time.
+After applying both of these corrections, the resulting energy estimator is called \texttt{trapENF}.
+The \texttt{trapENF} estimator improves the energy resolution of the \MJD\ detectors at 2614~keV by $\sim31\%$, as shown in figure~\ref{fig:trapenf}.
+Using the \texttt{trapENF} energy estimator, the \MJD\ has achieved the best energy resolution of any current generation \znbb\ experiment.
+There is, however, still room for improvement by correcting for global nonlinearities that arise from an energy dependant, systematic drift in the start time estimator and a small quadratic nonlinearity in the detector response.
+\\
+\subsection{Calibration System}
+\begin{figure}
+  \centering
+  \subfloat[Calibration track drawing]{\includegraphics[width=0.45\textwidth]{calibrationtrackdrawing}}~
+  \subfloat[Calibration track photo]{\includegraphics[width=0.45\textwidth]{calibrationtrackphoto}}
+  \caption[Calibration track]{\label{fig:caltrack}
+    A drawing and photo of the teflon calibration track wrapping around a cryostat.
+  }
+\end{figure}
+Energy calibration of detectors is performed using a \Th{228} source\cite{mjdcalibration}.
+\Th{228} has a large number of prominent $\gamma$-rays in its decay chain between 238~keV and 2614~keV which can be used to calibrate and characterize the detectors.
+For each module, a 4.7~m long line source, consisting of \Th{228} doped epoxy, is used to perform calibrations, with an activity of $\sim10$~kBq along the last 2~m of the source.
+The line source is inserted into guide tubes that wrap around the cryostat and reach outside of the shield structure.
+The source is pushed by a motor located outside of the shielding, and a set of magnets and magnetic sensors are used to ensure that the source is placed in the correct position.
+For each module, a separate 90~minute calibration run is performed once per week, with one source inserted at a time.
+In addition to the \Th{228} line source, a \Co{60} line source with activity 6.3~kBq over the last 2~m of length and a \Co{56} line source with activity 6~kBq over the last 2~m of length were manufactured for use inside of the calibration track.
+Figure~\ref{fig:caltrack} shows a drawing and photograph of the calibration track.
+\\
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{calfwhm}
+  \caption[Calibration spectrum with FWHM]{\label{fig:calfwhm}
+    A combined detector spectrum from a \Th{228} calibration run, with the FWHM extracted from a simultaneous fit of many peaks.
+  }
+\end{figure}
+The $\gamma$ peaks from the \Th{228} spectrum are simultaneously fit to an analytic peakshape function, as described in appendix~\ref{app:peakshape}.
+The results of this fit are used to extract the gain, energy offset, and energy resolution of each HPGe detector, and of the combined detector array.
+This fit is performed on 8~calibration peaks for each 90~minute calibration run, and a gain matching of the 238- and 2614-keV peaks is used to calibrate the detectors.
+At the end of a major dataset, a more detailed fit of $\sim30$~peaks is performed, which is used to measure the detailed energy characteristics.
+Figure~\ref{fig:calfwhm} shows a \Th{228} calibration spectrum, with the energy resolution extracted from a simultaneous peak fit.
+\\
+\subsection{Pulse Shape Analysis}
+PPC HPGe detectors enable several PSA techniques that can differentiate between different types of events, which can aid in reducing backgrounds.
+Because of the long drift times in PPC detectors, it is possible to differentiate between single- and multi-site events.
+All charge in a single-site event is localized within $\sim1-2$~mm inside of the crystal.
+$\beta\beta$-decay is an inherently single-site event because both electrons from the decay are fully absorbed within $\sim1$~mm of the decay site.
+In multi-site events, multiple localized clusters of charge are simultaneously created in the crystal, separated by more than a few mm.
+$\gamma$-rays that Compton scatter inside of the crystal and then deposit their remaining energy elsewhere in the crystal are an example of a multi-site event that could potentially be a background in searching for \znbb.
+The charge drift times inside of PPC detectors is long enough that the drift time of each localized charge cloud in the detector will differ by potentially hundreds of ns, which is long enough to be visible to the GRETINA digitizers.
+Figure~\ref{fig:avse} shows the difference between a single- and multi-site waveform.
+\\
+\begin{figure}
+  \centering
+  \subfloat[Single- and Multi-site waveforms]{\includegraphics[width=0.5\textwidth]{ssmswf}}
+  \subfloat[Calibration track photo]{\includegraphics[width=0.5\textwidth]{avse}}
+  \caption[Multi-site event cut]{\label{fig:avse}
+    Left: A single-site event (top) and multi-site event (bottom). Note the multiple current pulses in the multi-site event, which results in a lower ratio of current amplitude to energy.\\
+    Right: Comparison of current amplitude to energy. The red line represents the expected value for single-site waveforms. Waveforms that fall below the red line will mostly be multi-site waveforms. The AvsE parameter is calculated based on a comparison between the measured current amplitude, and the expected current amplitude for a singli-site event at that energy.
+  }
+\end{figure}
+In order to distinguish between single- and multi-site waveforms, we compare the maximum current amplitude in the waveform to the total energy of the waveform\cite{mjdavse}.
+For a single localized charge cloud, the maximum charge amplitude is expected to be approximately proportional to the energy deposited in the local area.
+This means that single-site events will typically have a fixed ratio between these values.
+In a multi-site event, on the other hand, the maximum charge amplitude will be proportional to the energy of the largest local site rather than the full energy of the waveform, so this ratio will be less than that for single-site events.
+In figure~\ref{fig:avse}, the relationship between the maximum current amplitude and the energy is shown.
+The analysis parameter AvsE performs a comparison between these values and has been shown to cut $\sim95\%$ of multi-site events while keeping $\sim90\%$ of single-site events.
+A measurement of these efficiencies is shown in figure\ref{fig:avseeff}
+Near the \znbb\ region of interest, this cut removes $\sim60\%$ of Compton continuum backgrounds.
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{avseefficiency}
+  \caption[Multi-site waveform cut efficiency]{\label{fig:avseeff}
+    A measurement of the cut efficiency of the AvsE cut for single escape (SEP) events, which are inherently multi-site, double-escape (DEP) events, which are inherently single-site, and Compton continuum events.
+  }
+\end{figure}
+\\
+
+\subsection{Muon Veto}
+
+\section{\MJD\ Software}
+\subsection{DAQ}
+\subsection{MGDO}
+\subsection{The Event Builder}
+\subsection{GAT}
+
+\section{Recent Results}
+
+\section{Future Plans}
 
 \onlyinsubfile{
-  \bibliographystyle{plain}
+  \bibliographystyle{unsrt}
   \bibliography{../main}
 }
 \end{document}

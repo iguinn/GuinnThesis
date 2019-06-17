@@ -149,7 +149,7 @@ $\langle T^*_k\rangle$ represents the expected value of $T^*_k$ based on previou
 \begin{equation}
   \sigma_{T^*,k} = \langle T^*_k\rangle\sqrt{(\frac{\sigma_{\epsilon,k}}{\epsilon_k })^2 + (\frac{\sigma_{exposure}}{M_{iso}T_{live} })^2}
 \end{equation}
-The implementation of equation~\ref{eq:rolke} is performed by the \texttt{TRolke} class in ROOT \cite{2005rolke}.
+The implementation of equation~\ref{eq:rolke} is performed by the \texttt{TRolke} class in ROOT \cite{rolke2005}.
 This likelihood function is used to compute a likelihood ratio
 \begin{equation}
   \mathrm{LR}(T_{1/2}) = \frac{\mathrm{sup}_{T^*_k,b_k}(\mathcal{L}(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau))}{\mathrm{sup}_{T_{1/2},T^*_k,b_k}(\mathcal{L}(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau))}

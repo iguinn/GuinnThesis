@@ -241,7 +241,7 @@ An example of a calibration spectrum with the FWHM curve fit to it is shown in f
   }
 \end{figure}
 \\
-\subsection{Signal ROI Optimization}
+\subsection{Signal ROI Optimization} \label{sec:roiopt}
 The signal region of interest around each peak is optimized based on the peak shape functions as fit for each data set.
 The signal region of interest is optimized following the procedure laid out in appendix~\ref{app:sens} and maximizing the rate sensitivity with respect to the region of interest upper and lower boundaries, $E_{low}$ and $E_{high}$ respectively.
 \begin{equation}
@@ -474,22 +474,19 @@ The uncertainty observed in this case is 0.325\%, which is applied to the energy
 For both \znbb\ and \tnbb\ modes, this efficiency uncertainty is sub-dominant, so these upper limits will suffice.
 \\
 \subsection{Muon Veto Cut}
-
-\begin{figure}[ht]
+\begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{muvetoeff}
-  \caption[Simulated efficiency of muon veto cut]{\label{fig:muvetoeff}
-    A histogram of muon-induced Germanium detector events based on their delay after their detection by the muon veto system. A cut of 1~s after the veto time will remove $>99.9$\% of muon-induced events.\cite{2015wiseman}}
+  \includegraphics[width=0.7\textwidth]{muonevent}
+  \caption[Example muon event]{\label{fig:muonevent}
+    A cartoon of a particle shower created by a muon event. The particles produced in such a shower can hit multiple detectors, producing multi-detector events.
+  }
 \end{figure}
-
 Cosmic ray muons have the potential to produce partical showers in the \MJD\ that can produce \msmd\ events and can activate short-lived isotopes that in turn may decay, producing delayed \msmd\ events.
 Background events caused by muons can be cut using the muon veto system described in section~\ref{sec:muveto} \cite{2015wiseman}.
-If a muon passes through the \MJD\, it must pass through two surfaces of the muon veto panels.
-Any time veto panels from at least two different surfaces simultaneously measure events above a certain energy threshold, we assume that event was a muon.
-Any Germanium detector events for the next 1~s after the muon event are then cut.
-This cut will remove $>99.9$\% of events induced by the muon shower, based on simulations shown in figure~\ref{fig:mucut}.
+Any Germanium detector events for 20~ms before and 1~s after a tagged muon event cut.
+This cut will remove $>99.9$\% of events induced by the muon shower, based on simulations shown.
 In reality, the cut efficiency is slightly lower due to periods of time where the muon veto system clock became desynchronized with the Germanium detector clock.
-The impact of this cut is to reduce the total livetime by $<40$~s per day.
+The impact of this cut is to reduce the total livetime in each module by $<40$~s per day.
 \\
 \section{Final Efficiency Measurements}
 The final efficiency measurement combining all of the effects described in this chapter for each \bbes\ mode is measured directly from the simulations.

@@ -1,0 +1,19 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+
+\documentclass[/main.tex]{subfiles}
+
+\begin{document}
+\graphicspath{{./pics/}{ch6/pics/}}
+
+\onlyinsubfile{\textpages}
+\chapter{Discussion of Results}
+
+
+\onlyinsubfile{
+  \bibliographystyle{plain}
+  \bibliography{../main}
+}
+
+\end{document}

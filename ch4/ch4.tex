@@ -11,12 +11,6 @@
 
 \section{Introduction}
 
-\Se{76} has 3 excited states that \Ge{76} can decay into in addition to the ground state, as shown in figure~\ref{fig:Ge76BBLevelDiagram}.
-While the ground state decay has been observed, none of the decays to excited states have been yet; current experimental limits and theoretical estimates for the half-life of each decay are listed in table~\ref{tab:Ge76HalfLives}.
-Each excited state decay will have a \bb -decay with a reduced \Qval\ compared to the ground state decay.
-The excited state decays will also promptly produce one or two $\gamma$-rays at known energies.
-These $\gamma$s will typically travel several cms before absorption and will often hit a different detector from the \bb -decay site, meaning that we can search for peaks at these energies.
-\\
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{leveldiagram}
@@ -24,18 +18,18 @@ These $\gamma$s will typically travel several cms before absorption and will oft
     Energy level diagram for \bb-decay of \Ge{76} to \Se{76}, including excited states. The \Qval s for each decay branch and the energies and branching ratios for the deexcitation $\gamma$s are shown next to their corresponding lines.}
 \end{figure}
 
-\begin{table}[p]
-  \caption[Current half-live limits and predictions for all \tnbb-decay modes of \Ge{76}]{\label{tab:Ge76HalfLives}
-    Table of best experimental limits and theoretical predictions for the half-life of each each \Ge{76}\ \bbes\ decay mode.
-  }
-  \input{ch4/tables/Ge76BBLimits.tex}
-\end{table}
-
-Furthermore, since these $gamma$s hit separate detectors, this signal is inherently \msmd.
+\Se{76} has 3 excited states that \Ge{76} can decay into in addition to the ground state, as shown in figure~\ref{fig:Ge76BBLevelDiagram}.
+While the ground state decay has been observed, none of the decays to excited states have been yet; current experimental limits and theoretical estimates for the half-life of each decay are listed in table~\ref{tab:Ge76HalfLives}.
+Each excited state decay will have a \bb -decay with a reduced \Qval\ compared to the ground state decay.
+The excited state decays will also promptly produce one or two $\gamma$-rays at known energies.
+These $\gamma$s will typically travel several cms before absorption and will often hit a different detector from the \bb -decay site, meaning that we can search for peaks at these energies.
+Furthermore, since these $gamma$ events must hit a separate detector from the site of the \bb -decay, the events containing this peak are inherently multi-detector.
 As shown in figure~\ref{fig:multhist}, by searching for the peak only in events with high hit multiplicity, i.e. events that involve 2 or more detectors hit, $\sim85\%$ of backgrounds can be cut, while only sacrificing $\sim25$\% of the signal.
-Furthermore, the coincident detector hit(s) can provide additional observables that can be used to further discriminate excited state signals from multi-site backgrounds.
+Additionally, the coincident detector hit(s) can provide additional observables that can be used to further discriminate excited state signals from multi-site backgrounds.
 This chapter will describe the various background reduction data cuts and how they are implemented.
 It will also evaluate the detection efficiency and systematic error associated with each cut based on simulations of the \MJD.
+The analysis presented in this chapter applies to the \tnbb -decay to the \SP{0}{+}{1} state of \Se{76}, which has $Q_{\beta\beta}=916.8$~keV and emits two $\gamma$s at 559.1~keV and 563.2~keV.
+The same analysis is applied to all other excited states in both the \znbb\ and \tnbb\ decay modes, and the results are presented in appendix~\ref{app:allresults}.
 
 \begin{figure}[h]
   \centering
@@ -318,7 +312,7 @@ Table~\ref{tab:energysystematics} contains a full summary of all of the energy u
   \input{ch4/tables/peakshapetable.tex} }
 \end{sidewaystable}
 
-\subsection{Detector Crosstalk}
+\subsection{Detector Crosstalk} \label{sec:crosstalk}
 Detector crosstalk is caused when a true signal in one detector channel induces a small signal in another channel.
 This is not a large enough evect to trigger events in a separate channel, meaning that it does not effect \ss\ events.
 However, it could produce an energy estimation error in \md\ events since coincident pulses could induce signals that interfere either constructively or destructively, shifting the measured energy.

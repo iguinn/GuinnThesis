@@ -7,7 +7,7 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{amsmath}
-\usepackage{subfig}
+\usepackage[caption=false]{subfig}
 \usepackage{amstext}
 \usepackage{multirow}
 \usepackage{makecell}
@@ -89,6 +89,9 @@
 { \end{itemize}                  }
 \newcommand{\tty}{\texttt}
 
+\usepackage{lineno}
+\linenumbers
+
 %%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
@@ -103,8 +106,7 @@
 \tableofcontents
 \thispagestyle{uniheader}
 
-
-\section{Introduction to \bbes}
+\section{Introduction}
 \Se{76} has 3 excited states that \Ge{76} can decay into in addition to the ground state, as shown in figure~\ref{fig:Ge76BBLevelDiagram}.
 While the ground state decay has been observed, none of the decays to excited states have been yet.
 Each excited state decay will have a \bb -decay with a reduced \Qval\ compared to the ground state decay.
@@ -115,7 +117,8 @@ These $\gamma$s will typically travel several cms before absorption and will oft
   \centering
   \includegraphics[width=0.8\textwidth]{leveldiagram}
   \caption[Energy level diagram for \Ge{76} \bb to \Se{76}]{\label{fig:Ge76BBLevelDiagram}
-    Energy level diagram for \bb-decay of \Ge{76} to \Se{76}, including excited states. The \Qval s for each decay branch and the energies and branching ratios for the deexcitation $\gamma$s are shown next to their corresponding lines.}
+    Energy level diagram for \bb-decay of \Ge{76} to \Se{76}, including excited states. The \Qval s for each decay branch and the energies and branching ratios for the deexcitation $\gamma$s are shown next to their corresponding lines.
+  }
 \end{figure}
 
 
@@ -174,8 +177,8 @@ Figure~\ref{fig:2dessim} shows an energy spectrum of multiplicity~2 events produ
 \subsection{Comparing \texttt{decay0} to the Kotila and Iachello generator}
 \begin{figure}
   \centering
-  \subfloat[\texttt{decay0} \tnbb\ to g.s.]{\includegraphics[width=0.5\linewidth]{decay0gsspectrum}}
-  \subfloat[CDF difference]{\includegraphics[width=0.5\linewidth]{decay0KS}}
+  \subfloat{\includegraphics[width=0.5\linewidth]{decay0gsspectrum}}
+  \subfloat{\includegraphics[width=0.5\linewidth]{decay0KS}}
   \caption[KS test comparing \texttt{decay0} to Kotila and Iachello \tnbb to g.s. spectra]{\label{fig:kstest}
     A KS test is performed comparing the \texttt{decay0} \tnbb to the ground state energy spectrum to that of Kotila and Iachello. The \texttt{decay0} spectrum is shown, along with the difference between the CDF of each spectrum.
   }
@@ -345,11 +348,11 @@ The measured data spectra and fit results are shown in figure~\ref{fig:Co56Spect
 \\
 \begin{figure}[p]
   \centering
-  \subfloat[Module 1]{\includegraphics[width=.75\linewidth]{M1PeakRatioComparison}}
+  \subfloat{\includegraphics[width=.75\linewidth]{M1PeakRatioComparison}}
   \\
-  \subfloat[Module 2]{\includegraphics[width=.75\linewidth]{M2PeakRatioComparison}}
+  \subfloat{\includegraphics[width=.75\linewidth]{M2PeakRatioComparison}}
   \caption[Peak height ratio comparison results for module 1 and module 2]{\label{fig:co56results}
-    Measurement of peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ for both simulated and measured \Co{56} spectra. Only statistical error bars are drawin. These ratios are listed in tables~\ref{tab:co56resultsM1} and \ref{tab:co56resultsM2}.
+    Measurement of peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ for both simulated and measured \Co{56} spectra. Module~1 is shown on top, and Module~2 below. Only statistical error bars are drawin. These ratios are listed in tables~\ref{tab:co56resultsM1} and \ref{tab:co56resultsM2}.
   }
 \end{figure}
 Any discrepancy between the simulated and measured data is treated as a systematic error which will be applied to the \bbes\ measurement.
@@ -489,7 +492,7 @@ To check for this effect, we can look at \md\ events in \Th{228} calibration dat
 In particular, we will compare the centroid and FWHM for several peaks in both \sd\ events and \md\ events.
 \begin{figure}[h]
   \centering
-  \subfloat[Module 1]{\includegraphics[width=\linewidth]{xtalkplot}}
+  \includegraphics[width=\linewidth]{xtalkplot}
   \caption[Peak shape comparison for single- and multi-detector events]{\label{fig:xtalk}
     Difference of the measured centroid and FWHM of several \Th{228} calibration peaks. Error bars represent the fit errors. Notice on the bottom right, that any difference is not visible to the naked eye.
   }
@@ -581,13 +584,13 @@ The results of this cut optimization procedure are shown in figures~\ref{fig:sum
 \\
 \begin{figure}[!h]
   \centering
-  \subfloat[Simulated BG Sum Energy Spectrum]{\includegraphics[width=.5\linewidth]{BGSumECut}}
-  \subfloat[Simulated ES Sum Energy Spectrum]{\includegraphics[width=.5\linewidth]{ESSumECut}}\\
-  \subfloat[Simulated BG Coincident Energy Spectrum]{\includegraphics[width=.5\linewidth]{BGCoinECut}}
-  \subfloat[Simulated ES Coincident Energy Spectrum]{\includegraphics[width=.5\linewidth]{ESCoinECut}}
+  \subfloat{\includegraphics[width=.5\linewidth]{BGSumECut}}
+  \subfloat{\includegraphics[width=.5\linewidth]{ESSumECut}}\\
+  \subfloat{\includegraphics[width=.5\linewidth]{BGCoinECut}}
+  \subfloat{\includegraphics[width=.5\linewidth]{ESCoinECut}}
   \caption[Sum and coincident simulated energy spectra with cuts]{\label{fig:sumandcoinEcuts}
-    Top: Sum energy spectra of simulated ES and BG events. The events in red are cut by the sum- or coincident-energy cut. Note that the region around many peaks is cut out. This is the intdended effect of the sum energy cut.\\
-    Bottom: Energy spectrum of events in coincident with events in the ROI. Events in red are cut by the sum- or coincident-energy cut. Once again, regions around prominent peaks are cut out as intended.
+    Top: Sum energy spectra of simulated ES~(left) and BG~(right) events. The events in red are cut by the sum- or coincident-energy cut. Note that the region around many peaks is cut out. This is the intdended effect of the sum energy cut.\\
+    Bottom: Energy spectrum of events in coincident with events in the ROI from simulations~(left) and measured data~(right). Events in red are cut by the sum- or coincident-energy cut. Once again, regions around prominent peaks are cut out as intended.
   }
 \end{figure}
 
@@ -739,10 +742,10 @@ One possible explanation for this is that a significant quantity of \Ge{68} exis
 \iso{68}{Ga} is a $\beta^+$ emitter which is a part of the \Ge{68} decay chain, which produces two 511~keV $\gamma$s, resulting in many \msmd events.
 \begin{figure}[ht]
   \centering
-  \subfloat[Module 1]{\includegraphics[width=.5\linewidth]{M1datarate}}
-  \subfloat[Module 2]{\includegraphics[width=.5\linewidth]{M2datarate}}
+  \subfloat{\includegraphics[width=.5\linewidth]{M1datarate}}
+  \subfloat{\includegraphics[width=.5\linewidth]{M2datarate}}
   \caption[Event rate in both modules with respect to effective exposure]{\label{fig:eventrate}
-    Event rate with respect to effective exposure, or the detection efficiency of the \tnbb\ decay to the \SP{0}{+}{1} excited state times the exposure. Integrated exposure is the total effective exposure prior to an event. The background rate is expected to be mostly flat.
+    Event rate with respect to effective exposure, or the detection efficiency of the \tnbb\ decay to the \SP{0}{+}{1} excited state times the exposure. Integrated exposure is the total effective exposure prior to an event. The background rate is expected to be mostly flat. Left is module~1, right is module~2.
   }
 \end{figure}
 
@@ -771,10 +774,10 @@ Figure~\ref{fig:cutsroi} shows the effects of cuts on events in the ROI in both 
 
 \begin{figure}
   \centering
-  \subfloat[Measured ROI Events]{\includegraphics[width=0.5\linewidth]{DataAllCuts}}
-  \subfloat[Simulated ROI Events]{\includegraphics[width=0.5\linewidth]{BGAllCuts}}
+  \subfloat{\includegraphics[width=0.5\linewidth]{DataAllCuts}}
+  \subfloat{\includegraphics[width=0.5\linewidth]{BGAllCuts}}
   \caption[Effect of data cuts on ROI events in measured and simulated data]{\label{fig:cutsroi}
-    Effect of cuts on all events in the BG and ES ROIs. Events are applied in sequence from top to bottom, meaning that if an event is cut by multiple cuts, it will be colored based on the first cut that applied. Both the simulated and measured event spectra are shown for comparison.
+    Effect of cuts on all events in the BG and ES ROIs. Events are applied in sequence from top to bottom, meaning that if an event is cut by multiple cuts, it will be colored based on the first cut that applied. Both measured~(left) and simulated~(right) event spectra are shown for comparison.
   }
 \end{figure}
 
@@ -896,40 +899,53 @@ Figure~\ref{fig:roievents} shows the event spectrum after all cuts have been app
   
   \begin{figure}[!htb]
     \centering
-    \subfloat[Simulated BG Sum Energy Spectrum]{\includegraphics[width=.5\linewidth]{BGSumECuts_#1}}
-    \subfloat[Simulated ES Sum Energy Spectrum]{\includegraphics[width=.5\linewidth]{ESSumECuts_#1}}\\
-    \subfloat[Simulated BG Coincident Energy Spectrum]{\includegraphics[width=.5\linewidth]{BGCoinECuts_#1}}
-    \subfloat[Simulated ES Coincident Energy Spectrum]{\includegraphics[width=.5\linewidth]{ESCoinECuts_#1}}
+    \subfloat{\includegraphics[width=.5\linewidth]{BGSumECuts_#1}}
+    \subfloat{\includegraphics[width=.5\linewidth]{ESSumECuts_#1}}
     \caption[#3 of #2: Sum and coincident simulated energy spectra with cuts]{
-      Sum energy and coincident energy spectra for the #3.
+      Effect of #3 cuts on sum energy spectra in BG (left) and ES (right) simulations.
+    }
+  \end{figure}
+  \begin{figure}[!htb]
+    \subfloat{\includegraphics[width=.5\linewidth]{BGCoinECuts_#1}}
+    \subfloat{\includegraphics[width=.5\linewidth]{ESCoinECuts_#1}}
+    \caption[#3 of #2: Sum and coincident simulated energy spectra with cuts]{
+      Effect of #3 cuts on coincident energy spectra in BG (left) and ES (right) simulations.
     }
   \end{figure}
   
-  \begin{figure}[p]
+  \begin{figure}[!htb]
     \centering
-    \subfloat[Simulation]{\includegraphics[width=0.7\linewidth]{BG2Dcuts_#1}}\\
-    \subfloat[Data]{\includegraphics[width=0.7\linewidth]{Data2Dcuts_#1}}
+    \subfloat{\includegraphics[width=0.7\linewidth]{BG2Dcuts_#1}}\\
+    \subfloat{\includegraphics[width=0.7\linewidth]{Data2Dcuts_#1}}
     \caption[#3 of #2: 2D plots of sum and coincident energy cuts in simulations and data]{
-      Simulated and measured multiplicity 2 energy spectrum with sum and coincident energy cuts included for the #3.
+      Simulated (left) and measured (right) multiplicity 2 energy spectrum with sum and coincident energy cuts included for the #3.
     }
   \end{figure}
   
-  \begin{figure}[p]
+  \begin{figure}[!htb]
     \centering
-    \subfloat[Effect of all cuts on ROI]{\includegraphics[width=0.8\linewidth]{ESAllCuts_#1}}\\
-    \subfloat[Table of efficiencies]{\input{../appAllResults/tables/table_#1_efficiency.tex}}
-    \caption[#3 of #2: Effect of all cuts in ROI]{Plot showing effect of cuts applied sequentially on ROI peak and table of detection efficiencies for the #3.}
+    \subfloat{\includegraphics[width=0.8\linewidth]{ESAllCuts_#1}}
+    \caption{Effect of all cuts applied sequentially on ROI for #3 of #2}
+  \end{figure}
+  \begin{figure}[!htb]
+    \subfloat{\input{../appAllResults/tables/table_#1_efficiency.tex}}
+    \caption{Table of detection efficiencies for the #3.}
   \end{figure}
 
 
-  \begin{figure}[p]
+  \begin{figure}[!htb]
     \centering
-    \subfloat[Simulated BG Cuts]{\includegraphics[width=.5\linewidth]{BGAllCuts_#1}}
-    \subfloat[Data Cuts]{\includegraphics[width=.5\linewidth]{DataAllCuts_#1}}\\
-    \subfloat[Data ROIs]{\includegraphics[width=0.5\linewidth]{DataROIs_#1}}
-    \caption[#3 of #2: Cuts appliled to simulated and measured background data]{
-      Effect of all cuts applied to measured and simulated background data.
+    \subfloat{\includegraphics[width=.5\linewidth]{BGAllCuts_#1}}
+    \subfloat{\includegraphics[width=.5\linewidth]{DataAllCuts_#1}}\\
+    \caption{
+      Effect of all cuts applied to sequentially simulated (left)  and measured (right) background data.
     }
+  \end{figure}
+  
+  \begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.5\linewidth]{DataROIs_#1}
+    \caption{All events after cuts in background (red) and signal (blue) ROIs for #3 of #2}
   \end{figure}
   
   \begin{sidewaystable}[p]

@@ -12,7 +12,7 @@
 
 The \textsc{Majorana} Collaboration is studying \bb -decay in \Ge{76} and is currently operating an array of High Purity Germanium (HPGe) detectors called the \MJD\cite{mjd2014}.
 The goal of the next generation of \znbb\ searches is a sensitivity to \mbb\ of $\sim15$~meV, which corresponds to a half-life sensitivity in \Ge{76} of $\sim10^{28}$~y.
-To reach this goal, an exposure on the order of several tonne-years will be required, with background levels in the region of interest of the decay of $<0.1$~cts/FWHM-t-y, as shown in figure~\ref{fig:sensitivity}.
+To reach this goal, an exposure on the order of several tonne-years will be required, with background levels in the region of interest of the decay of $<0.1$~cts/FWHM-t-y, as shown in Figure~\ref{fig:sensitivity}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{sensitivityplot}
@@ -25,7 +25,7 @@ With these future needs in mind, the \MJD\ was built with the following primary 
 \item Demonstrate backgrounds low enough to justify building \bb -decay experiment involving $\sim1$~tonne of \Ge{76}. The goal for the \MJD\ is a background rate of $<3$~background counts per tonne-year of isotopic exposure in a 4~keV region of interest around the 2039~keV Q-value of \znbb\ in \Ge{76}.
 \item Demonstrate the scalability of the design and techniques of the \MJD\ towards a tonne-scale experiment.
 \item Set competitive limits on the half-life of \znbb\ and on \mbb\ with other leading searches such as KamLAND-Zen and \Gerda \cite{kamlandzen, gerda}.
-\item Search for additional physics beyond the Standard Model. This includes searches for bosonic dark matter, solar axions, Pauli exclusion principle violation, electron decay, lightly ionizing particles, and trinucleon decay\cite{mjdlowE2017, mjdlips2019, mjdtrinuc2019}. As discussed in section~\ref{sec:bsmes}, the search for \bbes\ has implications for some models beyond the standard model physics.
+\item Search for additional physics beyond the Standard Model. This includes searches for bosonic dark matter, solar axions, Pauli exclusion principle violation, electron decay, lightly ionizing particles, and trinucleon decay\cite{mjdlowE2017, mjdlips2019, mjdtrinuc2019}. As discussed in Section~\ref{sec:bbestheory}, the search for \bbes\ has implications for some models beyond the standard model physics.
 \end{itemize}
 This chapter will describe the design of the \MJD\ and progress towards meeting these goals, with a focus on the most relevant elements of the experiment to the search for \bbes.
 
@@ -37,7 +37,6 @@ The PPC geometry offers several advantages in performing a low background search
 First, PPC HPGe detectors have intrisically low electronic noise due to a much lower capacitance than coaxial detectors.
 This results in an improved energy resolution and lower energy thresholds.
 Additionally, the PPC geometry enables pulse shape analysis (PSA) techniques to discriminate between single- and multi-site events.
-\\
 
 \begin{figure}[h]
   \centering
@@ -53,7 +52,7 @@ The remaining detectors use Germanium that has been isotopically enriched to $88
 Photographs of both an enriched and natural detector are shown in fiture~\ref{fig:detphotos}.
 By isotopically enriching the germanium used to manufacture the detectors, they act as both the source and the detector of \znbb, with the result that all kinetic energy from a \znbb\ is detected, which ensures a high detection efficiency.
 Furthermore, the manufacturing processes for HPGe detectors require a high material purity, which ensures intrisically low backgrounds inside of the detectors.
-\\
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{Modular_Design}
@@ -68,7 +67,7 @@ Each detector is placed in interchangable detector mounts, to which the first st
 These mounts are stacked into strings of 4-5 detectors, which are arranged into arrays of 7 strings, and the arrays are placed into cryostats.
 The detectors, electronics, cooling and vacuum  hardware are operated independantly for each cryostat, and the combination of this hardware and the detector array is refered to as a module.
 Figure~\ref{fig:modulardesign} shows the various stages of a module.
-\\
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{modules}
@@ -76,11 +75,11 @@ Figure~\ref{fig:modulardesign} shows the various stages of a module.
     Layout of all strings in both modules. The center string for each module is furthest to the left, and the other strings are on the outside. Enriched detectors are colored green, and natural detectors are colored blue.
   }
 \end{figure}
-The \MJD\ has been constructed with two modules, shown in figure~\ref{fig:modules}.
+The \MJD\ has been constructed with two modules, shown in Figure~\ref{fig:modules}.
 Module~1 contains 20~enriched detectors, totalling 16.9~kg in mass, and 9~natural detectors, totalling 5.6~kg.
 Module~2 contains 15~enriched detectors, totalling 12.9~kg, and 14~natural detectors, totalling 8.8~kg.
 In total, the total mass of \Ge{76} is 27.4~kg, 26.3~kg of which is contained in the enriched detectors.
-\\
+
 To meet the stringent background requirements of the \MJD, the detector and cryostat components are built out of extra clean materials.
 The cryostat and detector mount structures are built out of copper that has been electroformed underground\cite{mjdeforming}.
 Insulating components consist of NXT-85, a low background Teflon.
@@ -96,13 +95,13 @@ Components are machined underground in a class 1000 clean room environment, and 
   }
 \end{figure}
 An extensive radioassay campaign was carried out to verify the low backgrounds of the components and the manufacturing procedures\cite{mjdassay}.
-The results of this assay campaign are shown in figure~\ref{fig:assay}, and predict a background index of $<2.2$~cts/FWHM-t-y, with primordial isotopes in the LMFE boards and the lead shield as the dominant background contributions.
-\\
+The results of this assay campaign are shown in Figure~\ref{fig:assay}, and predict a background index of $<2.2$~cts/FWHM-t-y, with primordial isotopes in the LMFE boards and the lead shield as the dominant background contributions.
+
 Each cryostat is placed inside of a graded shield in order to further reduce backgrounds.
 Each layer of the shield is constructed from successiveley cleaner materials in order, consisting from outer- to inner-most layer of:
 \begin{itemize}
 \item High density polyethylene panels that reduce the energy of incoming environmental neutrons, and borated polyethylene to capture the neutrons
-\item Scintillating acrylic veto panels that act as an active muon veto, to be described in greater detail in section~\ref{sec:veto}
+\item Scintillating acrylic veto panels that act as an active muon veto, to be described in greater detail in Section~\ref{sec:muonveto}
 \item A mostly-sealed aluminum box that is continuously purged with scrubbed nitrogen gas in order to purge the interior of radon gas
 \item A 45~cm thick lead shield
 \item A 5~cm thick shield manufactured from commercially available Oxygen-Free High thermal Conductivity (OHFC) copper
@@ -119,7 +118,7 @@ Each layer of the shield is constructed from successiveley cleaner materials in 
 \end{figure}
 Figure~\ref{fig:shield} contains a drawing of the shield and module hardware.
 In addition to this shielding, the entire experiment is hosted at the Davis Campus of the Sanford Underground Research Facility (SURF) in Lead, South Dakota, 4850', with an overburden of $\sim4300$~m.w.e\cite{surf}.
-\\
+
 \subsection{Muon Veto}\label{sec:muonveto}
 The muon veto consists of 32~scintillating acryllic panels instrumented with wavelength-shifting fibers and photo-multiplier tubes \cite{2015wiseman}.
 The panels are arranged to completely cover each face of the shielding, including the top and bottom, forming a completely enclosed surface.
@@ -129,7 +128,7 @@ Figure~\ref{fig:muonveto} shows a diagram of the panel layout.
 The muon veto is read out by two Caen QDC digitizers, with a separate Caen trigger card that acts as a 100~MHz clock and facilitates the trigger logic for the veto system.
 All channels on all three cards are simultaneously recorded if any two panels simultaneously record energies greater than a threshold set a the hardware level.
 LED pulsers are used to monitor the stability of each channel.
-\\
+
 \begin{figure}
   \centering
   \subfloat[Muon veto panel configuration]{\includegraphics[width=0.4\textwidth]{muonpanels}}
@@ -143,12 +142,12 @@ Each muon event is analyzed to identify candidate muons.
 LED pulsers, which affect all panels simultaneously, $\gamma$-rays, which will have lower energies and different hit patterns, and events caused by hardware errors can be easily identified and removed.
 This analysis is expected to tag $>99\%$ of muon events that pass through the shield, with exceptions during DS0 and DS1, prior to the completion and complete debugging of the veto system.
 Once muon events have been analyzed, any HPGe detector events in a range of 0.2~ms before 1~s after the event are cut.
-As shown in figure~\ref{fig:muonveto}, this cut is expected to remove $>99.9\%$ of events induced by through-going muons, with exceptions during DS0 and DS1 when the muon and HPGe detector clocks were desynchronized.
+As shown in Figure~\ref{fig:muonveto}, this cut is expected to remove $>99.9\%$ of events induced by through-going muons, with exceptions during DS0 and DS1 when the muon and HPGe detector clocks were desynchronized.
 In addition to acting as a veto, this system can produce analyses of the muon flux measured at SURF's Davis Campus\cite{mjdmuonflux}.
-\\
-\section{HPGe Detector Signal Processing}
+
+\section{HPGe Detector Signal Processing} \label{sec:mjprocessing}
 This section will describe how a signal from one of the \MJD's detectors is read out, starting with the detector electronics, through the digital waveform processing techniques that are used.
-\\
+
 \subsection{Charge Signal Collection} \label{sec:signalelectronics}
 \begin{figure}
   \centering
@@ -168,9 +167,9 @@ The second stage amplifier produces two separate signals, with differing gains; 
 For the analysis presented here, events from the high gain channel will be primarily used.
 This circuit results in a typical peakshape that is approximately exponential, with a tail of $\sim72~\mu$s.
 The LMFE board additionally has a capacitively-coupled pulser line that can produce artificial pulses of a fixed energy that can be used to monitor the stability of the electronics.
-A circuit diagram and photo for the LMFE board is shown in figure~\ref{fig:lmfe}.
-A waveform shaped by these electronics can be seen in figure~\ref{fig:trapfilter}.
-\\
+A circuit diagram and photo for the LMFE board is shown in Figure~\ref{fig:lmfe}.
+A waveform shaped by these electronics can be seen in Figure~\ref{fig:trapfilter}.
+
 For each detector, the signal from both channels is digitized using GRETINA digitizer cards, developed by the GRETINA experiment\cite{zimmermann2012}.
 The \MJD\ signals are digitized at a freqency of 100~MHz, with 14 bits of precision.
 A built in field-programmable gate array applies a pole-zero correction and trapezoidal filter independantly to each channel (these will be discussed in the next section).
@@ -179,8 +178,8 @@ The digitizers are further capable of presumming samples by factors of 2, 4, 8 o
 Furthermore, the ditizizers can multi-sample, using a different presumming factor for different portions of the waveform.
 Multi-sampling enables a high sampling frequency for the rising edge of the waveform, which aids the PSA techniques that depend on the waveform risetime, and a low sampling frequency for the falling tail and baseline of the waveforms, which improves baseline measurement, energy estimation, and PSA techniques that utilize the exponential tail of the waveform.
 For \MJD\ data, for different datasets, multi-sampling is either disabled, resulting in $\sim20~\mu$s waveforms with a single sampling frequency of 100~MHz, or enabled with the falling tail sampled at 25~MHz, resulting in $\sim40~\mu$s waveforms.
-Each digitized pulse is recorded and reanalyzed offline, using the software described in section~\ref{sec:software}.
-\\
+Each digitized pulse is recorded and reanalyzed offline, using the software described in Section~\ref{sec:mjsw}.
+
 \subsection{Energy Estimation}
 \begin{figure}
   \centering
@@ -197,9 +196,9 @@ The energy of a waveform is estimated using a trapezoidal filter implemented in 
 Trapezoidal filters are nearly optimal filters for energy estimation, enabling low noise measurements while avoiding ballistic deficit\cite{Radeka1972, knoll}.
 The trapezoidal filter has a flat top length of $2~\mu$s and a ramp-time of $4~\mu$s.
 The pole-zero constant is optimized independantly for each detector in order to produce a flat-top for the trapezoids, and the maximum value of the trapezoid is selected as the energy estimator.
-An example of a pole-zero correction and trapezoidal filter application is shown in figure~\ref{fig:trapfilter}.
+An example of a pole-zero correction and trapezoidal filter application is shown in Figure~\ref{fig:trapfilter}.
 The energy measured in this fashion is named \texttt{trapENF}.
-\\
+
 \subsection{Additional Energy Corrections} \label{sec:energy}
 \begin{figure}
   \centering
@@ -210,12 +209,12 @@ The energy measured in this fashion is named \texttt{trapENF}.
 \end{figure}
 A second energy estimator has been implemented that corrects for several systematic errors in the \texttt{trapENF} estimator\cite{energyunidoc}.
 First, nonlinearities in the digitizer response are corrected for.
-The GRETINA digitizers have an unusually large nonlinearity, which manifests as a periodic sawtooth-shaped error, as shown in figure~\ref{fig:localnonlin}.
+The GRETINA digitizers have an unusually large nonlinearity, which manifests as a periodic sawtooth-shaped error, as shown in Figure~\ref{fig:localnonlin}.
 The size of this nonlinearity is measured by applying external, ramping signals from waveform generators in order to measure the width of each ADC bin.
 The resulting size of this nonlinearity before correction can shift measured energies by as much as 0.8~keV in the high gain readout.
 Before applying a trapezoidal filter, each waveform sample is corrected by the measured integral nonlinearity value, reducing the size of the ADC nonlinearity to $<0.1$~keV.
 The residual nonlinearity in energy response after applying this correction is referred to as the local nonlinearity.
-\\
+
 \begin{figure}
   \centering
   \subfloat[Modified Pole-Zero]{\includegraphics[height=6cm]{ctcorrection}}
@@ -231,15 +230,15 @@ This charge loss distorts the detector response, producing a low-energy tail in 
 The resolution degradation increases linearly as a function of hit energy, and at energies near the Q-value, this is a dominant contribution to the peak width.
 Charge trapping can be modelled as an exponential loss of charge with respect to the drift time of the charge inside of the HPGe crystal.
 To correct for this, we modify the pole-zero time constant so that the flat-top of the trapezoidal filter decays with the same time-constant as the charge trapping.
-As a result of this change, the measured waveform response after full charge collection will be identical, with respect to the origin time of the charge cloud, as shown in figure~\ref{fig:ctcorr}.
+As a result of this change, the measured waveform response after full charge collection will be identical, with respect to the origin time of the charge cloud, as shown in Figure~\ref{fig:ctcorr}.
 The resulting pole-zero time $\tau$ is described by:
 \begin{equation}
   \frac{1}{\tau} = \frac{1}{\tau_{PZ}} + \frac{1}{\tau_{CT}}
 \end{equation}
 where $\tau_{PZ}$ is the flat-top pole-zero time constant, and $\tau_{CT}$ is the charge trapping time constant.
 The value of $\tau$ is chosen to optimize the FWHM measured for a 2614~keV peak from a \Th{228} calibration spectrum, using the energy estimator described here.
-This optimization is shown in figure~\ref{fig:ctcorr}.
-\\
+This optimization is shown in Figure~\ref{fig:ctcorr}.
+
 \begin{figure}
   \centering
   \subfloat[\texttt{trapE} vs \texttt{trapENF}]{\includegraphics[width=0.53\textwidth]{trapEvtrapENF}}
@@ -252,10 +251,10 @@ However, because the trapezoid no longer has a flat top, the maximum value is no
 This technique is referred to as a ``fixed-time pickoff.''
 A short trapezoidal filter with a rise-time of $1~\mu$s and a flat-top of $1.5~\mu$s is used, with the final crossing of a fixed threshold value used to estimate the origin time.
 After applying both of these corrections, the resulting energy estimator is called \texttt{trapENF}.
-The \texttt{trapENF} estimator improves the energy resolution of the \MJD\ detectors at 2614~keV by $\sim31\%$, as shown in figure~\ref{fig:trapenf}.
+The \texttt{trapENF} estimator improves the energy resolution of the \MJD\ detectors at 2614~keV by $\sim31\%$, as shown in Figure~\ref{fig:trapenf}.
 Using the \texttt{trapENF} energy estimator, the \MJD\ has achieved the best energy resolution of any current generation \znbb\ experiment.
 There is, however, still room for improvement by correcting for global nonlinearities that arise from an energy dependant, systematic drift in the start time estimator and a small quadratic nonlinearity in the detector response.
-\\
+
 \subsection{Energy Calibration} \label{sec:calibration}
 \begin{figure}
   \centering
@@ -273,7 +272,7 @@ The source is pushed by a motor located outside of the shielding, and a set of m
 For each module, a separate 90~minute calibration run is performed once per week, with one source inserted at a time.
 In addition to the \Th{228} line source, a \Co{60} line source with activity 6.3~kBq over the last 2~m of length and a \Co{56} line source with activity 6~kBq over the last 2~m of length were manufactured for use inside of the calibration track.
 Figure~\ref{fig:caltrack} shows a drawing and photograph of the calibration track.
-\\
+
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{calfwhm}
@@ -281,12 +280,12 @@ Figure~\ref{fig:caltrack} shows a drawing and photograph of the calibration trac
     A combined detector spectrum from a \Th{228} calibration run, with the FWHM extracted from a simultaneous fit of many peaks.
   }
 \end{figure}
-The $\gamma$ peaks from the \Th{228} spectrum are simultaneously fit to an analytic peakshape function, as described in appendix~\ref{app:peakshape}.
+The $\gamma$ peaks from the \Th{228} spectrum are simultaneously fit to an analytic peakshape function, as described in Appendix~\ref{app:peakshape}.
 The results of this fit are used to extract the gain, energy offset, and energy resolution of each HPGe detector, and of the combined detector array.
 This fit is performed on 8~calibration peaks for each 90~minute calibration run, and a gain matching of the 238- and 2614-keV peaks is used to calibrate the detectors.
 At the end of a major dataset, a more detailed fit of $\sim30$~peaks is performed, which is used to measure the detailed energy characteristics.
 Figure~\ref{fig:calfwhm} shows a \Th{228} calibration spectrum, with the energy resolution extracted from a simultaneous peak fit.
-\\
+
 \subsection{Multi-site Events} \label{sec:avse}
 \begin{figure}[h]
   \centering
@@ -298,7 +297,7 @@ Figure~\ref{fig:calfwhm} shows a \Th{228} calibration spectrum, with the energy 
   }
 \end{figure}
 PPC HPGe detectors enable several PSA techniques that can differentiate between different types of events, which can aid in reducing backgrounds.
-The PPC detector geometry results in low drift velocity in the bulk of the detector and a weighting potential that is highly locallized near the point contact, meaning that most of the charge signal is induced in a short period of time, as shown in figure~\ref{fig:ppcdet}.
+The PPC detector geometry results in low drift velocity in the bulk of the detector and a weighting potential that is highly locallized near the point contact, meaning that most of the charge signal is induced in a short period of time, as shown in Figure~\ref{fig:ppcdet}.
 The result is a sharp current signal whose timing depends heavily on the position of charge deposition inside of the detector.
 This enabled the discrimination of single-site events from multi-site events.
 All charge in a single-site event is localized within $\sim1-2$~mm inside of the crystal.
@@ -307,7 +306,7 @@ In multi-site events, multiple localized clusters of charge are simultaneously c
 $\gamma$-rays that Compton scatter inside of the crystal and then deposit their remaining energy elsewhere in the crystal are an example of a multi-site event that could potentially be a background in searching for \znbb.
 The charge drift times inside of PPC detectors is long enough that the drift time of each localized charge cloud in the detector will differ by potentially hundreds of ns, which is long enough to be visible to the GRETINA digitizers.
 Figure~\ref{fig:avse} shows the difference between a single- and multi-site waveform.
-\\
+
 \begin{figure}
   \centering
   \subfloat[Single- and Multi-site waveforms]{\includegraphics[width=0.5\textwidth]{ssmswf}}
@@ -321,7 +320,7 @@ In order to distinguish between single- and multi-site waveforms, we compare the
 For a single localized charge cloud, the maximum charge amplitude is expected to be approximately proportional to the energy deposited in the local area.
 This means that single-site events will typically have a fixed ratio between these values.
 In a multi-site event, on the other hand, the maximum charge amplitude will be proportional to the energy of the largest local site rather than the full energy of the waveform, so this ratio will be less than that for single-site events.
-In figure~\ref{fig:avse}, the relationship between the maximum current amplitude and the energy is shown.
+In Figure~\ref{fig:avse}, the relationship between the maximum current amplitude and the energy is shown.
 The analysis parameter AvsE performs a comparison between these values and has been shown to cut $\sim95\%$ of multi-site events while keeping $\sim90\%$ of single-site events.
 A measurement of these efficiencies is shown in figure\ref{fig:avseeff}
 Near the \znbb\ region of interest, this cut removes $\sim60\%$ of Compton continuum backgrounds.
@@ -332,7 +331,7 @@ Near the \znbb\ region of interest, this cut removes $\sim60\%$ of Compton conti
     A measurement of the cut efficiency of the AvsE cut for single escape (SEP) events, which are inherently multi-site, double-escape (DEP) events, which are inherently single-site, and Compton continuum events.
   }
 \end{figure}
-\\
+
 \subsection{Surface Events} \label{sec:dcr}
 \begin{figure}
   \centering
@@ -346,7 +345,7 @@ Near the \znbb\ region of interest, this cut removes $\sim60\%$ of Compton conti
 
 Additional backgrounds in the \MJD can potentially come from $\beta$- and $\alpha$ particles incident on the surface of the HPGe detectors.
 Because these are charged particles, they will be absorbed within $\sim1$~mm ($\beta$s) or $\sim.1~\mu$m ($\alpha$s) of the detector surface.
-The $p^+$ and $n^+$ detector surfaces have a $\sim1.1$~mm thick lithiated layer that is dead (i.e. virtually no charge is collected from events in this layer), meaning that these surfaces are insensitive to incident charged particles.
+The $p^+$ and $n^+$ detector surfaces have a $\sim1.1$~mm thick lithiated layer that is dead (i.e.~virtually no charge is collected from events in this layer), meaning that these surfaces are insensitive to incident charged particles.
 A passivation layer between these contacts, however, has a thickness of $\sim0.1 \mu$m, and holes created near this surface are strongly trapped.
 These holes are rereleased on a time scale much longer than the trapezoidal filter time, with the result that a highly degraded energy is measured
 As a result, $\alpha$ particles with energies of 3-9~MeV can be read with energies at or near the 2.039~MeV Q-value of $\beta\beta$-decay.
@@ -355,7 +354,7 @@ DCR can be measured by checking for a reduction in the slope of the falling tail
 Figure~\ref{fig:dcr} shows a comparison between a DCR waveform and a bulk waveform, and the values of the DCR parameter for surface $\alpha$ events and bulk $\gamma$ events.
 This cut rejects most $\alpha$ particles while keeping $\sim99\%$ of \znbb events.
 
-\section{\MJD\ Software}
+\section{\MJD\ Software} \label{sec:mjsw}
 The \textsc{Majorana} uses a suite of software, developed either independantly or in conjunction with other physics collaborations.
 This section will give a brief overview of the software packages in use, their purpose, and their hierarchy.
 The primary language for this software is \cpp, unless noted otherwise.
@@ -368,7 +367,7 @@ Figure~\ref{fig:swhierarchy} shows the dependancies and hierarchy of the \MJD\ s
     A diagram of the dependancies between the software libraries used for the \MJD.
   }
 \end{figure}
-\\
+
 \subsection{DAQ}
 The DAQ hardware is managed and read out by the Object-oriented Real-time Control and Acquisition (ORCA) software, an object oriented DAQ framework written in Objective-C\cite{orca}.
 ORCA supports a wide variety of digitizers, including the GRETINA cards and Caen QDC and scaler cards used by the \MJD.
@@ -378,13 +377,13 @@ Data is divided into runs, which typically last an hour in length for background
 The various cards are read asynchronously by ORCA.
 Between data runs, cards are not reinitialized and continue to record data; as a result, 100\% livetime is achieved during normal operations.
 ORCA also supports readout of a variety of other devices that are used for environmental monitoring of the Davis Campus, and is capable of pushing these readings to an online database for access outside of the laboratory.
-\\
+
 \subsection{MGDO}
 The Majorana-Gerda Data Objects (MGDO) is a software library that is maintained by both the \MJ\ and \Gerda\ collaborations\cite{mgdo}.
 MGDO contains objects for storing waveforms, data from various digitizer cards, and run information that are compatible with ROOT's \texttt{TTree}, a data storage structure.
 MGDO also contains objects to perform various waveform transformations that are used in digitital signal processing.
-\\
-\subsection{The Event Builder}
+
+\subsection{The Event Builder}\label{sec:eventbuilder}
 The MJOR library contains the \MJ\ Event Builder, which converts the binary ORCA files into MGDO data storage objects and writes those objects to a ROOT \texttt{TTree}.
 Because the ORCA readout is asynchronous, the event builder is also responsible for sorting events in time order and combining simultaneous waveforms into events.
 Waveforms within a $4~\mu$s window are combined; this is a rolling window, meaning that if a waveform is within $4~\mu$s of any other waveform in the event, it will be added.
@@ -393,26 +392,26 @@ The event builder also performs some basic data quality checks, known colloquial
 The event builder records events from both the HPGe detectors, read by the GRETINA cards, and from the muon veto system, read by the Caen QDC and Scaler cards.
 The ROOT files produced by the event builder are known as build files.
 Appendix~\ref{app:eventbuilder} contains an in depth description of the event builder.
-\\
+
 \subsection{GAT}
 The Germanium Analysis Toolkit (GAT) is a software framework for performing various analyses on the \MJD.
-GAT performs the various digital waveform transformations necessary to compute the signal processing parameters described in section~\ref{sec:signalprocessing}.
+GAT performs the various digital waveform transformations necessary to compute the signal processing parameters described in Section~\ref{sec:mjprocessing}.
 GAT records these parameters in a separate file, called a Gatified file, which is used for data analysis.
 In addition, GAT produces skim files, which contain only events that pass additional data quality checks and only a single channel (between high and low gain) from each detector for each event.
 One example of events that are removed by data quality checks are events that occur during liquid nitrogen dewar fills, which last $\sim15$~minutes and cause periods of high electronic noise.
-Another example is events that are cut by the muon veto system, as described in section~\ref{sec:muonveto}.
+Another example is events that are cut by the muon veto system, as described in Section~\ref{sec:muonveto}.
 Finally, skim files are produced to include only runs and detectors that are determined to be high quality.
 GAT also contains software suites to perform other analyses for the \MJD, including the \znbb\ analysis, the excited state decay analysis described in this document, and energy calibrations.
-\\
+
 \subsection{\Mage}
 The Majorana Gerda (\Mage) simulation package is used to perform simulations of the \MJD\cite{mage2011}.
-It is described in detail in chapter~\ref{chap:simulations}.
-\\
+It is described in detail in Chapter~\ref{ch:sims}.
+
 \section{Recent Results}
 Based on the analysis described in this chapter, the \MJD\ has produced a limit on the half-life of \znbb\ in \Ge{76}.
 So far, two results have been published: one with $\sim$10~kg-y of data\cite{mjd2018}, and one with $\sim$26~kg-y of data\cite{mjd2019}, which will be discussed in this section.
 Further data releases will be performed once per year until the decommissioning of the \MJD, expected in 2020.
-\\
+
 \subsection{Data Taking and Blinding}
 Module~1 began recording data on June 26, 2015 and has been in continuous operation since December 31, 2015.
 Module~2 began recording data on August 25, 2016.
@@ -422,7 +421,7 @@ The main differences between the datasets are as follows:
 \begin{itemize}
 \item DS0: Data taken with module~1 only, prior to the installation of the inner copper shield. This dataset has elevated backgrounds.
 \item DS1: Data taken with module~1 after installation of the inner copper shield, and repairs to electronic components that resulted in a greater number of active detectors.
-\item DS2: Data taken with module~1 using the digitizer multi-sampling described in section~\ref{sec:signalelectronics}.
+\item DS2: Data taken with module~1 using the digitizer multi-sampling described in Section~\ref{sec:signalelectronics}.
 \item DS3: Data taken with module~1 after installation of module~2. Multi-sampling was disabled for DS3.
 \item DS4: Data taken with module~2, simultaneously to DS3. Separate instances of ORCA were run for DS3 and DS4.
 \item DS5a: Data taken with modules~1 and~2 using a single instance of ORCA. Data taken during this period had elevated noise due to poor detector grounding. As a result, the energy resolution and cut performance is worse for this DS than others.
@@ -431,7 +430,7 @@ The main differences between the datasets are as follows:
 \item DS6a: Data taken with both modules, with multi-sampling enabled. This dataset ended with the second data release of $\sim26$~kg-y of data.
 \end{itemize}
 The \MJD\ has continued recording data since the end of DS6a.
-\\
+
 The \MJD\ follows a statistical blinding scheme, in which 75\% of data is administratively blinded and inaccessible to analysts in the \MJ\ collaboration.
 The remaining 25\% of data is accessible and is used to test the analysis tools and parameters.
 Implementation of this scheme is accomplished by alternating between 31~hours of background runs that are unblinded and 93~hours that are blinded.
@@ -439,7 +438,7 @@ Unblinding is performed in several stages.
 First, only events with energies excluding the 1950-2350~keV region around the Q-value, low energy events and multi-detector events, all of which are used for various \MJD\ analyses.
 This data is used to perform run and detector selection, and to verify the data cleaning cuts.
 After verification, further data is unblinded individually for various analyses after a collaboration-wide review of the techniques.
-\\
+
 \subsection{Analysis}
 \begin{table}[h]
   \centering
@@ -451,15 +450,15 @@ After verification, further data is unblinded individually for various analyses 
 \end{table}
 An independant analysis is performed of each dataset.
 Table~\ref{tab:dsresults} contains a summary of the configuration, exposure, and detection efficiencies for each dataset.
-For each detector, the active isotopic mass is computed, which is the mass of \Ge{76} that is in the bulk region of a detector, excluding dead layers (see section~\ref{sec:dcr}.
-The dead layer volume is computed based on simulations, following the procedure to be outlined in section~\ref{sec:deadlayers}.
+For each detector, the active isotopic mass is computed, which is the mass of \Ge{76} that is in the bulk region of a detector, excluding dead layers (see Section~\ref{sec:dcr}.
+The dead layer volume is computed based on simulations, following the procedure to be outlined in Section~\ref{sec:deadlayers}.
 The total exposure for each dataset is computed by totalling the product of the active mass of each detector and the total livetime of each detector.
-The detector livetime excludes runs for which that detector was disabled, time periods cut by the LN fill cut or muon veto cut, and detector deadtime, which is estimated as described in section~\ref{sec:DT}.
+The detector livetime excludes runs for which that detector was disabled, time periods cut by the LN fill cut or muon veto cut, and detector deadtime, which is estimated as described in Section~\ref{sec:DT}.
 The detection efficiency for this analysis is defined as the fraction of \znbb\ events originating in the active region of an active detector that is contained in the region of interest selected for the peak search.
-The region of interest is selected by optimizing the detection efficiency with respect to the background acceptance, following a similar procedure to that described in section~\ref{sec:roiopt}, and results in an ROI efficiency of $\epsilon_{res}\sim0.900\pm0.007$, with slight variations between DSs.
+The region of interest is selected by optimizing the detection efficiency with respect to the background acceptance, following a similar procedure to that described in Section~\ref{sec:roiopt}, and results in an ROI efficiency of $\epsilon_{res}\sim0.900\pm0.007$, with slight variations between DSs.
 The cut officencies of AvsE ($\epsilon_{AE}$) and DCR ($\epsilon_{DCR}$) are calculated using the techniques described in sections~\ref{sec:avse} and~\ref{sec:dcr}.
 The containment efficiency ($\epsilon_{cont}$) accounts for events that occur in the transition region between the dead layer and the bulk of the detector, where there is partial energy loss that pulls the event out of the ROI.
-\\
+
 \begin{figure}
   \centering
   \subfloat[Full background spectrum]{\includegraphics[height=4.5cm]{mjdbgcuts}}
@@ -468,7 +467,7 @@ The containment efficiency ($\epsilon_{cont}$) accounts for events that occur in
     The \MJD\ background spectrum for datasets 0-6a. Left: the full energy range, with cuts applied sequentially. Right: the 1950-2350~keV bacgkround region of interest spectrum after applying all cuts. The blue band is the signal ROI, and the blue curve represents the flat background with a peak with amplitude equal to the 90\% confidence limit.
   }
 \end{figure}
-After applying all cuts, we measure the background spectrum shown in figure~\ref{mjdbgspectrum}.
+After applying all cuts, we measure the background spectrum shown in Figure~\ref{mjdbgspectrum}.
 The background index is estimated assuming a flat background in the 1950-2350~keV range, excluding regions around the known 2103~keV, 2117~keV and 2204~keV $\gamma$ peaks.
 The measured background index across all datasets is $6.1\pm0.8\cdot10^{-3}$~cts/(keV-kg-y).
 This corresponds to $15.4\pm2.0$ cts/(FWHM-t-y), using a 4.13~keV optimal ROI.
@@ -483,28 +482,28 @@ This background index falls short of the 3~ct/(FWHM-t-y) goal set for the \MJD, 
   \footnotesize
   \input{ch2/tables/dsbgidx.tex}
 \end{table}
-\\
+
 A poisson counting sideband analysis is performed, with 1~event in the ROI and 57 events in the $\sim350$~keV wide background ROI.
 The half-life limit is determined using
 \begin{equation}
   T_{1/2}^{0\nu}>\frac{\mathrm{ln}(2)NT\epsilon_{tot}\epsilon_{res}}{\hat{S}(n_{ROI}, \langle B\rangle)}
 \end{equation}
-where $NT\epsilon_{tot}\epsilon_{res}$ is shown in table~\ref{tab:dsresults}, and $\hat{S}(n_{ROI}, \langle B\rangle, CL)$ is an estimator for the upper limit on the number of observed counts at confidence limit CL with $n_{ROI}$ counts and $\langle B\rangle$ expected backgrounds in the ROI.
+where $NT\epsilon_{tot}\epsilon_{res}$ is shown in Table~\ref{tab:dsresults}, and $\hat{S}(n_{ROI}, \langle B\rangle, CL)$ is an estimator for the upper limit on the number of observed counts at confidence limit CL with $n_{ROI}$ counts and $\langle B\rangle$ expected backgrounds in the ROI.
 For this result, the Feldman-Cousins estimator\cite{feldmancousins} is used with confidence level of 90\%, yielding a half-life lower limit for \Ge{76} \znbb\ of $2.5\cdot10^{25}$~y.
 Other estimators have also been used and are quoted in reference~\cite{mjd2019}.
 Monto Carlo simulations were performed to measure the median sensitivity at 90\% CL at $>4.8\cdot10^{25}$~y.
 This half-life limit corresponds to a range of upper limits on $\langle m_{\beta\beta}\rangle$ of $(200--433)$~meV.
-\\
-\section{Future Searches for \Ge{76} \znbb}
+
+\section{Future Searches for \Ge{76} \znbb} \label{sec:legend}
 The \MJD\ and \Gerda\ experiments are the two most sensitive searches for \znbb\ in \Ge{76} to date.
 \Gerda\ has achieved a leading half-life limit of $9\cdot10^{25}$~y (90\% CL) from 82.4~kg-y of exposure\cite{gerda}.
 The \MJD\ and \Gerda\ have achieved the two lowest background indexes of any \znbb\ searches, at 11.9~cts/(FWHM-t-y) for the \MJD\ and 2.1~cts/(FWHM-t-y) for \Gerda.
 These low backgrounds have been achieved using differing, but complementary techniques.
-\Gerda\ has achieved its low background rate largely by submerging an array of enriched HPGe detectors in liquid Argon (lAr) (see figure~\ref{fig:legend200}.
+\Gerda\ has achieved its low background rate largely by submerging an array of enriched HPGe detectors in liquid Argon (lAr) (see Figure~\ref{fig:legend200}.
 This lAr veto acts as both passive and active shielding, since it is instrumented with photo-multiplier tubes and can detect scintillation light when a background event interacts inside the lAr.
 The \MJD\ has achieved low backgrounds thanks to its ultra-clean materials, particularly the electroformed copper, superior energy resolution and improved PSA techniques.
 The energy resolution and PSA improvements are enabled by the low noise LMFE electronics, which are mounted directly next to the detectors.
-\\
+
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{legend200}
@@ -515,12 +514,12 @@ The energy resolution and PSA improvements are enabled by the low noise LMFE ele
 The \MJ\ and \Gerda\ collaborations have combined to form the LEGEND collaboration, with the plan of building a tonne-scale array of enriched PPC HPGe detectors\cite{legend}.
 LEGEND will combine the background techniques demonstrated by the \MJD\ and \Gerda\ experiments and is currently undergoing active R\&D efforts to further reduce backgrounds.
 Currently, two stages are planned for LEGEND.
-LEGEND-200 is a 200~kg array of detectors that will utilize the existing \Gerda\ infrastructure at Gran Sasso National Laboratory (LNGS) in Italy, shown in figure~\ref{legend200}, with construction expected to begin in 2020.
+LEGEND-200 is a 200~kg array of detectors that will utilize the existing \Gerda\ infrastructure at Gran Sasso National Laboratory (LNGS) in Italy, shown in Figure~\ref{fig:legend200}, with construction expected to begin in 2020.
 In addition to the existing enriched HPGe detectors in use for both expirements, new detectors using an inverted-coaxial geometry which will have similar performance to the \MJD\ Ortec detectors, but even higher mass.
 Low mass electronics based on the LMFE design will be implemented, offering improved noise performance.
 The background goal for LEGEND-200 is $<0.6$~cts/(ROI-t-y), which is expected to be feasible based on simulations of the array with the previously mentioned improvements in the \Gerda\ lAr shield.
 After collecting $\sim1$~t-y of exposure, LEGEND-200 is expected to have a sensitivity to \Ge{76} \znbb\ of $>10^{27}$~y at 90\% CL.
-\\
+
 \begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{legend1000}
@@ -529,7 +528,7 @@ After collecting $\sim1$~t-y of exposure, LEGEND-200 is expected to have a sensi
   }
 \end{figure}
 LEGEND-1000 is a planned 1~tonne experiment that is currently undergoing active R\&D.
-A baseline design for LEGEND-1000, based on the \Gerda\ and LEGEND-200 designs, is shown in figure~\ref{legend1000}.
+A baseline design for LEGEND-1000, based on the \Gerda\ and LEGEND-200 designs, is shown in Figure~\ref{legend1000}.
 In addition to the improvements implemented for LEGEND-200, LEGEND-1000 will use underground electroformed copper, and clean materials that are under development.
 LEGEND-1000 will likely be housed in a laboratory with greater overburden than LNGS, reducing muon induced backgrounds.
 Low background lAr from underground sources will also be used, reducing backgrounds from cosmogenically activated isotopes such as the \iso{42}{Ar}--\iso{42}{K}--\iso{42}{Ca} chain.

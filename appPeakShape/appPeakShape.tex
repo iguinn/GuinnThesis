@@ -40,7 +40,7 @@ For this reason, the step is not considered when optimizing the signal ROI.
     A 2614~keV calibration peak fitted to the peakshape function described by equation~\ref{eq:peakshape}. The Gaussian component is shown in teal, the low energy tail in gold, the step in dashed red, and the combined peak shape in red.
   }
 \end{figure}
-The peak shape function is shown in figure~\ref{fig:peakshape}.
+The peak shape function is shown in Figure~\ref{fig:peakshape}.
 \\
 This peak shape function can be optionally extended with the addition of a high energy tail as follows:
 \begin{equation}
@@ -50,7 +50,7 @@ This peak shape function can be optionally extended with the addition of a high 
 \end{equation}
 Typically, no high energy tail is used, meaning $f_{HT}=0$.
 A high energy tail is necessary only if an abnormal peakshape appears.
-This can occur if the energy filter parameters are mis-set, or if peaks other than full energy $\gamma$ peaks are being fit, as is the case in section~\ref{sec:co56}, where the single- and double-escape peaks are used.
+This can occur if the energy filter parameters are mis-set, or if peaks other than full energy $\gamma$ peaks are being fit, as is the case in Section~\ref{sec:Co56}, where the single- and double-escape peaks are used.
 \\
 A simultaneous fit of many peaks in a calibration spectrum is performed in order to define the peak shape parameters at all energies.
 The peak shape parameters are defined as independant functions of energies and several hyperparameters as follows
@@ -82,9 +82,9 @@ The peak shape parameters are defined as independant functions of energies and s
   \end{equation}
   The inverse square term arises from low angle scattering of $\gamma$s as they approach the detector.
   The second power law term arises from transition layer events, and the power of -0.88 was empirically measured in simulations and data.
-  This model is described in greater detail in section~\ref{sec:stepheight}.
+  This model is described in greater detail in Section~\ref{sec:stepheight}.
 \end{itemize}
-The fit result of a simultaneous fit of 18 peaks from a 6~hour long \Th{228} calibration run is shown in figure~\ref{fig:simultaneousfit}.
+The fit result of a simultaneous fit of 18 peaks from a 6~hour long \Th{228} calibration run is shown in Figure~\ref{fig:simultaneousfit}.
 \begin{figure}[p]
   \centering
   \includegraphics[width=0.8\textwidth]{fitResults}
@@ -142,9 +142,9 @@ The second power law term arises from the transition layer of the detectors.
 Because of this model is nonlinear, floating the power parameter results in unreliable fitting for the standard 90-minute calibration runs, so $h_2$ is empirically measured using both data and simulations to be -0.88.
 Many simulations of the \Th{228} calibration source were run using the dead layer model described in equation~\ref{eq:dlmodel}, and the thickness of the transition layer varied between 0~and 2~mm.
 For each simulation, a simultaneous fit of many peaks was performed, floating all of the step height parameters.
-The values of $h_2$ measured are shown in figure~\ref{fig:stepheightpars_sim}, and have a stable value of -0.88 for dead layer thickness of $<1$~mm.
+The values of $h_2$ measured are shown in Figure~\ref{fig:stepheightpars_sim}, and have a stable value of -0.88 for dead layer thickness of $<1$~mm.
 Typical dead layer thicknesses for detectors are $\sim0.5$~mm.
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
   \includegraphics[width=0.8\textwidth]{hs2_tl}
   \caption[Simulated dependance of $h_2$ on transition layer thickness] {\label{fig:stepheightpars_sim}
@@ -154,12 +154,12 @@ Typical dead layer thicknesses for detectors are $\sim0.5$~mm.
 To measure this parameter from data, many peaks in a long calibration run were used.
 A fit was then performed for each detector, floating $h_2$ and fixing $h_{0}$.
 The value of $h_0$ is fixed to a value extracted from a fit of a calibration simulation that does not include the dead layer.
-The values of $h_2$ were measured from simultaneous fits of the spectrum measured for each detector in a long calibration run, and are shown in figure~\ref{fig:stepheightpars_dat}.
+The values of $h_2$ were measured from simultaneous fits of the spectrum measured for each detector in a long calibration run, and are shown in Figure~\ref{fig:stepheightpars_dat}.
 The measured values have large systematic uncertainties that are not accounted for in the fits, but the mean is consistent with the value of -0.88 measured using the simulations.
-\begin{figure}[h]
+\begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{hs2}
-  \caption[Measured values of $h_2$ in calibration data] {\label{fig:stepheightpars_sim}
+  \caption[Measured values of $h_2$ in calibration data] {\label{fig:stepheightpars_dat}
     Values of $h_2$ from the step height model measured using a simultaneous peak fit of the measured \Th{228} calibration spectrum. $h_0$ was fixed to values measured from simulations.
   }
 \end{figure}
@@ -171,7 +171,7 @@ Implementation of an energy range with a single peak on top of a quadratic backg
 Implementation of an energy region with multiple peaks included, with the peakshape parameters determined by functions of energy and various hyperparameters are included in \texttt{GATMultiPeakRegion.hh}.
 Implementation of the multi peak fitter, which manages many \texttt{GATMultiPeakRegion}s and the various parameter functions and hyperparameters, as well as many tools for computing auxiliary parameters at various energies, are included in \texttt{GATMultiPeakFitter.hh}.
 Implementation of a combined likelihood function to be used for simultaneous fitting is included in \texttt{GATGlobalFitFCN.hh}.
-Implementation of the HMC algorithm described in section~\ref{sec:fitter} is contained in \texttt{GATHybridMonteCarlo.hh}.
+Implementation of the HMC algorithm described in Section~\ref{sec:fitter} is contained in \texttt{GATHybridMonteCarlo.hh}.
 \\
 
 \onlyinsubfile{

@@ -10,13 +10,13 @@
 \onlyinsubfile{\textpages}
 \chapter{Conclusion}
 \section{Summary of Results}
-The result presented in this dissertation represents the best limit to date for all \bbes\ decay modes.
+The result presented in this dissertation represents the best limits to date each \Ge{76} \bbes\ decay mode.
 Meaningful constraints are placed on the value of the \bbes\ to the \SP{0}{+}{1} nuclear matrix element.
 This chapter will place the results of this analysis in the context of previous results and theoretical predictions.
 It will also discuss the potential for future improvements on this result.
-\\
+
 \subsection{Comparison to \Gerda\ Phase I result}
-\begin{table}[h]
+\begin{table}[t]
   \centering
   \caption[Comparison between results from the \MJD\ and \Gerda]{\label{tab:mjdgerdacomp}
     A comparison between the key parameters behind the results for \MJD\ and \Gerda\ for each \tnbb\ to excited states mode. Backgrounds and efficiencies are combined across modules and peaks. Limits and sensitivities are at 90\% Neyman confidence level.
@@ -27,10 +27,10 @@ It will also discuss the potential for future improvements on this result.
 \Gerda\ phase I published the previous best results for all \tnbb\ decay modes in 2015, using 22.3~kg-y of exposure\cite{gerdaESresult}.
 This result, using 21.3~kg-y of exposure has achieved a significantly higher sensitivity and limit.
 \Gerda\ employed similar analysis techniques to this result, but the \MJD\ enjoys several advantages in performing searches in multi-site detectors.
-First, the \Gerda\ liquid Argon veto acts as shielding for $\gamma$ photons that travel between HPGe detectors.
+First, the \Gerda\ liquid argon veto acts as shielding for $\gamma$s that travel between HPGe detectors.
 A 600~keV $\gamma$ has a mean free path through liquid argon of $\sim9$~cm, and the spacing between different \Gerda\ strings is several cm, resulting in significantly lower detection efficiency compared to the \MJD.
-For the decay to the \SP{0}{+}{1} state, \Gerda\ had a detection efficiency of 0.989~\%, while the \MJD\ had an efficiency of 1.71\%, averaged between the two modules.
-\\
+For the decay to the \SP{0}{+}{1} state, \Gerda\ had a detection efficiency of 0.989~\%, while the \MJD\ had an efficiency of 1.71\%, exposure-averaged between the two modules.
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.9\textwidth]{gerdabackgrounds}
@@ -38,22 +38,22 @@ For the decay to the \SP{0}{+}{1} state, \Gerda\ had a detection efficiency of 0
     The measured \Gerda\ single-hit and sum-energy spectra for high multiplicity events compared with the measured data. The dominant background in this spectrum originates from \iso{42}{K} in the liquid argon shield. Taken from \cite{gerdaESresult}.
   }
 \end{figure}
-In addition, \Gerda\ has a significantly higher background rate in the ROI: for the decay to the \SP{0}{+}{1} state, \Gerda expects 7.9~background counts while the \MJD\ expects 2.02~counts.
+In addition, \Gerda\ has a significantly higher background rate in the ROI: for the decay to the \SP{0}{+}{1} state, \Gerda\ expects 7.9~background counts while the \MJD\ expects 2.02~counts.
 One reason for this, is that the \MJD\ has significantly better resolution: the FWHM for a  583~keV coincident $\gamma$ is 1.3~keV for the \MJD, and 4.2~keV for \Gerda.
 Electronic crosstalk in the \Gerda\ detector array increases the FWHM from 3.8~keV to 4.2~keV.
-The LMFE boards (section~\ref{sec:signalelectronics}) and their proximity to the \MJ\ detectors provide low noise and minimal crosstalk (section~\ref{sec:crosstalk}), and the charge trapping correction (section~\ref{sec:energy}) provides further improvements.
+The LMFE boards (Section~\ref{sec:signalelectronics}) and their proximity to the \MJ\ detectors provide low noise and minimal crosstalk (Section~\ref{sec:crosstalk}), and the charge trapping correction (Section~\ref{sec:energy}) provides further improvements.
 As a result, the \MJD\ uses separate ROIs for the 559~and 563~keV $\gamma$s that combine to a width of 3.3~keV, while \Gerda\ uses a single 8.5~keV wide ROI.
 This explains most of the difference in background rates between the experiments; if \Gerda\ had the same ROI, the expected background rate would reduce to 3.1~counts.
-Additionally, the dominant background for \Gerda\ in this search comes from \iso{42}{K} from the \iso{42}{Ar}-\iso{42}{K}-\iso{42}{Ca} chain inside of the liquid Argon shield (see figure~\ref{gerdabgmodel}.
+Additionally, the dominant background for \Gerda\ in this search comes from \iso{42}{K} from the \iso{42}{Ar}-\iso{42}{K}-\iso{42}{Ca} chain inside of the liquid argon shield (see Figure~\ref{gerdabgmodel}.
 Because this decay can emit $\gamma$s from the interior of the detector array, it will produce multi-site events with high enough energies to pass the coincident energy cuts at a relatively high rate.
 This likely explains the remaining difference between the background rates.
-\\
+
 Since publishing the phase~I result\cite{gerdaESresult}, \Gerda\ has implemented numerous improvements that may improve on the previous result\cite{gerda2018}.
-\Gerda\ phase~II will replace many coaxial HPGe detectors with BEGe detectors, which are smaller, resulting in a more granular array that will be more sensitive to multi-detector events.
-Additionally, the liquid Argon shield will be instrumented, enabling it to act as an active shield, which may reduce backgrounds, and potentially be used to detect $\gamma$s from the excited state decays.
+\Gerda\ phase~II has since replaced many coaxial HPGe detectors with BEGe detectors, which are smaller, resulting in a more granular array that will be more sensitive to multi-detector events.
+Additionally, the liquid argon shield has been instrumented, enabling it to act as an active shield, which may reduce backgrounds, and potentially could be used to detect $\gamma$s from the excited state decays.
 \iso{42}{K} backgrounds are expected to be reduced with the addition of protective shrouds around detectors.
 Finally, improvements to the signal electronics and corrections for detector crosstalk may be implemented to improve the energy resolution.
-\\
+
 \subsection{Comparison to Theoretical Predictions}
 \begin{table}[p]
   \caption[Current half-live limits and predictions for all \tnbb-decay modes of \Ge{76}]{\label{tab:Ge76HalfLives}
@@ -63,46 +63,46 @@ Finally, improvements to the signal electronics and corrections for detector cro
   \input{ch6/tables/Ge76BBLimits.tex}
 \end{table}
 Table~\ref{tab:Ge76HalfLives} contains a list of theoretical predictions of the half-life of each \tnbb\ excited state decay mode for \Ge{76}.
-The models presented include Hartree-Fock-Bogoliubov (HFB), Quasi-Random Phase Approximation (QRPA), Multiple Commutator Model QRPA (MCM-QRPA), Renormalized proton-neutron QRPA (RQRPA), Interactive Boson Model (IBM), Shell Model (SM), and  Effective Field Theory (ET).
-For some references included in table~\ref{tab:Ge76HalfLives}, half-lives were not provided (the IBM\cite{barea2013, barea2015} and ET\cite{menendez2018}); in these cases, the half-life provided was calculated using:
+The models presented include Hartree-Fock-Bogoliubov (HFB), Quasi-Random Phase Approximation (QRPA), Multiple Commutator Model QRPA (MCM-QRPA), Renormalized proton-neutron QRPA (RQRPA), Interactive Boson Model (IBM), Shell Model (SM), and  Effective Field Theory (EFT) (recall Section~\ref{sec:NMEmethods}).
+For some references included in Table~\ref{tab:Ge76HalfLives}, half-lives were not provided (the IBM\cite{barea2013, barea2015} and EFT\cite{menendez2018}); in these cases, the half-life provided was calculated using:
 \begin{equation} \label{eq:hlcalc}
-  T^{2\nu~E.S.}_{1/2} = T^{2\nu~G.S.}_{1/2}\cdot\frac{\mathrm{G}_{2\nu}^{G.S.}|M_{2\nu}^{G.S.}|^2}{\mathrm{G}_{2\nu}^{E.S.}|M_{2\nu}^{E.S.}|^2}
+  T^{2\nu~E.S.}_{1/2} = T^{2\nu~G.S.}_{1/2}\cdot\frac{G_{2\nu}^{G.S.}|M_{2\nu}^{G.S.}|^2}{G_{2\nu}^{E.S.}|M_{2\nu}^{E.S.}|^2}
 \end{equation}
 where $T_{1/2}^{2\nu~g.s.}=1.65^{+0.14}_{-0.12}\cdot10^{21}$~y is the ground state decay half-life, averaged across all experiments\cite{barabash2015}.
 It should be noted that this uses and older measurement from \Gerda\ phase~I; a more recent result yields $T_{1/2}^{2\nu~g.s.}=1.926\pm0.094\cdot10^{21}$~y\cite{gerda2015}).
 $\mathrm{G}_{2\nu}$ are the phase space factors from Mirea, \textit{et al.}\cite{mirea2015}, and $|M_{2\nu}|$ are the matrix elements reported by the given source.
-The ET calculations\cite{menendez2018} also provided error estimates, which tend to be $40-80\%$ for excited state decays and are not shown here.
-\\
+The EFT calculations\cite{menendez2018} also provided error estimates, which tend to be $40-80\%$ for excited state decays and are not shown here.
+
 For each decay mode, the range of half life prediction spans many orders of magnitude.
 This wide range is related to a variety of factors, including the method used to compute the matrix elements and model assumptions made about the intermediate nuclear states, the final nuclear states, $g_A$ quenching and the phase space integrals.
 Because of the large number of factors that affect these calculations, it is difficult to draw conclusions about the different models based on a comparison to an experimental result.
-Nevertheless, we shall perform such a comparison: the result presented in this document rules out all predictions made with QRPA-based models for the \tnbb to \SP{0}{+}{1} state (the prediction by Suhonen\cite{gerdaESresult} is newly ruled out).
-For the \tnbb to \SP{2}{+}{1} state the HFB prediction by Dhiman and Raina\cite{dhiman1994} is newly ruled out.
-The \tnbb to \SP{2}{+}{2} state remains firmly out of reach of experiments.
-For the \znbb\ decay modes, a meaningful comparison between experiment and theory is not possible until the \znbb -decay to the ground state is observed.
-In addition, it is difficult to predict how an error in the prediction of any \tnbb\ to excited state half-life might coorrelate with an error in the \znbb\ half-life, due to the short range nature of \znbb\ matrix elements and the ong range nature of \tnbb\ matrix elements.
-Improvements in some of the existing models presented in table~\ref{tab:Ge76HalfLives} and future models can use excited state results as an additional test.
+Nevertheless, we shall perform such a comparison: the result presented in this document rules out all predictions made with QRPA-based models for the \tnbb\ to \SP{0}{+}{1} state (the prediction by Suhonen\cite{gerdaESresult} is newly ruled out).
+For the \tnbb\ to \SP{2}{+}{1} state the HFB prediction by Dhiman and Raina\cite{dhiman1994} is newly ruled out.
+The \tnbb\ to \SP{2}{+}{2} state remains firmly out of reach of experiments.
+For the \znbb\ decay modes, a meaningful comparison between experiment and nuclear theory calculations is not possible until the \znbb\ to the ground state is observed.
+In addition, it is difficult to predict how an error in the prediction of any \tnbb\ to excited state half-life might correlate with an error in the \znbb\ half-life predictions, for reasons discussed in Section~\ref{sec:bbestheory}.
+Improvements in some of the existing models presented in Table~\ref{tab:Ge76HalfLives} and future models can use excited state results as an additional test.
 Ideally, they will agree with a measured result of the excited state decay half-lives, and predict similar values of the \znbb\ nuclear matrix elements, with measurements across multiple isotopes.
 Table~\ref{tab:allisos} shows the current status of searches for \tnbb\ to \SP{0}{+}{1} states across multiple isotopes.
 For a more complete discussion, see Barabash's review \cite{barabash2017}. 
 \begin{table}
   \centering
   \caption[Table of \tnbb\ to \SP{0}{+}{1} states across multiple isotopes]{\label{tab:allisos}
-    Table of results and predictions for the half-life of \tnbb\ to \SP{0}{+}{1} states across multiple isotopes. For the RQRPA results, half-lives were calculated within the references; for the IBM and ET results, they were calculated using equation~\ref{eq:hlcalc}.
+    Table of results and predictions for the half-life of \tnbb\ to \SP{0}{+}{1} states across multiple isotopes. For the RQRPA results, half-lives were calculated within the references; for the IBM and EFT results, they were calculated using equation~\ref{eq:hlcalc}.
   }
   \input{ch6/tables/allisotopes.tex}
 \end{table}
-\\
+
 \section{The Future of \bbes\ in \Ge{76}}
-The \MJD\ has been continuously acquiring data since the April~18, 2018 cutoff and will continue to do so until is has $\sim100$~kg-y of exposure.
-In addition, much of the data-taking period remains to be unblinded, which increase the available exposure to $\sim40$~kg-y.
-This increase in exposure should increase the sensitivity to the \bbes\ to the \SP{0}{+}{1} state half-life above $10^{24}$~y, enabling a test of the ET prediction of $1.1\cdot10^{24}~y$\cite{menendez2018}.
-\\
+The \MJD\ has been continuously acquiring data since the April~18, 2018 cutoff used in this analysis, and will continue to do so until it has a projected $\sim100$~kg-y of exposure.
+In addition, much of the data-taking period remains to be unblinded, which increases the available exposure before the cutoff to $\sim40$~kg-y.
+This increase in exposure should increase the sensitivity to the \bbes\ to the \SP{0}{+}{1} state half-life above $10^{24}$~y, potentially enabling a test of the EFT prediction of $1.5\cdot10^{24}$~y\cite{menendez2018}.
+
 \subsection{Potential Improvements}
 In addition to gathering additional exposure, other improvements to this search are possible.
-In particular, the AvsE parameter, which is used to determine whether a waveform within a single detector is multi-site or single-site (section~\ref{sec:avse}), may be useful.
-When a $\gamma$ is fully absorbed within a single detector, it will typically be detected as a multi-site event, while most Compton continuum e
-For example, the 583~keV $\gamma$ from the \Th{228} spectrum is $\sim75\%$ multi-site, while the Compton continuum is only $\sim41\%$ multi-site, as shown in figure~\ref{fig:avse583}.
+In particular, the AvsE parameter, which is used to determine whether a waveform within a single detector is multi-site or single-site (see Section~\ref{sec:avse}), may be useful.
+When a $\gamma$ is fully absorbed within a single detector, it will typically be detected as a multi-site event, while most Compton continuum events are single-site.
+For example, the 583~keV $\gamma$ from the \Th{228} spectrum is $\sim75\%$ multi-site, while the Compton continuum is only $\sim41\%$ multi-site, as shown in Figure~\ref{fig:avse583}.
 If the peak search were to only look at multi-site events, it would likely produce a small gain of up to $\sim20\%$ in sensitivity.
 \begin{figure}[tb]
   \centering
@@ -111,13 +111,13 @@ If the peak search were to only look at multi-site events, it would likely produ
     A 583~keV peak from a \Th{228} calibration run using AvsE to select multi-site events (blue). The effect is to keep 75\% of events in the peak while keeping only 41\% of envents in the continuum.
   }
 \end{figure}
-\\
+
 The coincident energy cut could also benefit from using AvsE.
 For decay modes with only a single $\gamma$ (such as the \SP{2}{+}{1} modes), the coincident detector in a true signal will have only a single site, from the \bb -decay.
 On the other hand, for events with multiple $\gamma$s, coincdent events with energy above the \Qval\ of the decay will result from events involving the internal absorption of one of the $\gamma$s; as a result, these events will be inherently multi-site.
 Using AvsE in this cut will be especially important for differentiating between \SP{2}{+}{1} and \SP{0}{+}{1} events since they both involve a 559~keV peak.
 This means that some method of differentiating between events involving one and two $\gamma$s will be critical to differentiating events in this peak, and AvsE may provide the best way of doing so.
-A simulation of the effect of AvsE on the coincident energy spectrum is shown in figure~\ref{fig:coincavse}.
+A simulation of the effect of AvsE on the coincident energy spectrum is shown in Figure~\ref{fig:coincavse}.
 \begin{figure}[tb]
   \centering
   \includegraphics[width=0.6\textwidth]{coincidentcutwithavse}
@@ -129,7 +129,7 @@ The reason AvsE is not currently used for this search is that it cannot be simul
 The current method of simulating this parameter, called the dt-heuristic, is calibrated over an energy range close to 2039~keV, and has a relatively high error at the energies of interest for this analysis.
 Since this analysis relies heavily on uncertain simulations that would introduce significant systematic error, and since the improvements brought by using AvsE are expected to be small, this cut was not used for this analysis.
 However, further improvements to the dt-heuristic and development of pulse-shape simulations that can improve AvsE simulation may allow the implementation of this cut in the future.
-\\
+
   \subsection{Multi-Site Event Decomposition}
 \begin{figure}[h]
   \centering
@@ -139,12 +139,12 @@ However, further improvements to the dt-heuristic and development of pulse-shape
   }
 \end{figure}
 In addition to distinguishing between single- and multi-site events, PPC HPGe detectors offer the possibility to decompose a multi-site waveform and measure the energies of the component sites.
-Multi-site waveforms consist of multiple rises, as discussed in section~\ref{sec:avse}, and the current amplitude of each individual rise is proportional to the energy contained in the local charge cloud producing it.
+Multi-site waveforms consist of multiple rises, as discussed in Section~\ref{sec:avse}, and the current amplitude of each individual rise is proportional to the energy contained in the local charge cloud producing it.
 This propotionality is the reason the AvsE parameter works: for a single-site, the maximum current amplitude should be some fixed fraction of the total energy, while for multi-site waveforms, the current amplitude will be significantly less.
 Due to electronic noise, however, picking out individual components of waveforms and measuring the energy with each one is difficult.
 One method that has been demonstrated for doing this is to apply a Wiener deconvolution filter, which uses deconvolution with a known kernel function in order to sharpen the current peaks, combined with an optimal Wiener filter to prevent noise from blowing up.
-A proof of principle for this technique is shown in figure~\ref{fig:wienercurrent}.
-\\
+A proof of principle for this technique is shown in Figure~\ref{fig:wienercurrent}.
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=\textwidth]{decomposedspectrum}
@@ -157,30 +157,31 @@ To demonstrate the effectiveness of this technique, we can look at an inherently
 The single-escape peak produced by the \Tl{208} 2614~keV~$\gamma$ will consist of a 1592~keV pulse, produced by the site of the pair production, and additional sites that sum to 511~keV, produced by the annihilation $\gamma$.
 Figure~\ref{fig:eventdecompspectrum} shows how these expected features can be extracted from SEP events in a \MJD\ calibration run.
 Using this technique, we are able to identify the 1592~keV site in 44\% of SEP events, a number that could significantly improve with refinements to the algorithm.
-\\
+
 Multi-site event decomposition would be useful in searching for \bbes\ events because these events are inherently multi-site.
 The search presented here takes advantage of this by looking at multi-detector events; however, often the $\gamma$-rays in these events will not escape the source detector without losing at least some energy.
 In this case, the event would not be visible using this search's detection signature, but would be visible by looking for individual sites that sum to the full $\gamma$ energy.
 Based on simulations, 60\% of \tnbb\ to \SP{0}{+}{1} events have the full energy of at least one of the two $\gamma$s absorbed inside of Germanium detectors, which sets a much higher ceiling on the detection efficiency than the 2\% used in this document.
 Using the 44\% of pair production sites tagged in SEP events as a proxy, it is imaginable that such a search could achieve a detection efficency of 20-25\%, a ten-fold improvement over the current search.
-This could produce a large gain in sensitivity.
-\\
+This would also increase the measured background rate significantly, by introducing single-detector multi-site backgrounds; furthermore, the poorer energy resolution for these events would necessitate a wider ROI.
+Even so, this could produce a large gain in sensitivity.
+
 \subsection{Searching for \bbes\ with LEGEND}
-LEGEND-200 is preparing to begin operation in 2021, with lower backgrounds than the \MJD\ and \Gerda\ and a target exposure of $\sim1$~t-y (section~\ref{sec:legend}.
-In spite of this high exposure, however, many challenges remain for LEGEND-200 to offer a significantly improved result.
-LEGEND-200 will use the \Gerda\ liquid Argon shield, which carries disadvantages for a \bbes\ search due to higher backgrounds and lower detection efficiencies.
+LEGEND-200 is preparing to begin operation in 2021, with lower backgrounds than the \MJD\ and \Gerda\ and a target exposure of $\sim1$~t-y (Section~\ref{sec:legend}.
+In spite of this high exposure, however, many challenges remain for LEGEND-200 to offer a significantly improved result in the search for \bbes.
+LEGEND-200 will use the \Gerda\ liquid argon shield, which carries disadvantages for a \bbes\ search due to higher backgrounds and lower detection efficiencies.
 \Gerda\ Phase~II may find techniques to mitigate these disadvantages, and will likely publish a result soon.
 In addition, LEGEND-200 is using the inverted coaxial detector geometry, which increases the mass of each detector, but as a result reduces the granularity of the detector array.
 This will further reduce detection efficiency.
 Finally, once the \bbes\ to the \SP{0}{+}{1} decay is discovered, it will act as the largest background for the \SP{2}{+}{1} decay, which will further limit sensitivity without finding a method to distinguish the two.
 For these reasons, LEGEND-200 may struggle to significantly improve upon the final \MJD\ results without implementing many of the improvements mentioned in the previous section.
-\\
+
 If LEGEND-200 succeeds in these improvements and manages a measurement with $>10\%$ detection efficiency that remains nearly background free, future measurements could feasibly have half-life sensitivities exceeding $10^{26}$~y.
 This would almost certainly observe the \bbes\ to \SP{0}{+}{1} decay mode (and if it didn't that would be an interesting result in its own right!).
-It would also begin to probe into the theoretical half-life predictions for the \SP{2}{+}{1} decay mode, with potentially interesting results regarding a Bosonic component of neutrinos (section~\ref{sec:bosonicnus}, \cite{Tornow2010}).
+It would also begin to probe into the theoretical half-life predictions for the \SP{2}{+}{1} decay mode, with potentially interesting results regarding a Bosonic component of neutrinos (Section~\ref{sec:bosonicnus}, \cite{Tornow2010}).
 With the same improvements and lower backgrounds, LEGEND-1000 may probe half-lives exceeding $10^{27}$~y, offering a strong possibility of observing \tnbb\ to the \SP{2}{+}{1} excited state.
-Finally, under the optimistic scenario that LEGEND-200 discovers \znbb, LEGEND-1000 may begin a search for \znbb\ to excited states, with implications toward understanding the underlying mechanism for \znbb\ and Majorana neutrino mass.
-\\
+Finally, under the optimistic scenario that LEGEND-200 discovers \znbb, LEGEND-1000 may begin a search for \znbb\ to excited states, with implications toward understanding the underlying mechanism for \znbb\ decay and the Majorana nature of neutrino mass.
+
 \onlyinsubfile{
   \bibliographystyle{unsrt}
   \bibliography{../main}

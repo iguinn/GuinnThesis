@@ -12,21 +12,25 @@
 
 When performing rare event searches in the presence of backgrounds, it is often useful to select regions of interest and data cleaning cuts that optimize the median experimental sensitivity.
 Median n-$\sigma$ count sensitivity, $\hat{S}(\overline{B}, n_\sigma)$ is defined as the median upper limit of an n-$\sigma$ confidence interval on the number of observed signal counts, assuming the presence of no signal and backgrounds sampled from a distribution based on measured background level $\overline{B}$.
+A similar quantity, n-$\sigma$ discovery sensitivity, is defined as the true strength of a signal that would produce a discovery with significance n-$\sigma$ 50\% of the time.
+Unlike median sensitivity, discovery sensitivity accounts for the distribution in the number of counts that would be seen based on the true rate.
+For this reason, discovery sensitivity is a slightly more useful quantity when projecting or optimizing an experiment's sensitivity, even though median (or mean) sensitivity is the quantity that is usually reported.
+For the purpose of this appendix, we will focus on discovery sensitivity.
+
 The sensitivity of the experiment to the total rate of the process being searched for is
 \begin{equation}
   \hat{\Gamma}(\overline{B}, \epsilon, n_\sigma)\propto\frac{\hat{S}(\overline{B}, n_\sigma)}{\epsilon}
 \end{equation}
-
 where $\epsilon$ is the total detection efficiency of the signal being sought.
 Optimizing event selection for a search requires balancing the tradeoff between reducing backgrounds, which will decrease $\hat{S}(\overline{B})$, and improving signal detection efficiency.
-\\
+
 When optimizing a search, it is useful to use certain approximations when calculating sensitivity.
 In the high background limit, a common approximation is to assume the backgrounds measured will have a gaussian distribution with standard deviation of $\sqrt{\overline{B}}$.
 In this case, the median sensitivity will be
 \begin{equation}
   \hat{S}(\overline{B}, n_\sigma)=n_\sigma * \sqrt{\overline{B}}
 \end{equation}
-\\
+
 This approximation fails, however, in the low background limit, where a better approximation is that the background will instead be sampled from a Poisson distribution with mean counts $\overline{B}$.
 Because the Poisson distribution is a PDF over a discrete variable, the resultent sensitivity will have step-like properties and must be solved for using a toy Monte Carlo, properties that are not ideal for performing sensitivity optimizations.
 For this reason, when computing the sensitivity we instead use the analytic continuation of the CDF of the poisson distribution, which is the lower incomplete gamma function
@@ -51,7 +55,7 @@ For the purposes of this dissertation, we always use the 3-sigma discovery poten
 \end{equation}
 Figure~\ref{fig:DPvSens} shows a comparison of the gaussian approximation for sensitivity to the discovery potential.
 This function is implemented in \texttt{GATPeakShapeUtils.hh} as \linebreak\texttt{GATPeakShapeFunction::DiscoveryLimit}.
-\\
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{DPvSens}

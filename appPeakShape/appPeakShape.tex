@@ -93,12 +93,12 @@ The fit result of a simultaneous fit of 18 peaks from a 6~hour long \Th{228} cal
   }
 \end{figure}
 \section{Performing a Simultaneous Fit} \label{sec:fitter}
-Because of the large number of fit parameters ($\sim35$~parameters are used for weekly calibrations and $\sim100$~parameters are used with high statistics calibrations to perform more detailed characterizations of parameters), and because of the highly correlated nature of some of the parameters, the fit result is heavily dependant on the initial parameter guess.
+Because of the large number of fit parameters (${\sim}35$~parameters are used for weekly calibrations and ${\sim}100$~parameters are used with high statistics calibrations to perform more detailed characterizations of parameters), and because of the highly correlated nature of some of the parameters, the fit result is heavily dependant on the initial parameter guess.
 To ensure convergence on the global minimum of the negative log-likelihood in a timely manner, Hamiltonian Monte Carlo (HMC) is used\cite{DUANE1987}\cite{2012Neal}.
 HMC is a Markov Chain Monte Carlo (MCMC) technique that uses the parameter gradient of the negative log-likelihood in order to take large steps through the parameter space with a high acceptance rate.
 Several adaptations to the step sizes are applied, which prevent the algorithm used from exactly converging to the posterior described by the log-likelihood with a flat prior.
 First, the step size is increased by a factor of 1.1 after each successful step and decreased by a factor of 1.2 after each unsuccessful step.
-This adaptation asymptotically results in an acceptance rate of $\sim2/3$, a target suggested by \cite{2012Neal}.
+This adaptation asymptotically results in an acceptance rate of ${\sim}2/3$, a target suggested by \cite{2012Neal}.
 Second, the mass scale matrix is adapted to equal the diagonal elements of the Fisher information metric between each step.
 This adaptation is based on Riemann Manifold HMC\cite{Girolami2011}, although it does not properly evolve the metric between steps and will therefore fail to converge exactly.
 The combination of these adaptations results in a quick and reliable convergence that approximates the posterior, and is very useful as a burn-in when fitting.
@@ -143,7 +143,7 @@ Because of this model is nonlinear, floating the power parameter results in unre
 Many simulations of the \Th{228} calibration source were run using the dead layer model described in equation~\ref{eq:dlmodel}, and the thickness of the transition layer varied between 0~and 2~mm.
 For each simulation, a simultaneous fit of many peaks was performed, floating all of the step height parameters.
 The values of $h_2$ measured are shown in Figure~\ref{fig:stepheightpars_sim}, and have a stable value of -0.88 for dead layer thickness of $<1$~mm.
-Typical dead layer thicknesses for detectors are $\sim0.5$~mm.
+Typical dead layer thicknesses for detectors are ${\sim}0.5$~mm.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.8\textwidth]{hs2_tl}

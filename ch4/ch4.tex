@@ -503,17 +503,20 @@ This means that the combined efficiency $\epsilon_{comb}$ for each effect $k$ is
   \epsilon_{comb} = \prod_{k=0}^N P(\mathrm{event~is~cut} | \mathrm{cuts~} 0\dots k-1 \mathrm{~are~applied})
 \end{equation}
 In spite of this, we will assume that the sources of error are uncorrelated and the fractional uncertainty is independant of what other effects have been applied.
+The effect of this assumption will be discussed below.
 This implies that the uncertainty on the combined efficiency, $\sigma_{\epsilon,comb}$ can be expressed as:
 \begin{equation}
   \sigma_{\epsilon,comb}=\epsilon_{comb} \sqrt{ \sum_{k=0}{N} (\frac{\sigma_{\epsilon,k}}{\epsilon_k})^2 }
 \end{equation}
-The values $\epsilon_k$ represent the probability of cutting an event assuming all other cuts are applied.
+The values $\epsilon_k$ represent the probability of cutting an event assuming no other analysis cuts are applied.
+Because of correlations among the cuts (particularly between the sum and coincident energy cuts), this results in a double-counting of uncertainty, making this a conservative estimate.
+
 Table~\ref{tab:eff_2vBB_0_1} shows the efficiency for each effect described in this chapter and uncertainty on each efficiency, and the combined efficiency and uncertainty.
 \begin{table}[h]
   \centering
   \input{ch4/tables/efficiency.tex}
   \caption[Detection efficiency summary for \tnbb\ to the \SP{0}{+}{1} state of \Se{76}]{\label{tab:eff_2vBB_0_1}
-    Table of detection efficiencies and uncertainties for \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}. Note that the efficiencies are the combined efficiency for the 559 and 563~keV peaks.
+    Table of detection efficiencies and uncertainties for \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}. Efficiencies of individual effects are calculated without applying other cuts; because of correlations between cuts (especially the sum and coincident energy cuts), simply multiplying these efficiencies together will underestimate the efficiency. The final efficiency calculated here correctly accounts for such correlations. Note that the efficiencies are the combined efficiency for the 559 and 563~keV peaks.
   }
 \end{table}
 Similar tables for each other \bbes\ peak are shown in Appendix~\ref{app:allresults}.

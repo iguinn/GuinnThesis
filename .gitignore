@@ -6,7 +6,7 @@
 /**/*.out
 *.bbl
 *.blg
-main.pdf
+/main.pdf
 intro/intro.pdf
 ch1/ch1.pdf
 ch2/ch2.pdf

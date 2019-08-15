@@ -60,8 +60,8 @@ To date, no interaction has been observed that violates Lepton-number conservati
 \subsection{Parity Violation in the Weak Force}
 The discrete parity symmetry (P) is conserved for the electromagnetic and strong forces.
 In 1956, Lee and Yang suggested that the discrete parity symmetry (P) could be violated by the weak force, as no experimental evidence existed to confirm or reject this\cite{LeeYang1956}.
-Within a year, Wu and collaborators experimentally demonstrated P violation by placing \Co{60} under a strong magnetic field at low temperature and by using the polarization of the deexcitation $\gamma$s and of the nuclei to measure the helicity of the electrons.
-Wu found a preference for the emission of left-handed electrons over right-handed electrons, resulting from P-violation\cite{Wu1957}.
+Within a year, Wu and collaborators experimentally demonstrated P violation by placing \Co{60} under a strong magnetic field at low temperature and by measuring the correlation between the directions of the deexcitation $\gamma$s and of the electron emitted.
+If P is conserved, no correlation is expected in these directions; however, Wu found an anti-correlation, implying P-violation\cite{Wu1957}.
 Shortly after, Garwin, Lederman and Weinrich confirmed this in the polarization of muons produced by decays of pions in flight\cite{Garwin1957}.
 
 In 1958, Goldhaber and collaborators observed that the weak force is maximally parity violating, and weak interactions involve only left-handed neutrinos\cite{Goldhaber1958}.
@@ -108,7 +108,7 @@ where $M^{CKM}_{ij}$ is the Cabibbo-Kobayashi-Maskawa (CKM) matrix that describe
 
 This theory also made a number of new predictions, which have since been confirmed.
 The Z~boson, a heavy, neutral, spin~1 boson was predicted, which would enable elastic scattering of neutrinos off other weakly interacting particles.
-Neutrino elastic scattering off a nucleus was confirmed by the Gargamelle detector in 1973\cite{Gargamelle1973}, and both the W~and Z~bosons were observed at the Super Proton Synchotron in 1983\cite{Arnison1983, Bagnaia1983}.
+Neutrino elastic scattering of a muon neutrino off of an electron was observed by the Gargamelle detector in 1973\cite{Gargamelle1973}, and both the W~and Z~bosons were observed at the Super Proton Synchotron in 1983\cite{Arnison1983, Bagnaia1983}.
 This theory also incorporated the Higgs boson, a spin~0 boson that imparts mass to the fermions in the standard model, as will be discussed in Section~\ref{sec:diracmass}.
 The Higgs boson was discovered at the ATLAS and CMS detectors using the Large Hadron Collider in 2012\cite{ATLAS2012, CMS2012}.
 
@@ -233,7 +233,7 @@ In 2000, the SNO experiment observed neutrino flavor mixing in solar neutrinos.
 Since solar $\nu_e$s are produced amid an extremely high electron density, as they escape the Sun, they will adiabatically transform into the $\nu_2$ eigenstate due to the MSW effect.
 By observing solar neutrinos via different interaction mechanisms, SNO had sensitivity to both the total number of neutrinos, regardless of flavor, via neutral current interactions, and to the number of electron neutrinos via charged current interactions.
 SNO observed the expected total number of neutrinos according to the Standard Solar Model\cite{Bahcall2005}, while observing a deficit in electron neutrinos, definitively solving the Solar Neutrino Problem\cite{SNO2002}.
-Finally, in 2001 KamLAND observed a deficit of electron neutrinos from nuclear reactors consistent with oscillation\cite{kamland2003}.
+Finally, in 2003 KamLAND observed a deficit of electron neutrinos from nuclear reactors consistent with oscillation\cite{kamland2003}.
 Figure~\ref{fig:nuoscillation} shows the results of all three experiments.
 Between these three measurements, a deficit has been observed in Solar, atmospheric, and reactor neutrinos, and this deficit has been explained in a simple and consistent way using the PMNS mass mixing model.
 
@@ -261,13 +261,8 @@ As will be discussed in Section~\ref{sec:numasstheory}, the Standard Model does 
 The Standard Model of Particle Physics includes only left-handed neutrinos.
 The Lagrangian represents neutrinos as left-handed Weyl spinors, representing a left-handed (LH) particle and a right-handed (RH) anti-particle.
 A CPT transformation, flips between a LH particle and RH anti-particle; due to CPT invariance, these must have identical properties except for helicity and charge, meaning this is the simplest possible representation of a spin-$\frac{1}{2}$ particle.
-These particles cannot be given mass using a mass term in the Standard Model Lagrangian:
-\begin{equation}
-  \mathcal{L}_{mass}=-m\bar\nu_L\nu_L
-\end{equation}
-as this term evaluates to zero.
 However, we now understand that neutrinos are massive, which cannot be explained without extending the Standard Model.
-This section will discuss BSM mechanisms for generating neutrino mass.
+This section will discuss possible mechanisms for generating neutrino mass and why extension of the Standard Model is required for each.
 For a more detailed and complete discussion, see C.~Giunti and C.W.~Kim, Chapter 6~\cite{Giunti}.
 
 \subsection{A Brief Discussion of Helicity and Chirality} \label{sec:helicitychirality}
@@ -289,8 +284,7 @@ This can be intuitively seen by imagining a massive, classical fermion moving th
 When switching between these frames, the spin direction will appear the same, while the direction of momentum will flip, meaning that the helicity will flip as well.
 For this reason, the helicity operator cannot appear as a part of the Standard Model Lagrangian while chirality can.
 This means that Fermion spinors are eigenstates of chirality, and the weak force interacts directly with left-chiral states rather than left-helicity states.
-This means that any mass term must also couple opposite-chirality states in the Lagrangian, explaining why a Weyl fermion, lacking an opposite-chirality state, must be massless.
-For massive particles, helicity is a constant of motion since momentum and angular momentum are both conserved, while chirality is not.
+On the other hand, for massive particles, helicity is a constant of motion since momentum and angular momentum are both conserved, while chirality is not.
 
 \subsection{Dirac Mass} \label{sec:diracmass}
 All other Standard Model fermions gain mass via the Dirac mechanism, and are called Dirac fermions\cite{Dirac1928}.
@@ -555,6 +549,7 @@ The components of this equation, which will mostly be familiar from equation~\re
     M_{0\nu}=M^{0\nu}_{GT} - \frac{g_V^2}{g_A^2}M^{0\nu}_F+M^{0\nu}_T
   \end{equation}
   where $M^{0\nu}_T$ is a the Tensor term of the NME.
+  Recent work by Cirigliano, \textit{et. al.} suggests that an additional contact term to the NME is also required and may have a value near to leading order\cite{Cirigliano2018_1}.
   The neutrino exchange operator increases the contribution of terms forbidden in the \tnbb\ NMEs, including the Fermi and Tensor terms and intermediate nuclear states beyond the $1^+$ states.
   As a result, the \znbb\ matrix element is very challenging to calculate; as Figure~\ref{fig:horribleplot} shows, different choices of model result in a factor of ${\sim}3$ difference in LNE NMEs.
   Section~\ref{sec:NMEmethods} will describe the differences between these models.
@@ -595,7 +590,7 @@ The components of this equation, which will mostly be familiar from equation~\re
   }
 \end{figure}
 The previous section assumed that LNE is the dominant mode for \znbb; however, with many models for generating Majorana neutrino mass, exchanges of other, heavier particles may be the primary decay mode.
-In such cases, \znbb\ is not primarily generated by the aforementioned dimension-5 effective Standard Model Lagrangian term, but instead through dimension 6, 7 and 9 terms\cite{Cirigliano2018}.
+In such cases, \znbb\ is not primarily generated by the aforementioned dimension-5 effective Standard Model Lagrangian term, but instead through dimension 6, 7 and 9 terms\cite{Cirigliano2018_2}.
 Figure~\ref{fig:znbbheavy} shows a sampling of different BSM particle exchanges that could potentially cause \znbb.
 A generic equation for the half-life is:
 \begin{equation}
@@ -680,6 +675,25 @@ Because of differences between the \tnbb\ and \znbb\ decay modes previously disc
 For a detailed discussion of current experiments and calculations, see \cite{barabash2017}.
 Decay to excited states half-lives are also sensitive to additional BSM physics.
 
+\subsection{\tnbb\ NMEs in \Ge{76}} \label{sec:tnbbesnmes}
+Table~\ref{tab:Ge76HalfLives} contains a list of theoretical predictions of the half-life of each \tnbb\ excited state decay mode for \Ge{76}.
+The models presented use the same techniques and acronyms defined in Section~\ref{sec:NMEmethods}.
+For some references included in Table~\ref{tab:Ge76HalfLives}, half-lives were not provided (the IBM\cite{barea2013, barea2015} and EFT\cite{menendez2018}); in these cases, the half-life provided was calculated using:
+\begin{equation} \label{eq:hlcalc}
+  T^{2\nu~E.S.}_{1/2} = T^{2\nu~G.S.}_{1/2}\cdot\frac{G_{2\nu}^{G.S.}|M_{2\nu}^{G.S.}|^2}{G_{2\nu}^{E.S.}|M_{2\nu}^{E.S.}|^2}
+\end{equation}
+where $T_{1/2}^{2\nu~g.s.}=1.926\pm0.094\cdot10^{21}$~y is the ground state decay half-life measured by \Gerda\ Phase~I.
+$\mathrm{G}_{2\nu}$ are the phase space factors from Mirea, \textit{et al.}\cite{mirea2015}, and $|M_{2\nu}|$ are the matrix elements reported by the given source.
+The EFT calculations\cite{menendez2018} also provided error estimates, which tend to be $40-80\%$ for excited state decays and are not shown here.
+The half-life predictions for each decay mode of \Ge{76} span many orders of magnitude; this uncertainty is found in all \bb-isotopes\cite{barabash2017}.
+This wide range using different techniques is related to a variety of factors, including the nuclear spectroscopy of the the intermediate and final nuclear states, and the physics underlying $g_A$ quenching.
+A half-life measurement may prove helpful in understanding some errors of the NME models; optimistically, it may enable improvements in the \znbb\ NME predictions as well.
+\begin{table}[p]
+  \caption[Current half-live limits and predictions for all \tnbb-decay modes of \Ge{76}]{\label{tab:Ge76HalfLives}
+    Table of best half-life predictions and experimental limits for each \Ge{76} \tnbb\ decay mode.}
+  \input{ch1/tables/Ge76BBLimits.tex}
+\end{table}
+
 \subsection{\znbb\ to Excited States}
 \begin{figure}[t]
   \centering
@@ -689,7 +703,7 @@ Decay to excited states half-lives are also sensitive to additional BSM physics.
   }
 \end{figure}
 If the neutrino is Majorana, then \znbb\ to excited states can occur.
-The NMEs for \znbb\ to excited states vary significantly based on the physics mechanism producing it.
+The NMEs for \znbb\ to excited states vary significantly based on the underlying physics.
 It has been further shown that the ratio of the half-lives for \znbb\ to the first $0^+$ excited state and to the ground state varies based on the physics mechanism, as shown in Figure~\ref{fig:esmechanism}\cite{Simkovic2002, Suhonen2016}.
 This means that a measurement of both the excited- and ground-state decays could shed light on what BSM physics is causing \znbb.
 

@@ -95,10 +95,10 @@
 %%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\graphicspath{{./pics/}{../ch3/pics/}{../ch4/pics/}{../ch5/pics/}{../appAllResults/pics/}}
+\graphicspath{{./pics/}{../ch3/pics/}{../ch4/pics/}{../ch5/pics/}{../appAllResults/pics/}{../appSens/pics/}}
 
 \title{Search for Double Beta Decay to Excited States}
-\author{I. Guinn}\affiliation{University of Washington, Seattle, WA, USA}
+\author{I. Guinn}\affiliation{University of North Carolina at Chapel Hill, NC, USA}
 
 \pagestyle{uniheader}
 \maketitle
@@ -111,7 +111,7 @@
 While the ground state decay has been observed, none of the decays to excited states have been yet.
 Each excited state decay will have a \bb -decay with a reduced \Qval\ compared to the ground state decay.
 The excited state decays will also promptly produce one or two $\gamma$-rays at known energies.
-These $\gamma$s will typically travel several cms before absorption and will often hit a different detector from the \bb -decay site, meaning that we can search for peaks at these energies.
+These $\gamma$s will typically travel several centimeters before absorption and will often hit a different detector from the \bb -decay site, meaning that we can search for peaks at these energies.
 \\
 \begin{figure}[h]
   \centering
@@ -122,7 +122,7 @@ These $\gamma$s will typically travel several cms before absorption and will oft
 \end{figure}
 
 
-Furthermore, since these $gamma$s hit separate detectors, this signal is inherently \msmd.
+Furthermore, since these $\gamma$s hit separate detectors, this signal is inherently \msmd.
 As shown in figure~\ref{fig:multhist}, by searching for the peak only in events with high hit multiplicity, i.e. events that involve 2 or more detectors hit, $\sim85\%$ of backgrounds can be cut, while only sacrificing $\sim25$\% of the signal.
 Furthermore, the coincident detector hit(s) can provide additional observables that can be used to further discriminate excited state signals from multi-site backgrounds.
 This chapter will describe the various background reduction data cuts and how they are implemented.
@@ -132,81 +132,80 @@ It will also evaluate the detection efficiency and systematic error associated w
   \centering
   \includegraphics[width=0.8\textwidth]{MultHist}
   \caption[Event Multiplicity in E.S. decay and BG model simulations]{\label{fig:multhist}
-    The simulated distribution of ROI event multiplicities in the background model and \bbes to \SP{0}{+}{1} decay. These simulations use the DS6 detector configuration.}
+    The simulated distribution of ROI event multiplicities in the background model (red) and \bbes\ (blue) to \SP{0}{+}{1} decay. These simulations use the DS6 detector configuration.}
 \end{figure}
-
 
 \section{Simulation of Excited State Decays} \label{sec:essims}
 Simulations of the \Ge{76} decay to excited states of \Se{76} are used to evaluate the detection efficiency of the analysis presented in this document.
 Two different event generators are used to generate \Ge{76} \bb-decay\ within \Mage.
 The first generator uses calculations of the phase space factors from J.~Kotila and F.~Iachello\cite{Kotila2012}.
-It is implemented in the mage class \texttt{MGGeneratorDoubleBeta} using data tables with the distribution of both electron energies and anglular correlations.
+It is implemented in the mage class \texttt{MGGeneratorDoubleBeta} using data tables with the distribution of both electron energies and angular correlations.
 These data tables are provided for the \tnbb\ and \znbb\ decays to the ground state of \Se{76}, but not for the decays to any excited state of \Se{76}.
 This calculation is an improvement over other phase space calculations thanks to an exact evalutation of the Dirac wave functions of the electrons involving a finite nuclear size and electron screening.
-\\
-A second event generator packaged with \Mage\ is \texttt{decay0}\cite{Ponkratenko2000}, a fortran program that generates a wide variety of $\beta\beta$- and $\beta$-decays.
-\texttt{decay0} is capable of generating \tnbb\ and \znbb\ for \Ge{76} to \Se{76} \SP{0}{+}{} and \SP{2}{+}{} excited states using a variety of physics mechanisms.
+
+A second event generator packaged with \Mage\ is \texttt{DECAY0}\cite{Ponkratenko2000}, a FORTRAN program that generates a wide variety of $\beta\beta$- and $\beta$-decays.
+\texttt{DECAY0} is capable of generating \tnbb\ and \znbb\ for \Ge{76} to \SP{0}{+}{} and \SP{2}{+}{} excited states of \Se{76} using a variety of physics mechanisms.
 For the excited state decays, the deexcitation $\gamma$s and conversion electrons are also generated.
-Several modifications were made to \texttt{decay0} for this analysis.
+Several modifications were made to \texttt{DECAY0} for this analysis.
 First, the precision of the excited state deexcitation energies was increased from 1~keV to 0.001~keV (The $\gamma$ energies changed from 559 to 559.101~keV, from 563 to 563.178~keV, from 657 to 657.041~keV, and from 1216 to 1216.104~keV).
 Second, angular correlations were added for the \SP{2}{+}{2}-\SP{2}{+}{1}-\SP{0}{+}{g.s.} deexcitation $\gamma$ cascade which involves a 657~keV $\gamma$ with multipolarity E2+M1 and mixing ratio of $+5.2$ followed by a 559~keV $\gamma$ with multipolarity E2\cite{SINGH1995}.
-The angular distribution between the $\gamma$s is\cite{Evans1955}
+The angular distribution between the $\gamma$s is\cite{Evans1955} 
 \begin{equation}
   P(\theta)\propto 1-0.372\cdot\cos^2(\theta)+0.0439\cdot\cos^4(\theta)
 \end{equation}
-The angular correlation for the \SP{0}{+}{1}-\SP{2}{+}{1}-\SP{0}{+}{g.s.} deexcitation was previously included in \texttt{decay0}, and is represented by the angular distribution
+The angular correlation for the \SP{0}{+}{1}-\SP{2}{+}{1}-\SP{0}{+}{g.s.} deexcitation was already correctly included in \texttt{DECAY0}, and is represented by the angular distribution\cite{SINGH1995, Evans1955}
 \begin{equation}
   P(\theta)\propto 1-3\cdot\cos^2(\theta)+4\cdot\cos^4(\theta)
 \end{equation}
-Running \texttt{decay0} produces data files with the initial momenta of the generated particles.
+Running \texttt{DECAY0} produces data files with the initial momenta of the generated particles.
 The \Mage\ class \texttt{MGGeneratorDecay0} reads these datafiles and generates initial positions for these events.
-\\
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=.9\linewidth]{ESsim}
   \caption[Simulation of multiplicty 2 events from \tnbb\ to \SP{0}{+}{1}]{\label{fig:2dessim}
-    Multiplicity 2 energy spectrum produced by a decay0 simulation of \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}.
+    Multiplicity 2 energy spectrum produced by a \texttt{DECAY0} simulation of \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}.
   }
 \end{figure}
-Simulations were run for \Ge{76} \tnbb and \znbb to the \Se{76} \SP{0}{+}{1}, \SP{2}{+}{1} and \SP{2}{+}{2} excited states using the \texttt{decay0} generator.
-For each decay mode, 5000000 event primaries were generated in the bulk of the enriched detectors and 500000 primaries were generated in the bulk of the natural detectors.
+Simulations were run for \Ge{76} \tnbb\ and \znbb\ to the \SP{0}{+}{1}, \SP{2}{+}{1} and \SP{2}{+}{2} excited states of \Se{76} using the \texttt{DECAY0} generator.
+For each decay mode, 5,000,000 event primaries were generated in the bulk of the enriched detectors and 500,000 primaries were generated in the bulk of the natural detectors.
 These events were skimmed with the relative activities set equal to the total isotopic mass in each set of detectors: 26.2538~kg in enriched detectors, and 1.1232~kg in natural detectors.
-These simulations were additionally post-processed with the dead layer thickness set to 0, and skim files were produced both with and without a dead layer, and with and without dead times.
+These simulations were additionally post-processed and skim files were produced both with and without a dead layer, and with and without dead times.
 Figure~\ref{fig:2dessim} shows an energy spectrum of multiplicity~2 events produced by the simulation of the \Ge{76} decay to the \SP{0}{+}{1} excited state of \Se{76}.
-\\
-\subsection{Comparing \texttt{decay0} to the Kotila and Iachello generator}
+
+\subsection{Comparing \texttt{DECAY0} to the Kotila and Iachello generator} \label{sec:decay0vskandi}
 \begin{figure}
   \centering
   \subfloat{\includegraphics[width=0.5\linewidth]{decay0gsspectrum}}
   \subfloat{\includegraphics[width=0.5\linewidth]{decay0KS}}
-  \caption[KS test comparing \texttt{decay0} to Kotila and Iachello \tnbb to g.s. spectra]{\label{fig:kstest}
-    A KS test is performed comparing the \texttt{decay0} \tnbb to the ground state energy spectrum to that of Kotila and Iachello. The \texttt{decay0} spectrum is shown, along with the difference between the CDF of each spectrum.
+  \caption[KS test comparing \texttt{decay0} to Kotila and Iachello \tnbb\ to g.s. spectra]{\label{fig:kstest}
+    A KS test is performed comparing the \texttt{DECAY0} \tnbb\ to the ground state energy spectrum to that of Kotila and Iachello. The \texttt{decay0} spectrum is shown, along with the difference between the CDF of each spectrum.
   }
 \end{figure}
-The Kotila and Iachello generator performs a more calculation of phase space than \texttt{decay0} and is used for the \MJD 's measurement of \tnbb\ and \znbb\ to the ground state.
-Because Kotila and Iachello present only the phase space integral for the excited state decays, and do not include the energy and angular distributions, \texttt{decay0} is used for this analysis.
-To evaluate the accuracy of \texttt{decay0}, we can compare the spectrum of the \tnbb\ to the ground state it generates to that of Kotila and Iachello; this comparison will reflect the error with respect to the true value if we assume that the error on the latter spectrum is much smaller than that of \texttt{decay0}.
+The Kotila and Iachello generator performs a more accurate calculation of phase space than \texttt{DECAY0} and is used for the \MJD 's measurement of \tnbb\ and \znbb\ to the ground state.
+Because Kotila and Iachello present only the phase space integral for the excited state decays, and do not include the energy and angular distributions, \texttt{DECAY0} is used for this analysis.
+To evaluate the accuracy of \texttt{DECAY0}, we can compare the spectrum of the \tnbb\ to the ground state it generates to that of Kotila and Iachello; this comparison will reflect the error with respect to the true value if we assume that the errors corrected by Kotila and Iachello are the dominant errors in \texttt{DECAY0}.
 This comparison is performed using a Kolmogorov-Smirnov (KS) test.
 The KS test statistic is the maximum difference between the CDF of each normalized energy spectrum.
-As we will see in chapter~\ref{chap:ch4}, this test is useful in evaluating the uncertainties in the measurement presented in this thesis.
-The CDF difference is shown in figure~\ref{fig:kstest}, with a KS statistic of 0.00081.
+As we will see in Section~\ref{sec:MSenergycuts}, this test is useful in evaluating the uncertainties in the measurement presented in this document.
+The CDF difference is shown in Figure~\ref{fig:kstest}, with a KS statistic of 0.00081.
 While this error is statistically significant at a level of 97\%, we will see that the systematic error generated is subdominant.
 
 \section{Background Model Simulation}
 A simulation of the background spectrum measured by the \MJD\ will be used to optimize the search for \bbes.
 \Mage\ simulations of a variety of decay chains, including \Th{232}, \iso{238}{U}, \iso{40}{K}, \Co{60}, \iso{222}{Rn} and \Ge{68}, have been run using event generators internal to \geant.
-Geometries of large number of component groups have been defined encompassing one or more physical component of the experiment.
-Decays can be generated in either the bulk of a component group, or on the surface.
+A large number of component groups have been defined, encompassing one or more physical components of the experiment (e.g.~all signal electronic connectors are a single component group).
+The event generators use the combined geometries of these groups to generate start positions, which can be in either the bulk of a component group, or on the surface.
 The activity of each isotope from each component group is determined by fitting a linear combination of the simulated energy spectra to the measured background spectrum.
-An incomplete version of this fit is used for this thesis, producing the spectra in figures~\ref{fig:bgsim1D} and~\ref{fig:bgsim2D}.
-\Ge{68} decays with a half-life of 271~days, so its activity is scaled to represent the activity of each major dataset.
-\iso{210}{Pb} in the lead shield is simulated using a special generator that samples bremstrahlung x-rays emitted from the surface of a thick lead shield \cite{VOJTYLA1996}.
-\\
+An incomplete version of this fit is used for this document, producing the spectra in Figures~\ref{fig:bgsim1D} and~\ref{fig:bgsim2D}\cite{buuck2019}.
+\Ge{68} decays with a half-life of 271~days, so its activity is scaled to represent the exposure-weighted activity of each major dataset.
+\iso{210}{Pb} in the lead shield is simulated using a special generator that samples bremsstrahlung x-rays emitted from the surface of a thick lead shield \cite{VOJTYLA1996}.
+
 \begin{figure}
   \centering
   \includegraphics[width=1\linewidth]{BGsim1D}
   \caption[Simulation of multiplicty 1 events from the background model]{\label{fig:bgsim1D}
-    Energy spectrum of multiplicity 1 events produced from a simulation of the background model, with most common source components labelled.
+    Energy spectrum of observed multiplicity 1 events produced from a simulation of the preliminary background model, with the highest contributing components labelled.
   }
 \end{figure}
 
@@ -219,26 +218,66 @@ An incomplete version of this fit is used for this thesis, producing the spectra
 \end{figure}
 The background model used for this analysis is known to be inaccurate.
 Since it is only used for optimizing the search for \bbes\ and is not important for the detection efficiency calculation, this does not affect the accuracy of the result presented.
-For future versions of this analysis, a complete and more accurate background model will be used, which will result in small improvements to the optimization.
+For future versions of this analysis, a complete and more accurate background model will be used, which should result in small improvements to the cut optimization.
+
+\section{\Co{56} Simulation} \label{sec:calsims}
+Calibration of the \MJD\ is performed for each module using a line source that is injected by motor into a spiral track that winds around the module.
+Simulations of the \Co{56} calibration sources are performed using the \geant\ generators for these isotopes, and a spiral position sampler written in \Mage.
+The detection efficiency test described in Section~\ref{sec:Co56} uses the \Co{56} source simulation.
+The simulated spectra for the \Co{56} source can be seen in Figures~\ref{fig:56Co1D} and~\ref{fig:Co56Sim2D}
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{Co56Sim1D}
+  \caption[Simulation of multiplicty 1 events from \Co{56} line source]{ \label{fig:56Co1D}
+    Energy spectrum of multiplicity 1 events produced from a simulation of the \Co{56} line source inserted into the module~1 calibration track.
+  }
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{Co56Sim2D}
+  \caption[Simulation of multiplicty 2 events from \Co{56} line source]{ \label{fig:Co56Sim2D}
+    Multiplicity 2 energy spectrum produced by a simulation of the \Co{56} line source inserted into the module~1 calibration track.
+  }
+\end{figure}
 
 
+\section{Simulation Skimming} \label{sec:simskim}
+Skim files are produced containing parameters of interest from the post-processed files using the software \texttt{es\_skimsims}.
+Skim files can also mix postprocessed files from multiple sources in ratios corresponding to the various activities of the sources.
+\texttt{es\_skimsims} accepts as input a JSON file listing the simulated sources, the desired activity of each source, and the number of available event primaries.
+From this, it calculates the number of primaries to accept from each source by maximizing the total number of events used while maintaining the correct ratio according to the activities.
+Once this is done, it goes through each source sequentially and saves parameters of interest, including energy and detector position, to a \texttt{TTree}\cite{rootcern}.
+As will be discussed in future chapters, single detector events are of little interest to this analysis, so only multi-detector events are recorded in order to maintain a small file size.
+Multiplicity~1 events are recorded separately to a histogram according only to energy.
+The skimming process also accounts for which sets of detectors are enabled.
+Another input of \texttt{es\_skimsims} is a JSON file containing a list of detector configurations, containing a bitmask describing which detectors are and are not enabled.
+The detector configurations will be discussed further in Section~\ref{sec:sds}.
+When the skimmer encounters a disabled detector in an event, it ignores that detector, and does not count it towards the event multiplicity.
+ 
+Each detector spends some portion of operating time dead, due to the finite rate at which the digitizers can retrigger, which typically cause $<0.1\%$ of HPGe hits to fail to read.
+However, during early datasets, some detector channels were effected by a bug in the Gretina cards that caused a high rate of triggers on negative-energy noise pulses, resulting in much higher dead time fractions.
+This effect is assumed to be random and uncorrelated between detectors.
+The dead time of each detector is measured by counting the number of pulser events in each detector for each run.
+Because the pulses occur at a fixed rate, we can predict the number of pulser events that should occur in any given run; the fraction of pulser events missed is assumed to represent the dead time fraction.
+The JSON detector configuration file contains the dead time fraction and the statistical uncertainty (assuming binomial statistics with respect to the total number of expected pulser events) on that fraction for each active detector.
+For each simulated detector hit, the data skimmer randomly throws out hits according to the probability represented by the dead fraction, treating that detector as inactive for that event.
 
 
-
-\section{\Md s Selection}
-Simultaneous detector hits are combined into events by the event builder (see section~\ref{sec:eventbuilder} and appendix~{app:eventbuilder}).
+\section{Selection of Multi-Detector Events}
+Simultaneous detector hits are combined into events by the event builder.
 Events are combined in a 4~$\mu$s rolling window.
-This window is expected to accept virtually all true coincidence events (see figure~\ref{fig:toffset}.
-In a small number of runs, clocks between different Gretina cards were desyncronized.
+This window is expected to accept virtually all true coincidence events (see Figure~\ref{fig:toffset}).
+In a small number of runs, clocks between different Gretina cards were desynchronized.
 For these runs, the clocks were resynchronized by applying a timing offset during event building that is measured by seeking the time offset that aligns pulser events.
-With a typical overall rate between both modules of $<1$~Hz, $<.4\%$ of all multi-site events are expected to originate from accidental coincidence, making this a negligible background.
-Once all the data has gone through the processing chain described in section~\ref{sec:datachain}, the skim files from all good runs in datasets 1\-6a are collected into a single skim file containing a \texttt{TTree} with only multi-site events by \texttt{es\_skimdata}.
-\\
+With a typical overall rate between both modules of $<1$~Hz, $<0.4\%$ of all multi-site events are expected to originate from accidental coincidences, making this a negligible background.
+Once all the data has gone through the standard \MJD\ processing chain, the skim files from all good open runs in datasets 1\-6a are collected into a single skim file containing a \texttt{TTree} with only multi-site events by the program \texttt{es\_skimdata}.
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{toffset}
   \caption[Distribution of offset times within multi-detector events]{\label{fig:toffset}
-    Distribution of time interval between individual hits within a multi-detector event during a \Th{228} calibration run. Offsets of greater than $\sim1.5$~$\mu$s are due to pileup, which is significant due to the high data rate of calibration runs.}
+    Distribution of time interval between individual hits within a multi-detector event during a \Th{228} calibration run. Offsets of greater than ${\sim}1.5$~$\mu$s are due to pileup, which is significant due to the high data rate of calibration runs. Offsets greater than ${\sim}4~\mu$s must involve events with more than two hits, due to the event builder time window.}
 \end{figure}
 
 \subsection{Variation in Detector Configuration} \label{sec:sds}
@@ -253,36 +292,40 @@ To decode the bitmask, the $b$'th least significant bit represents string positi
 \end{equation}
 The set of runs and active channels for each run were determined by the run selection and data cleaning committee, and the procedures are outlined in \cite{2018Reine}.
 The program \texttt{es\_getdatasets} uses these selections to sort each run into a subdataset.
-\\
+
 The detection efficiency is defined as the probability of a signal event in any detector, including inactive detectors.
-Detection efficiencyis calculated individually for each subdataset and for each module by creating separate a separate skim file for each subdataset as outlined in section~\ref{sec:simskim}.
-The final efficiency is then computed as a isotopic exposure weighted average of the efficiency within each subdataset.
-Any efficiency uncertainties are assumed to be totally correlated between subdatasets, meaning they are added linearly instead of in quadrature.
-The livetime of each subdataset is calculated by the program \texttt{es\_livetimes} by totalling the run time in each run, and subtracting any deadtime that affects the entire module, including deadtime caused by the muon veto system and by liquid nitrogen fills.
-Additional sources of deadtime that affect individual detectors are calculated as inefficiencies rather than being subtracted from the livetime, as discussed in section~\ref{sec:simskim}
-This is done because deadtime in any individual detector affects the detection efficiency of all other detectors.
-The isotopic exposure is computed by multiplying the livetime of each module of the total isotopic mass in each module, including mass in inactive detectors and dead layers.
+Detection efficiency is calculated individually for each subdataset and for each module by creating a separate skim file for each subdataset as outlined in Section~\ref{sec:simskim}.
+The final efficiency is then computed as an isotopic exposure weighted average of the efficiency within each subdataset.
+Any efficiency uncertainties are assumed to be totally correlated between subdatasets.
+The livetime of each subdataset is calculated by the program \texttt{es\_livetimes} by totalling the run time in each run, and subtracting any dead time that affects the entire module, including dead time caused by the muon veto system and by liquid nitrogen fills.
+Additional sources of dead time that affect individual detectors are calculated as inefficiencies rather than being subtracted from the livetime, as discussed in Section~\ref{sec:simskim}.
+This is done because dead time in any individual detector affects the detection efficiency of all other detectors.
+The isotopic exposure is computed by multiplying the livetime of each module by the total isotopic mass in each module.
+Since this includes mass in inactive detectors and dead layers, the isotopic exposure for this analysis will differ from that presented in the \znbb\ analysis.
 Table~\ref{tab:subdatasets} lists each subdataset along with its livetime and exposure.
 
 \begin{table}
   \caption[List of subdatasets, livetimes, efficiency and exposure]{\label{tab:subdatasets}
-    List of each subdataset with its livetime, detection efficiency measured for the \bbes to \SP{0}{+}{1} decay, and total isotopic exposure. Note the large amount of variance in the detection efficiency.
+    List of each subdataset, labelled by the bitmasks defined in equation~\ref{eq:sdsbitmask}, with its livetime, detection efficiency measured for the \bbes\ to \SP{0}{+}{1} decay, and total isotopic exposure. Note the large amount of variance in the detection efficiency.
   }
   \scriptsize
   \input{sdsexposure.tex}
 \end{table}
 
 \subsection{Dead Layer Effects} \label{sec:DL}
-For \msmd\ events, each individual hit may be degraded by the deadlayer, so the loss of sensitivity from deadlayers is larger for this search than for searches for single-site events.
-For this reason, dead layer effects are treated as a loss of detection efficiency instead of a loss of exposure.
-Dead layers are included in the simulations as a part of post-processing as described in section~\ref{sec:simpostproc}
-To account for uncertainty in the thickness of the deadlayer, two separate simulations are run, with and without deadlayers.
+For multi-detector events, each individual hit may be degraded by the dead layer, so the loss of sensitivity from dead layers is larger for this search than for searches for single-site events.
+For this reason, dead layer effects are treated as a loss of detection efficiency instead of a loss of exposure (as in the \znbb\ analysis).
+Dead layers are included in the simulations as a part of simulation post-processing.
+To account for uncertainty in the thickness of the dead layer, two separate simulations are run, with and without dead layers.
 By comparing the efficiency measurement from each simulation, we measure the size of the dead layer effect.
 The percent uncertainty in the efficiency loss from dead layers is assumed to be the same as the percent uncertainty in the dead layer thickness.
 Typical loss of efficiency for multi-site peaks is 25-35\%; for the \tnbb\ to the \SP{0}{+}{1} decay, the losses are 26\% for module~1 and 34\% for module~2.
 The uncertainty in the dead layer tends to be one of the dominant uncertainties in measuring the detection efficiency.
-The effect of dead layers on detection efficiency can be seen in figure~\ref{fig:dldt}.
-\\
+This is much larger than the ${\sim}10\%$ loss seen in the \znbb\ analysis for two reasons.
+First, for multi-detector events, there are multiple hits that could possibly be lost to the dead layer.
+Second, $\gamma$ hits will be more concentrated at the surface of the detectors, near the dead layers, than \bb\ sites.
+The effect of dead layers on detection efficiency can be seen in Figure~\ref{fig:dldt}.
+
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{DeadLayerDeadTime}
@@ -292,143 +335,143 @@ The effect of dead layers on detection efficiency can be seen in figure~\ref{fig
 \end{figure}
 
 \subsection{Dead Time Effects} \label{sec:DT}
-Detector deadtimes, which affect only a single detector simultaneously, reduce the detection efficiency for events that occur in all detectors in the module.
-For this reason, instead of subtracting these deadtimes from the livetime, the deadtimes are incorperated into the detection efficiency.
-Detector deadtimes are measured individually for each run by counting pulser events and comparing to the number of expected pulser events for each detector.
-\texttt{es\_livetime} collects the detector deadtimes that are measured in this way and finds the average detector deadtime for each subdataset.
-These dead times are then applied to the simulation skimming process as described in section~\ref{sec:simskim}.
-Similar to the dead layers, simulation files are produced with and without deadtimes in order to measure the size of the effect.
-Uncertainties in the detector deadtimes are measured as the statistical uncertainties from pulser counts.
+Detector dead times, which affect only a single detector at a time, reduce the detection efficiency for events that occur in all detectors in the module.
+For this reason, instead of subtracting these dead times from the livetime, the dead times are incorporated into the detection efficiency.
+Detector dead times are measured individually for each run by counting pulser events and comparing to the number of expected pulser events for each detector.
+The program \texttt{es\_livetime} collects the detector dead times that are measured in this way and finds the average detector dead time for each subdataset.
+These dead times are then applied to the simulation skimming process as described in Section~\ref{sec:simskim}.
+Similar to the dead layers, simulation files are produced with and without dead times in order to measure the size of the effect.
+Uncertainties in the detector dead times are measured as the statistical uncertainties from pulser counts.
 The percent uncertainty in efficiency loss from detector dead times is assumed to be the same as the average percent uncertainty in the detector dead time.
-Typical loss of efficiency from detector deadtims range from 1-3\%.
+Typical loss of efficiency from detector dead times range from 1-3\%.
 For the \tnbb\ to the \SP{0}{+}{1} decay, the losses are 2.5\% for module~1 and 1.9\% for module~2.
-The effects of detector deadtimes can be seen in figure~\ref{fig:dldt}.
-\\
-\subsection{Additional Effects} \label{sec:Co56}
-Other possible sources of systematic uncertainty, which could hypothetically result from inaccuracies in the simulation geometry, in the detection efficiency must be accounted for.
-To do so, we use pair production events from calibration runs as a proxy for \bbes\ events.
+The effects of detector dead times can be seen in Figure~\ref{fig:dldt}.
+
+\subsection{Simulation Validation and Errors} \label{sec:Co56}
+In addition to dead layer and dead time effects that can be explicitly accounted for, other possible sources of systematic uncertainty from the simulation exist, such as inaccuracies in the simulation geometry.
+To account for these, we use pair production events from calibration runs as a proxy for \bbes\ events.
 In pair production events, an electron-positron pair is produced in the bulk of a detector, followed promptly by two 511~keV $\gamma$s from the annihilation of the positron.
 Because these events involve a single pair production site and the prompt emission of gamma rays which may be absorbed in a separate detector, they make a good proxy for \bbes\ events.
-In single-escape peak (SEP) events, one gamma is absorbed in the same detector as the pair-production, while the other escapes, resulting in a detector hit with energy equal to the $\gamma$ energy minus 511~keV.
-In double-escape peak (DEP) events, both gammas escape the detector, resulting in a detector hit with energy equal to the $\gamma$ energy minus 1022~keV.
-Both both SEP and DEP events present the possibility for a second 511~keV detector hit.
-By comparing the rate of multiplicity-1 events in the SEPs and DEPs to the rate of multiplicity-2 events in which one hit falls into one of these peaks and the other falls into the 511~keV peak, we can measure a proxy the detection efficiency of our multi-site event signature.
+In single-escape peak (SEP) events, one gamma is absorbed in the detector containing the pair-production, while the other escapes, resulting in a source detector hit with energy equal to the $\gamma$ energy minus 511~keV.
+In double-escape peak (DEP) events, both gammas escape the detector, resulting in a source detector hit with energy equal to the $\gamma$ energy minus 1022~keV.
+Both SEP and DEP events present the possibility for a second 511~keV detector hit.
+By comparing the rate of multiplicity-1 events in the SEPs and DEPs to the rate of multiplicity-2 events in which one hit falls into one of these peaks and the other falls into the 511~keV peak, we can measure a proxy for the detection efficiency of our multi-site event signature.
 By comparing this measurement to simulation, we can estimate the size of any unknown uncertainties in our simulation-based efficiency estimate.
-\\
-\begin{figure}[ht]
+
+\begin{figure}[t]
   \centering
   \subfloat{\includegraphics[width=.5\linewidth]{mult1Co56Fits}}
   \subfloat{\includegraphics[width=.5\linewidth]{mult2Co56Fits}}
   \caption[Spectra of multiplicty 1 and 2 \Co{56} data with peak fits]{\label{fig:Co56Spectra}
-    Spectra of multiplicity 1 \Co{56} events (left) and multiplicity 2 \Co{56} events in coincidence with an annihilation gamma. The results of the simultaneous peak fits are drawn in red (SEP fit) and green (DEP fit).
+    Spectra are shown of multiplicity 1 \Co{56} events (left) and multiplicity 2 \Co{56} events in coincidence with an annihilation gamma. The results of the simultaneous peak fits are drawn in red (SEP fit) and green (DEP fit).
   }
 \end{figure}
 To achieve this, we will use a \Co{56} calibration source.
 \Co{56} presents the advantage of a large number of $\gamma$s at energies high enough to cause pair production, which allows for a comparison of many peaks to our simulation.
-A \Co{56} line source was inserted into the module~1 calibration track on January 15, 2019 and was 168.1~hrs of data were recorded, until January 22, 2019.
-Immediately after this, the source was inserted into the module~2 calibration track and 167.1~hrs of data were recorded until January 29, 2019.
-The source had a nominal activity of 6~kHz, resulting in a high enough data rate that the energy threshold for each channel was raised to $\sim400$~keV.
-As discussed in section~\ref{sec:calsims}, 3~billion event primaries were simulated for the \Co{56} source in each module's source track in order to achieve similar events statistics for both the simulations and data.
-Simulations were run with and without dead-layers.
-\\
-8 SEPs and 7 DEPs were selected as proxies for the \bbes\ signal.
-A simultaneous fit, as described in appendix~\ref{app:peakshape}, of all SEPs as single-detector events and as two-detector events in coincidence with a 511~keV peak event was performed in the calibration data and in the simulations both with and without dead layers.
-SEPs and DEPs have abnormal peakshapes due to in flight annihilation of the positrons, which results in Doppler broadening of the peak shapes.
+A \Co{56} line source was inserted into the module~1 calibration track on January 15, 2019 and 168.1~h of data were recorded, until January 22, 2019.
+Immediately after this, the source was inserted into the module~2 calibration track and 167.1~h of data were recorded until January 29, 2019.
+The source had a nominal activity of 6~kHz, resulting in a high enough data rate that the energy threshold for each channel was raised to ${\sim}400$~keV.
+As discussed in Section~\ref{sec:calsims}, 3~billion event primaries were simulated for the \Co{56} source in each module's source track in order to achieve similar events statistics for both the simulations and data.
+Simulations were run with and without dead layers.
+
+8 SEPs and 7 DEPs were selected as proxies for the \bbes\ signal; these peaks were selected because of their prominence above the Compton continuum and the absense of nearby peaks that would interfere with a peak-height measurement.
+A simultaneous fit, using the multipeak fitter, of all SEPs as single-detector events and as two-detector events in coincidence with a 511~keV peak event was performed in the calibration data and in the simulations both with and without dead layers.
+SEPs and DEPs have abnormal peakshapes due to in-flight annihilation of the positrons, which results in Doppler broadening of the peaks.
 For this reason, a high energy tail is added to the typical peak shape function.
 The peak height ratios and uncertainties for peak $k$ are determined as follows:
 \begin{equation}
   \epsilon_k=\frac{A_{k,m2}}{A_{k,m1}}
 \end{equation}
 \begin{equation}
-  \sigma_{stat, k}=\epsilon_k \sqrt{\frac{\Sigma_{A,k,m1;A,k,m1}}{A_{k,m1}^2}-2\frac{\Sigma_{A,k,m1;A,k,m2}}{A_{k,m1}A_{k,m2}}+\Sigma_{A,k,m2;A,k,m2}}{A_{k,m2}^2}
+  \sigma_{stat, k}=\epsilon_k \sqrt{\frac{\Sigma_{A,k,m1;A,k,m1}}{A_{k,m1}^2}-2\frac{\Sigma_{A,k,m1;A,k,m2}}{A_{k,m1}A_{k,m2}}+\frac{\Sigma_{A,k,m2;A,k,m2}}{A_{k,m2}^2}}
 \end{equation}
-where $A_{k,m1/2}$ are the fitted amplitudes of peak $k$ with multiplicity 1 and multiplicity 2 respectively, and $\Sigma_{A,k,m1/2;A,k,m1/2}$ is the fitter covariance matrix element for these amplitudes.
+where $A_{k,m1/2}$ are the fitted amplitudes of peak $k$ with multiplicity 1 and multiplicity 2 respectively, and $\Sigma_{A,k,m1/2;A,k,m1/2}$ is the fitted covariance matrix element for these amplitudes.
 The same process of simultaneously fitting DEPs is followed to extract the DEP peak-height ratios.
-The measured data spectra and fit results are shown in figure~\ref{fig:Co56Spectra}.
-\\
-\begin{figure}[p]
+The measured data spectra and fit results are shown in Figure~\ref{fig:Co56Spectra}.
+
+\begin{figure}[t]
   \centering
-  \subfloat{\includegraphics[width=.75\linewidth]{M1PeakRatioComparison}}
+  \subfloat{\includegraphics[width=.7\linewidth]{M1PeakRatioComparison}}
   \\
-  \subfloat{\includegraphics[width=.75\linewidth]{M2PeakRatioComparison}}
+  \subfloat{\includegraphics[width=.7\linewidth]{M2PeakRatioComparison}}
   \caption[Peak height ratio comparison results for module 1 and module 2]{\label{fig:co56results}
-    Measurement of peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ for both simulated and measured \Co{56} spectra. Module~1 is shown on top, and Module~2 below. Only statistical error bars are drawin. These ratios are listed in tables~\ref{tab:co56resultsM1} and \ref{tab:co56resultsM2}.
+    Measurement of peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ for both simulated and measured \Co{56} spectra. Only statistical error bars are drawn. These ratios are listed in tables~\ref{tab:co56resultsM1} and \ref{tab:co56resultsM2}.
   }
 \end{figure}
-Any discrepancy between the simulated and measured data is treated as a systematic error which will be applied to the \bbes\ measurement.
-Since some of this discrepancy can be explained by the dead layer uncertainty, the difference between the simulated peak-height ratios with and without the deal layer is multiplied by the percent uncertainty in the dead layer thickness in order to measure the systematic error caused by the dead layer.
-Finally, a $\chi^2$ value is computed for the comparison between the simulated and measured peak-heights using the statistical and dead-layer uncertainties.
+Figure \ref{fig:co56results} shows an overall offsete that cannot be explained by statistical errors; this discrepancy is measured and treated as a systematic error which will be applied to the \bbes\ measurement.
+Since some of this discrepancy can be explained by the dead layer uncertainty, the difference between the simulated peak-height ratios with and without the dead layer is multiplied by the percent uncertainty in the dead layer thickness in order to measure the systematic error caused by the dead layer.
+Finally, a $\chi^2$ value is computed for the comparison between the simulated and measured peak-heights using the statistical and dead layer uncertainties.
 \begin{equation}
-  \chi^2 = \displaystyle\sum_{k=1}^N \frac{(\epsilon_{k, meas}-\epsilon_{k, sim}-\delta_{DL}\cdot\sigma_{DL,k} - \mu)^2}{\sigma_{stat,dat,k}^2+\sigma_{stat,sim,k}^2} + \delta_{DL}^2
+  \chi^2(\mu, \delta_{DL}) = \displaystyle\sum_{k=1}^N \frac{(\epsilon_{k, meas}-\epsilon_{k, sim}-\delta_{DL}\cdot\sigma_{DL,k} - \mu)^2}{\sigma_{stat,dat,k}^2+\sigma_{stat,sim,k}^2} + \delta_{DL}^2
 \end{equation}
-where $\delta_{DL}$ is the error from the deal layer thickness, which is correlated across all peaks, and $\mu$ is the mean error that remains.
-This $\chi^2$ function is minimized, and the systematic error is taken to be
+where $\sigma_{DL,k}$ is the uncertainty from dead layers, $\delta_{DL}$ is the measured error from dead layers (correlated across all peaks with a prior of 1~$\sigma$), and $\mu$ is the mean error that remains.
+This $\chi^2$ function is minimized with respect to $\mu$ and $\delta_{DL}$ and the profile likelihood is used to compute the uncertainty on $\mu$, using MINUIT\cite{minuit}.
+The systematic error is taken to be
 \begin{equation}
   \sigma_{sim}^2 = \mu^2 + \sigma_\mu^2
 \end{equation}
 Tables~\ref{tab:co56resultsM1} and~\ref{tab:co56resultsM2} list the peak height ratios and uncertainties for each peak for module~1 and module~2, respectively.
 The final fractional uncertainties measured are $\sigma_{sim,M1}=0.0020$ and $\sigma_{sim,M2}=0.0047$.
 This uncertainty is applied directly to the detection efficiency measured before applying any other effects such as dead layers, dead times and cuts, without any scaling.
-This uncertainty is one of the dominant uncertainties on the detection efficiency along with the dead layer uncertainty; while the absolute uncertainty is small, because it is applied to the detection efficiency, which tends to be $\sim5$\%, directly rather than to the loss from an individual effect, the fractional uncertaint is quite high.
+This uncertainty is one of the dominant uncertainties on the detection efficiency along with the dead layer uncertainty; while the absolute uncertainty is small, because it is applied to the detection efficiency, which tends to be ${\sim}5$\%, directly rather than to the loss from an individual effect, the fractional uncertainty is on the order of 10\%.
 In cases where the detection efficiency is very low, such as the 1216~keV peak in module~2 from decays to the \SP{2}{+}{2} state, this uncertainty can completely overwhelm the detection efficiency.
 Figure~\ref{fig:co56results} plots the peak height ratios for simulated and measured data for both modules~1 and~2.
 
 \begin{table}[h]
   \caption[Table of peak height ratios for module~1]{\label{tab:co56resultsM1}
-    Table of measured peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ in module~1 for both simulated and measured \Co{56} spectra, with uncertainties. A plot of these numbers is shown in figure~\ref{fig:co56results}
+    Table of measured peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ in module~1 for both simulated and measured \Co{56} spectra, with uncertainties. A plot of these numbers is shown in Figure~\ref{fig:co56results}
   }
   \input{../ch4/tables/table_M1Co56Ratios.tex}
 \end{table}
 
 \begin{table}[h]
   \caption[Table of peak height ratios for module~2]{\label{tab:co56resultsM2}
-    Table of measured peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ in module~2 for both simulated and measured \Co{56} spectra, with uncertainties. A plot of these numbers is shown in figure~\ref{fig:co56results}
+    Table of measured peak height ratios between multiplicity~1 events and multiplicity~2 events containing a 511~keV annihalation $\gamma$ in module~2 for both simulated and measured \Co{56} spectra, with uncertainties. A plot of these numbers is shown in Figure~\ref{fig:co56results}
   }
   \input{../ch4/tables/table_M2Co56Ratios.tex}
 \end{table}
 
 \section{Region of Interest Selection}
-Once the multisite events have been collected, we want to search for detector hits with the energies of the $\gamma$s emitted in each \bbes\ decay mode.
+Once the multi-site events have been collected, we want to search for detector hits with the energies of the $\gamma$s emitted in each \bbes\ decay mode.
 To do this, a signal region of interest (ROI) must be identified.
 To estimate the number of background events in the signal ROI, a background ROI must also be selected near the signal ROI.
 This section will describe the selection of the signal and background ROIs and the calculation of the efficiency and uncertainties on the efficiency due to the ROI selection.
-\\
-The peakshape function and parameters are described in appendix~\ref{app:peakshape}.
+
 For each dataset, a simultaneous fit of many peaks is performed to a combined spectrum of all detectors and all calibration runs, ensuring that any variation in gain or energy nonlinearity between detectors is accounted for.
-From each fit result, a set of parameters describing a single peak shape at the energy of the signal ROI of interest can be extracted, along with a covariance matrix for those parameters.
+From each fit result, a set of parameters describing a single peak at the energy of the signal ROI can be extracted, along with a covariance matrix for those parameters.
 From these fit results, we can compute the optimal ROI, detection efficiency and uncertainty for each data set.
-An example of a calibration spectrum with the FWHM curve fit to it is shown in figure~\ref{fig:fwhmcal}.
+An example of a calibration spectrum with the FWHM curve fit to it is shown in Figure~\ref{fig:fwhmcal}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.9\linewidth]{fwhmcal}
   \caption[FWHM extracted from a \Th{228} calibration spectrum]{\label{fig:fwhmcal}
-    A \Th{228} calibration run with the FWHM fit curve and individual uncertainties at several peaks. This curve is used to compute the FWHM for a peak at a given energy. The statistical uncertainties is extracted from the fit result. An additional uncertainty is added to account for the uncertainties in the individual peaks; this is used to measure the uncertainty from energy nonlinearity.
+    A \Th{228} calibration run with the FWHM fit curve and individual uncertainties at several peaks. This curve is used to compute the FWHM for a peak at a given energy. The statistical uncertainties are extracted from the fit result. An additional systematic uncertainty is added to account for the residuals.
   }
 \end{figure}
-\\
+
 \subsection{Signal ROI Optimization} \label{sec:roiopt}
 The signal region of interest around each peak is optimized based on the peak shape functions as fit for each data set.
-The signal region of interest is optimized following the procedure laid out in appendix~\ref{app:sens} and maximizing the rate sensitivity with respect to the region of interest upper and lower boundaries, $E_{low}$ and $E_{high}$ respectively.
+The optimization follows the procedure laid out in Appendix~\ref{app:sens} and maximizes the rate sensitivity with respect to the region of interest upper and lower boundaries, $E_{low}$ and $E_{high}$ respectively:
 \begin{equation}
   \hat\Gamma(E_{low}, E_{high}, \overline B) \propto \frac{\mathrm{DP}\big(\overline B(E_{high}-E_{low})\big)}{\epsilon_{ROI}(E_{low}, E_{high})}
 \end{equation}
-$\mathrm{DP}$ is the discovery potential as defined in appendix~\ref{app:sens}, where a flat background with background index $\overline B$ measured from data is assumed.
+where $\mathrm{DP}$ is the discovery potential as defined in Appendix~\ref{app:sens}, and a flat background with background index $\overline B$ measured from data is assumed.
 The efficiency is defined by the CDF of the Gaussian and LE tail components
 \begin{equation}
-  \label{eq:PDCDF}
+  \label{eq:PSCDF}
   \begin{aligned}
-    \epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma, f_{tail}, \tau) &= \frac{1}{2}\big(\mathrm{erfc}(\frac{E_{low}-\mu}{\sqrt{2}\sigma}) - \mathrm{erfc}(\frac{E_{high}-\mu}{\sqrt{2}\sigma})\big) \\& + f_{tail}\tau\big(\mathrm{ExGaus}(E_{high}; \mu, \sigma, \tau)-\mathrm{ExGaus}(E_{low}; \mu, \sigma, \tau)\big)
+    \epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma, f_{tail}, \tau) &= \frac{1}{2}\big(\mathrm{erfc}\left(\frac{E_{low}-\mu}{\sqrt{2}\sigma}\right) - \mathrm{erfc}\left(\frac{E_{high}-\mu}{\sqrt{2}\sigma}\right)\big) \\& + f_{tail}\tau\big(\mathrm{ExGaus}(E_{high}; \mu, \sigma, \tau)-\mathrm{ExGaus}(E_{low}; \mu, \sigma, \tau)\big)
   \end{aligned}
 \end{equation}
-The optimal ROI is numerically calculated by minimizing $\frac{1}{\hat\Gamma(E_{low}, E_{high}, \overline B)}$ with respect to $E_{low}$ and $E_{high}$ using the minuit minimizer\cite{minuit}.
-\\
+The optimal ROI is numerically calculated by minimizing $\frac{1}{\hat\Gamma(E_{low}, E_{high}, \overline B)}$ with respect to $E_{low}$ and $E_{high}$ using MINUIT\cite{minuit}.
+
 \subsection{Background ROI Selection}
-For each peak, a background ROI of width $50--100$~keV surrounding the peak is selected.
+For each peak, a background ROI of width $50-100$~keV surrounding the peak is selected.
 The ROI is selected to avoid any known background peaks and exclude them with at least $99.9\%$ efficiency.
 A $99.9\%$ exclusion region calculated from the peakshape function is selected around the peak and removed from the background ROI.
-\\
+
 \subsection{ROI Detection Efficiency and Uncertainty} \label{sec:ROIEff}
-The ROI detection efficiency is calculated from the CDF defined in equation~\ref{eq:PSCDF}.
+The ROI detection efficiency is calculated from the CDF defined in Equation~\ref{eq:PSCDF}.
 The covariance matrix of the peak shape parameters obtained from the fit result is used to calculate the statistical uncertainty of the efficiency.
 Several additional systematic effects must also be accounted for:
 \begin{itemize}
@@ -437,20 +480,20 @@ Several additional systematic effects must also be accounted for:
   This gain drift results in an increase in the width of the peak, which is accounted for by adding in quadrature $\sigma_{drift}$ to the value of $\sigma$ obtained from the fit.
   This also results in the dominant systematic uncertainty on the peak width, $\delta_{fwhm,drift}$.
   The gain drift also results in a small systematic error in the measured energy of the peak $\delta_{\mu,drift}$.
-  A detailed description of the measurement of each of this systematic effect is contained in referece~\cite{energysystunidoc}.  
+  A detailed description of the measurement of this systematic effect is contained in Reference~\cite{energysystunidoc}.  
 \item \textbf{Energy nonlinearity:} While the energy response for HPGe detectors is ostensibly linear, several factors result in small nonlinearities.
   Local nonlinearities that are correlated over small energy scales of arise from the response of the Gretina digitizers.
-  While these nonlinearities are corrected for, a nonlinearity of $\sim0.1$~keV with a period of $\sim300$~keV remains.
+  While these nonlinearities are corrected for, a residual nonlinearity of ${\sim}0.1$~keV with a period of ${\sim}300$~keV remains.
   Global nonlinearities result from systematic uncertainties in the energy estimation.
   One source of global nonlinearity arises from uncertainty in the start time of the waveform, which is energy dependant.
   Another is a small quadratic term resulting from charge recombination.
   Because calibrations are performed on peaks with energies ranging from 238~keV to 2614~keV, energy shifts due to global nonlinearities are very small in this range and local energy nonlinearities dominate.
-  At smaller and larger anergies, the shifts can be as large as $\sim0.5$~keV in some detectors.
-  Energy nonlinearities result in an increase in $\sigma$ as a result of the combining of peaks with different shifts; however, since the energy calibrations include all detectors, this shift is already included in the fit result, so no action is required.
+  At smaller and larger energies, the shifts can be as large as ${\sim}0.5$~keV in some detectors.
+  In addition to this bias, energy nonlinearities result in an increase in $\sigma$ as a result of the combining of peaks from different detectors with different shifts; however, since the energy calibrations include all detectors, this shift is already included in the fit result, so no action is required.
   Energy nonlinearities also have a significant affect on the uncertainty in the measured peak energy, $\delta_{\mu,NL}$, which is a dominant uncertainty.
-  A detailed description of the measurement of each of this systematic effect is contained in referece~\cite{energysystunidoc}.
+  A detailed description of the measurement of each of these systematic effects is contained in Reference~\cite{energysystunidoc}.
 \item \textbf{Detector Crosstalk:} Because we are searching for peaks in coincidence events, the possibility for a distortion in the energy measurement due to crosstalk between the involved events exists.
-  This effect is measured in section~\ref{sec:crosstalk} to be small enough that no energy correction or peakshape correction is required.
+  This effect is measured in Section~\ref{sec:crosstalk} to be small enough that no energy correction or peakshape correction is required.
   However, this effect does contribute to small uncertainties in the peak position, $\delta_{\mu,xtalk}$ and peak width, $\delta_{fwhm,xtalk}$.
 \end{itemize}
 
@@ -461,17 +504,18 @@ To compute the uncertainty on the efficiency, the efficiency is computed after m
 For the uncertainty from the width, we take:
 \begin{equation}
   \begin{aligned}
-    \sigma_{\epsilon_{ROI},fwhm} &= \frac{1}{2}\big(\epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma(1+\delta_\alpha), f_{LE}, \tau(1+\delta_\alpha)) \\&+ \epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma(1-\delta_\alpha), f_{LE}, \tau(1-\delta_\alpha))\big)
+    \sigma_{\epsilon_{ROI},fwhm} = \frac{1}{2}&\big(\epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma(1+\delta_\alpha), f_{LE}, \tau(1+\delta_\alpha)) \\&- \epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma(1-\delta_\alpha), f_{LE}, \tau(1-\delta_\alpha))\big)
   \end{aligned}
 \end{equation}
-Because the ROI is optimized to around $\mu$, shifts in the peak in either direction will cause a reduction in efficiency; for this reason, we must perform a second order propagation of uncertainties.
+Because the ROI is optimized around $\mu$, shifts in the peak in either direction will cause a reduction in efficiency.
+For this reason, we must perform a second order propagation of uncertainties with respect to $\delta_\mu$.
 The result is a slight degradation in the efficiency, so that
 \begin{equation}
   \epsilon_{ROI} =  \frac{\epsilon_{ROI}(E_{low}, E_{high}; \mu + \delta_\mu, \sigma, f_{LE}, \tau) + \epsilon_{ROI}(E_{low}, E_{high}; \mu - \delta_\mu, \sigma, f_{LE}, \tau)}{2}
 \end{equation}
 and
 \begin{equation}
-  \sigma_{\epsilon_{ROI},\mu} = \epsilon_{ROI}(E_{low}, E_{high}; \mu) - \epsilon_{ROI}
+  \sigma_{\epsilon_{ROI},\mu} = \epsilon_{ROI}(E_{low}, E_{high}; \mu, \sigma, f_{LE}, \tau)) - \epsilon_{ROI}
 \end{equation}
 These uncertainties are taken to be uncorrelated and added in quadrature to obtain the final uncertainty on the ROI efficiency.
 Table~\ref{tab:energysystematics} contains a full summary of all of the energy uncertainties, the ROIs, and the ROI efficiencies and uncertainties.
@@ -483,22 +527,23 @@ Table~\ref{tab:energysystematics} contains a full summary of all of the energy u
   \input{../ch4/tables/peakshapetable.tex} }
 \end{sidewaystable}
 
-\subsection{Detector Crosstalk}
+\subsection{Detector Crosstalk} \label{sec:crosstalk}
 Detector crosstalk is caused when a true signal in one detector channel induces a small signal in another channel.
-This is not a large enough evect to trigger events in a separate channel, meaning that it does not effect \ss\ events.
-However, it could produce an energy estimation error in \md\ events since coincident pulses could induce signals that interfere either constructively or destructively, shifting the measured energy.
+This is not a large enough effect to trigger events in a separate channel, meaning that it does not effect single-detector events.
+However, it could produce an energy estimation error in multi-detector events since coincident pulses could induce signals that interfere either constructively or destructively, shifting the measured energies.
 In practice, this could produce both a shift and additional uncertainty in both the measured energy of the peak and in the width of the peak.
-To check for this effect, we can look at \md\ events in \Th{228} calibration data.
-In particular, we will compare the centroid and FWHM for several peaks in both \sd\ events and \md\ events.
+To check for this effect, we can look at multi-detector events in \Th{228} calibration data.
+In particular, we will compare the centroid and FWHM for several peaks in both single-detector events and multi-detector events.
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\linewidth]{xtalkplot}
+  \subfloat{\includegraphics[width=\linewidth]{xtalkplot}}
   \caption[Peak shape comparison for single- and multi-detector events]{\label{fig:xtalk}
     Difference of the measured centroid and FWHM of several \Th{228} calibration peaks. Error bars represent the fit errors. Notice on the bottom right, that any difference is not visible to the naked eye.
   }
 \end{figure}
-\\
+
 5 peaks were selected from the \Tl{208} $\gamma$ cascade, at 277, 583, 763, 860 and 2614~keV, and one additional peak was selected from the \Bi{212} cascade, at 785~keV.
+These peaks were selected based on their prominence in the high multiplicity hit spectrum.
 The combined calibration spectra from dataset~6 were used to perform this analysis.
 These peaks were fit individually, and the centroid and FWHM were computed for multiplicity 1~and multiplicity~2 events.
 Figure~\ref{fig:xtalk} shows the results of these measurements.
@@ -511,86 +556,88 @@ We will treat the systematic error as uncorrelated between the peaks and compute
 \begin{equation}
   \chi^2 = \displaystyle\sum_{k=0}^N \frac{(\mathrm{FWHM}_{k,m1} - \mathrm{FWHM}_{k,m2})^2}{\sigma_{fwhm,k,m1}^2+\sigma_{fwhm,k,m2}^2+\delta_{fwhm,xtalk}^2}
 \end{equation}
-Both systematic errors are numerically computed using a Brent minimization algorithm.
-The results are $\delta_{\mu,xtalk}=0.012$~keV and $delta_{fwhm,xtalk}=0.011$~keV, both of which are subdominant uncertainties.
+Both systematic errors are numerically computed using a Brent minimization algorithm\cite{brent}.
+The results are $\delta_{\mu,xtalk}=0.012$~keV and $\delta_{fwhm,xtalk}=0.011$~keV, both of which are subdominant uncertainties.
 
 
 \section{Background Cuts}
 By making use of known properties of background events, data cleaning cuts can be designed to selectively reduce backgrounds while minimizing sacrifice of excited state events.
-Because of the \md\ nature of the event selection, many of these background cuts are designed that make use of observables from the detector hits in coincidence with candidate hits.
+Because of the \md\ nature of the event selection, many of these background cuts are designed to make use of observables from the detector hits in coincidence with candidate hits.
 
 \subsection{Enriched Source Detector Cut}
-Since the \bbes\ events must originate in \Ge{76}, events are far likelier to originate in enriched Germanium detectors than those with natural Germanium isotopic abundances.
+Since the \bbes\ events must originate in \Ge{76}, events are far likelier to originate in enriched HPGe detectors than those with natural germanium isotopic abundances.
 There are 29.8~kg of enriched detectors, with $88.1 \pm 0.7$\% abundance of \Ge{76} and 14.4~kg of natural detectors, with $7.83 \pm 0.07$\% abundance of \Ge{76}.
 This means that $95.8 \pm 0.1$\% of \bbes\ events will originate in enriched detectors.
 If we assume that background events will hit all detector mass at the same rate, then we would expect only 67\% of hits from background events involving two detectors to be in coincidence with a hit in an enriched detector.
 This means that a significant gain in sensitivity can be acheived by cutting hits that are not in coincidence with an enriched detector hit.
-While the detection efficiency of this cut is expected to be close to 95.8\%, the actual efficiency is measured from simulations, and tends to be greater, since a greater proportion of enriched detectors are active than of natural detectors.
+While the detection efficiency of this cut is expected to be close to 95.8\%, the actual efficiency is measured from simulations, and tends to be greater, since a greater proportion of enriched detectors are active compared to natural detectors.
 
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.8\textwidth]{enrnatdets}
   \caption[Module 1 and Module 2 enriched and natural detectors]{\label{fig:Ge76BBLevelDiagram}
-    Diagram showing each detector in each module, arranged by which string and position they are in. Enriched detectors are colored green and natural detectors are colored blue. 95\% of \Ge{76} is contained in the enriched detectors.}
+    Diagram showing each detector in each module, arranged by which string and position they are in. Enriched detectors are colored green and natural detectors are colored blue. 95\% of \Ge{76} in the array is contained in the enriched detectors.}
 \end{figure}
 
 \subsection{Coincident and Sum Energy Cuts} \label{sec:MSenergycuts}
 The greatest source of background events is expected to be $\gamma$-rays from a handful of known primordial and cosmogenic isotopes.
-Because $\gamma$ photons are monoenergetic, these backgrounds will often present a clear detection signature that can be targetted.
-$\gamma$ photons will often Compton scatter from one detector into another, depositing their entire energy between the two.
+Because $\gamma$-rays are monoenergetic, they will often present a clear detection signature that can be targeted.
+$\gamma$-rays will often Compton scatter from one detector into another, depositing their entire energy between the two.
 For this reason, events whose total energy is equal to the energy of a known $\gamma$ can be cut.
 $\beta$-decays will often result in a cascade of multiple $\gamma$s, at least one of which may be fully absorbed in a single detector.
 These events can be cut by searching for a coincident detector with energy equal to that of a known $\gamma$.
-Finally, whereas the \bb\ decay spectrum approaches zero amplitude at low energies and at \Qbb, the Compton continuum of $\gamma$s has finite amplitude at low energies.
-This means that sensitivity can be gained by setting low- and high-energie thresholds on hits in coincidence with a candidate event.
+Finally, whereas the \bb\ decay spectrum approaches zero amplitude at low energies and at \Qbb, the Compton continuum of $\gamma$s has a large amplitude at low energies.
+This means that sensitivity can be gained by setting low- and high-energy thresholds on hits in coincidence with a candidate event.
 These combined backgrounds can be reduced by cutting events with either sum energies or coincident hit energies that fall in a set of energy ranges.
-For \bbes\ modes with multiple $\gamma$s, the expected energy ranges will vary differ in natural and enriched detectors, since natural detectors will mostly include hits from one of the $\gamma$s, while enriched events will include \bb\ hits, $\gamma$ hits, and pileup events including both of these, allowing a much wider energy range.
-For this reason, a separate set of coincident cut energy ranges are found for natural and enriched detectors.
-\\
+For \bbes\ modes with multiple $\gamma$s, the optimal energy ranges will differ between natural and enriched detectors, since natural detectors will mostly include hits from one of the $\gamma$s, while enriched events will include \bb\ hits, $\gamma$ hits, and pileup events including both of these, allowing a much wider energy range.
+For this reason, a separate set of coincident cut energy ranges are used for natural and enriched detectors.
+
 The energy ranges that are cut can be determined by comparing the background model simulation to simulations of each \bbes\ decay mode.
-An algorithm was written that simultaneously selects a set of both sum and coincident energy ranges to cut that optimizes discovery potential, as described in appendix~\ref{app:sens}.
+An algorithm was written that simultaneously selects a set of both sum and coincident energy ranges to cut that optimizes discovery potential, as defined in Appendix~\ref{app:sens}.
 The algorithm begins by identifying events in the \bbes\ simulation that include at least one hit consisting of the full absorption of a $\gamma$ photon and events in the background model simulation that include at least one hit in the background region of interest.
 These events are then sorted into energy bins for each coincident hit and for the sum energy of the event (a single event will be in multiple bins).
-For each bin, the algorithm checks the change in discovery potential if the bin was toggled to be either cut or readded.
-Following equation~\ref{eq:cutcriterion}, the discovery potential will be improved for bin $k$ if:
+For each bin, the algorithm checks the change in discovery potential if the bin was toggled to be either cut or included.
+Following Equation~\ref{eq:cutcriterion}, the discovery potential will be improved by toggling bin $k$ if:
 \begin{equation}
   \mathrm{DP}'(s\cdot N_{BG})\frac{s\cdot n_{k,BG}}{\mathrm{DP}(s\cdot N_{BG})} < \frac{n_{k,ES}}{N_{ES}}
 \end{equation}
-where $N_{ES}$ and $N_{BG}$ are the total number of events remaining in the simulated \bbes\ and background spectra, respectively, $s$ is a scaling to estimate the number of background events in the data from the number in the simulation, and $n_{k,ES}$ and $N_{k,BG}$ are the number of simulated \bbes\ and background events contained in the bin.
-A $\chi$ value is computed representing the normal quadrile of the probability that cutting or readding the bin will improve the discovery potential.
+where $N_{ES}$ and $N_{BG}$ are the total number of events remaining in the simulated \bbes\ and background spectra, respectively; $s$ is a scaling to estimate the number of background events in the data from the number in the simulation; and $n_{k,ES}$ and $n_{k,BG}$ are the number of simulated \bbes\ and background events contained in the bin.
+A $\chi$ value is computed representing the normal quantile of the probability that cutting or including the bin will improve the discovery potential.
 This is done by assuming that the uncertainty on the number of events in the bin is Gaussian distributed, with standard deviations $\sqrt{n_{k,ES}}$ and $\sqrt{n_{k,BG}}$, respectively.
 In this case, we get:
 \begin{equation}
-  \chi_k = \frac{ \frac{n_{k,ES}}{N_{ES}} - \mathrm{DP}'(s\cdot N_{BG})\frac{s\cdot n_{k,BG}}{\mathrm{DP}(s\cdot N_{BG})} }{ \sqrt{ (\mathrm{DP}'(s\cdot N_{BG})\frac{s}{\mathrm{DP}(s\cdot N_{BG})})^2n_{k,BG} + \frac{n_{k,ES}}{N_{ES}^2} } }
+  \chi_k = \frac{ \frac{n_{k,ES}}{N_{ES}} - \mathrm{DP}'(s\cdot N_{BG})\frac{s\cdot n_{k,BG}}{\mathrm{DP}(s\cdot N_{BG})} }{ \sqrt{ \left(\mathrm{DP}'(s\cdot N_{BG})\frac{s}{\mathrm{DP}(s\cdot N_{BG})}\right)^2n_{k,BG} + \frac{n_{k,ES}}{N_{ES}^2} } }
 \end{equation}
-All events in the bin with highest probability of improving the discovery potential are then either cut or readded, and must be cut or readded to all other bins that they fall into.
-Note that a readded event will only be readded if it is not cut by any other bin.
+All events in the bin with highest probability of improving the discovery potential are then either cut or included, and must be cut or included to all other bins that they fall into.
+Note that a included event will only be included if it is not cut by any other bin.
 This process is repeated until toggling any bin will have $\chi_k<0$, meaning there is a $<50$\% chance of improving the discovery potential.
 At this point, the bins are then combined in order to determine the ranges of energies to be cut in sum energy and coincident energies.
-\\
-Because of limited statistics in the simulations, this cut will be biased to cut events with a downward fluctuation in \bbes\ amplitude and accept bins with an upward fluctuation in \bbes\ amplitude, and vice-versa for the background model.
+
+Because of limited statistics in the simulations, this cut will be biased to cut events in bins with a downward fluctuation in \bbes\ rate and accept bins with an upward fluctuation, and vice-versa for the simulated background model.
 In order to minimize this bias and ensure that energy ranges are selected based on real backgrounds rather than statistical fluctuations, a penalty is applied to the probability calculations if a new range would be added.
-If a cutting or readding a bin would increase the number of energy ranges, a penalty of 3 is added to the $\chi$ value, and if it would reduce the number of ranges, a penalty of -3 is added.
+If cutting or readding a bin would increase the number of energy ranges, a penalty of 3 is added to the $\chi$ value, and if it would reduce the number of ranges, a penalty of -3 is added.
 This corresponds to requiring a 99.8\% chance that adding a new energy range will represent an improvement before we conclude that it is not a statistical fluctuation.
-This is inspired by the Akaike Information Criterion (AIC), which adds a penalty of 1 to a likelihood for each parameter added to a model.
+This is inspired by the Akaike Information Criterion (AIC)\cite{Akaike1974}, which adds a penalty of 1 to a likelihood for each parameter added to a model.
 In this case, adding an energy range adds two parameters to our cut, so the equivalent penalty is 1.5 per parameter, which is a larger penalty than AIC.
-\\
+This difference can be explained by the fact that the AIC penalty of 1 requires 97.7\% that toggling a bin represents an improvement; however, it has been observed that ${\sim}100$ bins exist close enough to the threshold for inclusion or exclusion to accidentally toggle the bin.
+As a result, using a penalty of 1 will result in multiple accidentally excluded energy regions, on average, while a penalty of 1.5 will not.
+
 To further control limited simulation statistics, a variety of bin widths is used to determine the optimal energy ranges.
 This is necessary because with a narrow binning, bins do not have enough statistics to overcome the penalty described above, but wider bins produce very imprecise energy ranges.
 The algorithm starts by optimizing the cut ranges with a bin width of 6.4~keV starting from a prior of cutting no energy ranges.
 Once this optimization is complete, the bin width is split in half and the algorithm re-optimizes the energy ranges, using the previous ranges as a prior.
 This halving of bin width is repeated until a final bin width of 0.2~keV is reached.
 The results of this cut optimization procedure are shown in figures~\ref{fig:sumandcoinEcuts} and~\ref{fig:2Dcuts}.
-\\
-\begin{figure}[!h]
+
+\begin{figure}[!t]
   \centering
   \subfloat{\includegraphics[width=.5\linewidth]{BGSumECut}}
   \subfloat{\includegraphics[width=.5\linewidth]{ESSumECut}}\\
   \subfloat{\includegraphics[width=.5\linewidth]{BGCoinECut}}
   \subfloat{\includegraphics[width=.5\linewidth]{ESCoinECut}}
-  \caption[Sum and coincident simulated energy spectra with cuts]{\label{fig:sumandcoinEcuts}
-    Top: Sum energy spectra of simulated ES~(left) and BG~(right) events. The events in red are cut by the sum- or coincident-energy cut. Note that the region around many peaks is cut out. This is the intdended effect of the sum energy cut.\\
-    Bottom: Energy spectrum of events in coincident with events in the ROI from simulations~(left) and measured data~(right). Events in red are cut by the sum- or coincident-energy cut. Once again, regions around prominent peaks are cut out as intended.
+  \caption{\label{fig:sumandcoinEcuts}
+    Top: Simulated sum energy spectra of simulated ES and BG events. The events in red are cut by the sum- or coincident-energy cut. Note that regions around many peaks are cut, as intended.\\
+    Bottom: Simulated energy spectrum of events in coincidence with events in the ROI. Excesses in red are cut by the sum- or coincident-energy cut. Once again, regions around prominent peaks are cut out as intended.
   }
 \end{figure}
 
@@ -606,110 +653,117 @@ The results of this cut optimization procedure are shown in figures~\ref{fig:sum
   \centering
   \includegraphics[width=0.8\linewidth]{DigitizerNonlinearity}
   \caption[Measured Digitizer Nonlinearity vs Energy]{\label{fig:dignonlin}
-    Digitizer nonlinearity before (red) and after (blue) begin corrected. This nonlinearity is measured by comparing the energy measured in the high gain channel to that of the low gain channel.
+    Digitizer nonlinearity before (red) and after (blue) being corrected. This nonlinearity is measured by comparing the energy measured in the high gain channel to that of the low gain channel.
   }
 \end{figure}
-The application of the sum and coincident energy cuts will introduce systematic error to the efficiency measurement.
-For the \tnbb\ decay modes, the coincidence events will have a broad energy spectrum, so the systematic error will be dominated by errors in that spectrum or in the energy estimation.
+The efficiency of each of the sum and coincident energy cuts can be evaluated by computing the ratio of simulated \bbes\ events that pass the cut to the total number of simulated events.
+The primary source of uncertainty arises from imperfections in the simulated \bbes\ spectra produced by \texttt{DECAY0} (see Section~\ref{sec:essims}).
+Additionaly uncertainty in the spectral shape arises from energy nonlinearity.
 Since the efficiency is calculated by integrating over portions of the coincidence spectrum, an upper limit on the systematic error can be found using the KS statistic of a comparison between the simulated spectrum and the true spectrum.
-As discussed in section~\ref{decay0}, we can compare the decay0 simulated spectrum to the true spectrum using the Iachello simulated spectrum.
-To account for energy nonlinearity, each energy is shifted to represent the effects of digitizer nonlinearity and energy drift.
-Digitizer nonlinearity originates from the fact that some digitizer energy bins are slightly wider than others and has an approximately sawtooth dependency on energy with a period of $\sim600$~keV.
-A correction is applied that reduces the size of of this nonlinearity to $\sim0.1$~keV in magnitude and smooths it out significantly, as shown in figure~\ref{fig:dignonlin}.
-Digitizer nonlinearity is corrected by shifting each energy according to a sawtooth function with rms 0.1~keV and period 600~keV:
+As discussed in Section~\ref{sec:decay0vskandi}, we can perform this comparison by using the Kotila and Iachello spectrum as a proxy.
+This relies on the assumption that the Kotila and Iachello spectrum has corrected the dominant errors in the \texttt{DECAY0} spectrum; if any errors coexist in both spectra that have a similar order of magnitude, then this approach will underestimate the uncertainty.
+To account for energy nonlinearity, each simulated energy is shifted to represent the effects of digitizer nonlinearity and energy drift.
+Digitizer nonlinearity originates from the fact that some digitizer energy bins are slightly wider than others and has an approximately sawtooth dependency on energy with a period of ${\sim}600$~keV.
+A correction is applied that reduces the size of this nonlinearity to ${\sim}0.1$~keV in magnitude and smooths it out significantly, as shown in Figure~\ref{fig:dignonlin}.
+Digitizer nonlinearity is included in the simulation by shifting each energy according to a sawtooth function with rms 0.1~keV and period 600~keV:
 \begin{equation}
-  \Delta(E) = \sqrt(3)\cdot (0.1~\mathrm{keV}) \big(\mathrm{rem}(\frac{E-150~\mathrm{keV}}{600~\mathrm{keV}}) \big)
+  \Delta(E) = \sqrt{3}\cdot (0.1~\mathrm{keV}) \big(\mathrm{rem}(\frac{E-150~\mathrm{keV}}{600~\mathrm{keV}}) \big)
 \end{equation}
 where $\mathrm{rem}$ is the remainder function as defined in the \cpp standard library.
 An additional shift that is randomly sampled from a Gaussian distribution with standard deviation $0.00015\cdot E$ is applied to simulate the effect of gain drift, based on the drift observed during DS5.
-After applying both of these corrections to the decay0 spectrum, a KS test is performed against the Iachello spectrum, and a KS statistic of 0.08\% is observed, as shown in figure~\ref{fig:decay0NLCks}.
-This statistic is used as an upper limit on the uncertainty from the energy range cuts for \tnbb modes.
+After applying both of these alterations to the \texttt{DECAY0} spectrum, a KS test is performed against the Kotila and Iachello spectrum, and a maximum CDF difference of 0.08\% is observed, as shown in Figure~\ref{fig:decay0NLCks}.
+This difference is used as an upper limit on the uncertainty from the energy range cuts for \tnbb\ modes.
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.6\linewidth]{decay0KS}
   \caption[KS Test of decay0 spectrum with energy non-linearities vs Iachello spectrum]{\label{fig:decay0NLCks}
-    KS test comparing the simulated decay0 \tnbb\ ground state decay with energy nonlinearities applied to the simulated spectrum using the Iachello phase space factors.
+    KS test comparing the CDFs of the simulated \texttt{DECAY0} \tnbb\ ground state decay with energy nonlinearity modifications applied to the Kotila and Iachello simulated spectrum.
   }
 \end{figure}
-\\
-For \znbb, the energy ranges selected by this cut tend to surround peaks corresponding to the \Qbb s of the decay modes.
+
+For \znbb, the energy ranges selected by this cut surround peaks corresponding to the \Qbb s of the decay modes or sum peaks of the \Qbb\ with a deexcitation $\gamma$.
 In this case, since we are no longer integrating over a \bb -spectrum, the uncertainty in the efficiency will depend on shifts in the peak, similar to the ROI-efficiency.
 Since the energy regions selected keep at least 99.9\% of these peaks in all cases, we can set an upper limit on the uncertainty by checking the ROI efficiency uncertainty around the 2039~keV \Qbb, assuming an ROI tuned to select 99.9\% of the peak.
-The uncertainty observed in this case is 0.325\%, which is applied to the energy range cuts for \znbb modes.
-For both \znbb\ and \tnbb\ modes, this efficiency uncertainty is sub-dominant, so these upper limits will suffice.
-\\
+The uncertainty observed in this case is 0.325\%, which is applied to the energy range cuts for \znbb\ modes.
+For both \znbb\ and \tnbb\ modes, this efficiency uncertainty is sub-dominant, so these highly conservative uncertainty estimates will suffice.
+
 \subsection{Muon Veto Cut}
-\begin{figure}[h]
+\begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{muonevent}
+  \includegraphics[width=0.7\textwidth]{muonevent}
   \caption[Example muon event]{\label{fig:muonevent}
     A cartoon of a particle shower created by a muon event. The particles produced in such a shower can hit multiple detectors, producing multi-detector events.
   }
 \end{figure}
 Cosmic ray muons have the potential to produce partical showers in the \MJD\ that can produce \msmd\ events and can activate short-lived isotopes that in turn may decay, producing delayed \msmd\ events.
-Background events caused by muons can be cut using the muon veto system described in \cite{2015wiseman}.
-Any Germanium detector events for 20~ms before and 1~s after a tagged muon event cut.
-This cut will remove $>99.9$\% of events induced by the muon shower, based on simulations shown.
+Background events caused by muons can be cut using the muon veto system.
+This analysis follows the standard \MJD\ muon cut procedure, for which any HPGe detector events occurring 20~ms before and 1~s after a tagged muon event are cut.
+This cut will remove $>99.9$\% of events induced by the muon shower, based on simulations\cite{2015wiseman}.
 In reality, the cut efficiency is slightly lower due to periods of time where the muon veto system clock became desynchronized with the Germanium detector clock.
-The impact of this cut is to reduce the total livetime in each module by $<40$~s per day.
-\\
-\section{Final Efficiency Measurements}
-The final efficiency measurement combining all of the effects described in this chapter for each \bbes\ mode is measured directly from the simulations.
-The efficiency used is the average of the simulated efficiency for each subdataset, weighted by the exposure of that subdataset.
-Because each module is an independant measurement, separate efficiencies are measured for modules~1 and~2.
+The impact of this cut is to reduce the total livetime in each module by $<40$~s per day\cite{2015wiseman}.
+
+\section{Combined Detection Efficiency for \bbes}
+The final efficiency measurement combining all of the effects described in this chapter for each \bbes\ mode is measured directly from the simulations by computing the ratio of events that survive all cuts and effects to the total number of generated events.
+The efficiency used is the exposure-weighted average of the simulated efficiency for each subdataset.
+Because each module is an independent measurement, separate efficiencies are measured for modules~1 and~2.
 Because of correlations causing the probability of certain effects causing sacrifice of a \bbes\ event to be conditional on other effects, the combined efficiency will differ from simply being the product of the individual efficiencies.
 This means that the combined efficiency $\epsilon_{comb}$ for each effect $k$ is:
 \begin{equation}
   \epsilon_{comb} = \prod_{k=0}^N P(\mathrm{event~is~cut} | \mathrm{cuts~} 0\dots k-1 \mathrm{~are~applied})
 \end{equation}
-In spite of this, we will assume that the sources of error are uncorrelated and the fractional uncertainty is independant of what other effects have been applied.
+In spite of this, we will assume that the sources of error are uncorrelated and the fractional uncertainty is independent of what other effects have been applied.
+The effect of this assumption will be discussed below.
 This implies that the uncertainty on the combined efficiency, $\sigma_{\epsilon,comb}$ can be expressed as:
 \begin{equation}
   \sigma_{\epsilon,comb}=\epsilon_{comb} \sqrt{ \sum_{k=0}{N} (\frac{\sigma_{\epsilon,k}}{\epsilon_k})^2 }
 \end{equation}
-The values $\epsilon_k$ represent the probability of cutting an event assuming all other cuts are applied.
+The values $\epsilon_k$ represent the probability of cutting an event assuming no other analysis cuts are applied.
+Because of correlations among the cuts (particularly between the sum and coincident energy cuts), this results in a double-counting of uncertainty, making this a conservative estimate.
+
 Table~\ref{tab:eff_2vBB_0_1} shows the efficiency for each effect described in this chapter and uncertainty on each efficiency, and the combined efficiency and uncertainty.
 \begin{table}[h]
   \centering
   \input{../ch4/tables/efficiency.tex}
   \caption[Detection efficiency summary for \tnbb\ to the \SP{0}{+}{1} state of \Se{76}]{\label{tab:eff_2vBB_0_1}
-    Table of detection efficiencies and uncertainties for \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}. Note that the efficiencies are the combined efficiency for the 559 and 563~keV peaks.
+    Table of detection efficiencies and uncertainties for \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}. Efficiencies of individual effects are calculated without applying other cuts; because of correlations between cuts (especially the sum and coincident energy cuts), simply multiplying these efficiencies together will underestimate the efficiency. The final efficiency calculated here correctly accounts for such correlations. Note that the efficiencies are the combined efficiency for the 559 and 563~keV peaks.
   }
 \end{table}
-Similar tables for each other \bbes\ peak are shown in appendix~\ref{app:allresults}.
+Similar tables for each other \bbes\ peak are shown in Appendix~\ref{app:allresults}.
 In all cases the dominant uncertainties come from either the dead layer thickness or the simulation uncertainty.
-Figure~\ref{fig:escuteffects} shows the effect of each cut as it is applied sequantially to the \tnbb\ to \SP{0}{+}{1} peaks.
+Figure~\ref{fig:escuteffects} shows the effect of each cut as it is applied sequentially to the \tnbb\ to \SP{0}{+}{1} peaks.
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.8\textwidth]{ESAllcuts}
-  \caption[Simulated \tnbb to \SP{0}{+}{1} peaks with cuts applied]{\label{fig:escuteffects}
-    The 559~and 563~keV peaks from the \tnbb\ decay to the \SP{0}{+}{1} decay mode, with the effect of all cuts applied sequentially to simulated ES events. The cuts are applied from top to bottom (i.e. red, blue, then green). Many events will be cut by more than one of these; in that case it will be colored by whichever cut is applied first. 
+  \caption[Simulated \tnbb\ to \SP{0}{+}{1} peaks with cuts applied]{\label{fig:escuteffects}
+    The 559~and 563~keV peaks from the \tnbb\ decay to the \SP{0}{+}{1} decay mode, with the effect of all cuts applied sequentially to simulated ES events. The cuts are applied from top to bottom (i.e.~red, blue, then green). Many events will be cut by more than one of these; in that case it will be colored by whichever cut is applied first. 
   }
 \end{figure}
+
+
 
 
 \section{Double Beta Decay to Excited States Results}
 Now that we have found and characterized a specific detection signature for each decay mode, we can apply this search to data.
 This result will look at open runs from datasets 1~through 6a that were designated silver or gold in run quality.
-The duty cycle and changes that define each data set are shown in figure~\ref{fig:dutycycle}.
-These were taken from January 12, 2016 to April 18, 2018, and contains a total of 13.4~kg~y of isotopic exposure for module~1 and 7.9~kg~y for module~2.
+The duty cycle and changes that define each data set are shown in Figure~\ref{fig:dutycycle}.
+These were taken from January~12, 2016 to April~18, 2018, and contain a total of 13.4~kg~y of isotopic exposure for module~1 and 7.9~kg~y for module~2.
 Approximately half the data in these datasets is blinded, and is not included in this analysis.
-The \MJD\ uses a statistical blinding scheme in which 3/4 of runs are blinded administratively (i.e. through file access) in cycles of 31~hrs of unblinded runs followed by 93~hrs of blinded runs.
-The data is unblinded in a staged fashion, where first single-site events, not including any interesting physics regions are unblinded (i.e. no background ROI, \znbb\ to the ground state ROI, low energy or multisite data).
+The \MJD\ uses a statistical blinding scheme in which 3/4 of runs are blinded administratively (i.e.~through file access) in cycles of 31~h of unblinded runs followed by 93~h of blinded runs.
+Unblinding data proceeds in a staged fashion, where first single-site events, not including any interesting physics regions are unblinded (i.e.~no background ROI, \znbb\ to the ground state ROI, low energy or multi-site data).
 This data is used for a variety of data validation checks prior to unblinding of any other data.
 The remaining data are separately unblinded after a collaboration review for individual analyses and users.
-For this analysis, the multi-site data has been left blinded.
-\\
+For this analysis, the multi-site events have been left blinded.
+
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.9\linewidth]{dutycycle}
   \caption[Dataset and Duty Cycle Summary]{\label{fig:dutycycle}
-    The duty cycles for each major dataset, and a brief discription of the major changes in configuration that define each data set.
+    The duty cycles for each major dataset used in this analysis, and a brief discription of the major changes in configuration that define each data set.
   }
 \end{figure}
 
 In the open multi-site data, 5558 multi-detector events were observed.
-A histogram of the event multiplicities is shown in figure~\ref{fig:datamult}, and a spectrum of all multiplicity~2 event energies is shown in fiture~\ref{fig:data2D}.
+A histogram of the event multiplicities is shown in Figure~\ref{fig:datamult}, and a spectrum of all multiplicity~2 event energies is shown in Figure~\ref{fig:data2D}.
 \begin{figure}[h]
   \centering
   \includegraphics[width=.6\linewidth]{DataMultiplicity}
@@ -721,46 +775,46 @@ A histogram of the event multiplicities is shown in figure~\ref{fig:datamult}, a
   \centering
   \includegraphics[width=.8\linewidth]{Data2D}
   \caption[Measured energy spectrum of multiplicity~2 events]{\label{fig:data2D}
-    Measured energy spectrum of multiplicity~2 events in datasets~1-6a.
+    Measured energy spectrum of open multiplicity~2 events in datasets~1-6a.
   }
 \end{figure}
 
 \section{Validation}
-In addition to the basic run selection and data cleaning validation checks that are run on all multiplicity~1 data, we will perform some additional checks on high multiplicity data.
+In addition to the basic run selection and data cleaning validation checks that are run on all multiplicity~1 data, we perform some additional checks on high multiplicity data.
 As previously, this section will describe these checks applied to the \tnbb\ to the \SP{0}{+}{1} state of \Se{76}.
-Similar checks are performed on other decay modes in appendix~\ref{app:allresults}.
+Similar checks are performed on other decay modes in Appendix~\ref{app:allresults}.
 
-\subsection{Data Rate}
-Any spikes in the rate of multisite events would potentially indicate problems with run selection or data cleaning.
+\subsection{Data Rate} \label{sec:ratecheck}
+Any spikes in the rate of multi-site events would potentially indicate problems with run selection or data cleaning.
 Significant variation in the data rate is expected due to changes in which detectors are active.
-For this reason, the rate of multisite events with respect to the effective exposure, which is the exposure times the detection efficiency of \bbes\ events is used instead.
-This quantity is interesting because the rate of observed \bbes\ events should be constant wtih respect to it.
+For this reason, the rate of multi-site events with respect to the sensitive exposure, defined as the exposure times the detection efficiency of \bbes\ events, is used instead.
+This quantity is interesting because the rate of observed \bbes\ events should be constant with respect to it.
 The changes in detection efficiency from one subdataset to another for both backgrounds and \bbes\ are highly correlated and driven by which detectors are enabled.
-For this reason, we can reasonably expect that the backgrounds should also have a nearly constant rate with respect to effective exposure, although differences between background source positions and the distribution of \Ge{76} in the detectors imply that some differense should be expected.
+For this reason, we can reasonably expect that the backgrounds should also have a nearly constant rate with respect to sensitive exposure, although differences between background source positions and the distribution of \Ge{76} in the detectors imply that some differences should be expected.
 Figure~\ref{fig:eventrate} indeed shows a slow reduction in the overall background rate over time.
 One possible explanation for this is that a significant quantity of \Ge{68} exists in natural HPGe detectors as a result of cosmogenic activation, and has a half-life of 271~days, which is observable on the timescale of the \MJD's operation.
-\iso{68}{Ga} is a $\beta^+$ emitter which is a part of the \Ge{68} decay chain, which produces two 511~keV $\gamma$s, resulting in many \msmd events.
+\iso{68}{Ga} is a $\beta^+$ emitter which is a part of the \Ge{68} decay chain, which produces two 511~keV $\gamma$s and has a high probability of producing multi-detector events.
 \begin{figure}[ht]
   \centering
   \subfloat{\includegraphics[width=.5\linewidth]{M1datarate}}
   \subfloat{\includegraphics[width=.5\linewidth]{M2datarate}}
-  \caption[Event rate in both modules with respect to effective exposure]{\label{fig:eventrate}
-    Event rate with respect to effective exposure, or the detection efficiency of the \tnbb\ decay to the \SP{0}{+}{1} excited state times the exposure. Integrated exposure is the total effective exposure prior to an event. The background rate is expected to be mostly flat. Left is module~1, right is module~2.
+  \caption{\label{fig:eventrate}
+    Event rate with respect to sensitive exposure, or the detection efficiency of the \tnbb\ decay to the \SP{0}{+}{1} excited state times the exposure. Integrated exposure is the total sensitive exposure prior to an event. The background rate is expected to be mostly flat, with differences discussed in Section~\ref{sec:ratecheck}.
   }
 \end{figure}
 
 
-\subsection{Background Cut Evaluation}
+\subsection{Background Cut Evaluation} \label{sec:bgcuteval}
 A second important check to ensure that the cuts applied to each \bbes\ mode is to compare each cut efficiency to the expected background cut efficiency.
 Since the background model used for this analysis uses preliminary results, disagreement between the expected and measured cut efficiencies could indicate a difference between the background model and the measured backgrounds rather than a problem with the application of cuts.
 However, any major discrepencies could indicate a bug in the analysis.
-To perform this comparison, the cut efficiencies are measured both in terms of the total number of events cut, $\epsilon_{total}$ and the number of events that are uniquely cut, $\epsilon_{unique}$ (i.e., not cut by any of the others).
+To perform this comparison, the cut efficiencies are measured both in terms of the total number of events cut, $\epsilon_{total}$ and the number of events that are uniquely cut, $\epsilon_{unique}$ (i.e.~not cut by any of the others).
 Table~\ref{tab:bgcutstable} lists each cut for the \bbes\ decay to the \SP{0}{+}{1} state and the expected and measured cut efficiencies.
-The expected background cut efficiencies, $\langle\epsilon\rangle$ represent the fraction of events cut, averaged over all datasets, weighted by exposure.
+The expected background cut efficiencies, $\langle\epsilon\rangle$ represent the fraction of simulated events cut, measured as an exposure-weighted average across all open datasets.
 The measured background cut efficiencies, $\hat{\epsilon}$ represent the measured fraction of events cut.
-Statistical uncertainties in the expected efficiencies are neglible compared to the uncertainties in the measured efficiencies, and are not included.
+Statistical uncertainties in the expected efficiencies are negligible compared to the uncertainties in the measured efficiencies, and are not included.
 The sacrifice is the number of events uniquely sacrificed by the cut.
-$\Delta \mathrm{DP}$ is the expected improvement in discovery potential, as defined in appendix~\ref{app:sens} as a result in the cut.
+$\Delta \mathrm{DP}$ is the expected improvement in discovery potential, defined in Appendix~\ref{app:sens}, as a result of the cut.
 Figure~\ref{fig:datacuts2D} shows the effects of data cuts on multiplicity~2 events.
 Figure~\ref{fig:cutsroi} shows the effects of cuts on events in the ROI in both measured and simulated data.
 
@@ -776,8 +830,8 @@ Figure~\ref{fig:cutsroi} shows the effects of cuts on events in the ROI in both 
   \centering
   \subfloat{\includegraphics[width=0.5\linewidth]{DataAllCuts}}
   \subfloat{\includegraphics[width=0.5\linewidth]{BGAllCuts}}
-  \caption[Effect of data cuts on ROI events in measured and simulated data]{\label{fig:cutsroi}
-    Effect of cuts on all events in the BG and ES ROIs. Events are applied in sequence from top to bottom, meaning that if an event is cut by multiple cuts, it will be colored based on the first cut that applied. Both measured~(left) and simulated~(right) event spectra are shown for comparison.
+  \caption{\label{fig:cutsroi}
+    Effect of cuts on all events in the BG and ES ROIs. Events are applied in sequence from top to bottom, meaning that if an event is cut by multiple cuts, it will be colored based on the first cut that applied. Both the simulated and measured event spectra are shown for comparison.
   }
 \end{figure}
 
@@ -798,8 +852,8 @@ For a given peak $k$, the expected number of signal counts is
 \begin{equation}
   \langle s_k\rangle = \ln2 \frac{N_A}{m_{76}}\epsilon_k\frac{M_{iso}T_{live}}{T_{1/2}}
 \end{equation}
-where $M_{iso}$ is the total isotopic mass and $T_{live}$ is the livetime ($M_{iso}T_{live}$ is the exposure and is calculated in section~\ref{sec:subdatasets} to be $13.356\pm0.021$ for module~1 and $7.872\pm0.13$ for module~2.
-$\epsilon_k$ is the total detection efficiency of the decay mode using peak $k$, and is calculated in chapter~\ref{ch:4}, and can be found in appendix~\ref{app:allresults}.
+where $M_{iso}$ is the total isotopic mass and $T_{live}$ is the livetime ($M_{iso}T_{live}$ is the exposure and is calculated in Section~\ref{sec:sds} to be $13.356\pm0.021$~kg-y for module~1 and $7.872\pm0.13$~kg-y for module~2.
+$\epsilon_k$ is the total detection efficiency of the decay mode using peak $k$, which can be found in Appendix~\ref{app:allresults}.
 $m_{76}=0.0759214$~kg is the molar mass of \Ge{76}, and $N_A=6.02214076\times10^{23}$ is Avagadro's number.
 Fun fact: an Avagadro's number of avocados has approximately the volume of Mars.
 We will define the single count half-life to be
@@ -807,12 +861,12 @@ We will define the single count half-life to be
   T^*_k=\ln2 \frac{N_A}{m_{76}}\epsilon_kM_{iso}T_{live}
 \end{equation}
 which is the decay half-life that would produce on average one count in signal ROI $k$.
-\\
+
 Because of the nearly background free nature of this search, a likelihood construction is used that assumes Poisson statistics for the number of counts in the signal and background ROIs.
 \begin{equation}
   \label{eq:rolke}
   \begin{aligned}
-    \mathcal{L}(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau)
+    \mathcal{L}_k(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau)
     &=\frac{\mu_k^{n_k}e^{-\mu_k}}{n_k!} \cdot \frac{(b_k\tau)^{m_k}e^{-b_k/\tau}}{m_k!} \cdot
     \frac{1}{\sigma_{T^*,k}\sqrt{2\pi}}e^{-\frac{(T^*_k-\langle T^*_k\rangle)^2}{2\sigma_{T^*,k}^2}} \\
     \mu_k &= s_k+b_k = \frac{T^*_k}{T_{1/2}} + b_k
@@ -823,44 +877,49 @@ $T^*_k$ and $b_k$ are nuisance parameters representing the measured single count
 $\mu_k$ is the total expected number of counts, combining background and signal, in the ES ROI.
 $n_k$ is the measured number of events in the ES ROI and is expected to be drawn from a Poisson distribution with mean $\mu_k$.
 $m_k$ is the measured number of events in the BG ROI and is expected to be drawn from a Poisson distribution with mean $b_k/\tau$, where $\tau$ is the ratio between the number of expected background counts in the BG ROI to the number in the ES ROI.
-Note that since these events are \msmd, it is possible for multiple hits in the event to fall into one of the ROIs; however, we will choose a single hit to represent the whole event.
+Note that since these events are multi-detector events, it is possible for multiple hits in the event to fall into one of the ROIs; however, we will choose a single hit to represent the whole event.
 In this case, any hit that falls into the ES ROI takes precedence over any hit that falls into the BG ROI, and if multiple hits fall into the ES ROI, one is chosen at random.
+This approach would produce a very small bump in an otherwise flat background at the ES ROI; this is accounted for in the calculation of $\tau$.
 $\tau$ is usually determined based on the background simulation; however, in cases where the simulation statistics are limited after applying all cuts, a flat background is assumed and the ratio of the ES ROI width to the BG ROI width is used.
 $\langle T^*_k\rangle$ represents the expected value of $T^*_k$ based on previous measurements of exposure and detection efficiency, which is assumed to have Gaussian uncertainty:
 \begin{equation}
   \sigma_{T^*,k} = \langle T^*_k\rangle\sqrt{(\frac{\sigma_{\epsilon,k}}{\epsilon_k })^2 + (\frac{\sigma_{exposure}}{M_{iso}T_{live} })^2}
 \end{equation}
-The implementation of equation~\ref{eq:rolke} is performed by the \texttt{TRolke} class in ROOT \cite{rolke2005}.
+The implementation of Equation~\ref{eq:rolke} is performed by the \texttt{TRolke} class in ROOT \cite{rolke2005}.
 This likelihood function is used to compute a likelihood ratio
 \begin{equation}
-  \mathrm{LR}(T_{1/2}) = \frac{\mathrm{sup}_{T^*_k,b_k}(\mathcal{L}(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau))}{\mathrm{sup}_{T_{1/2},T^*_k,b_k}(\mathcal{L}(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau))}
+  \mathrm{LR}_k(T_{1/2}) = \frac{\mathrm{sup}_{T^*_k,b_k}\left(\mathcal{L}_k(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau)\right)}{\mathrm{sup}_{T_{1/2},T^*_k,b_k}\left(\mathcal{L}_k(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau)\right)}
 \end{equation}
 The \texttt{TRolke} class analytically computes the supremum over $T^*_k$ and $b_k$, returning the log-likelihood difference.
-$T_{1/2}$ is restricted to positive values.
+The implementation is parameterized in terms of $\Gamma=\frac{1}{T_{1/2}}$, which is restricted to positive values; if the supremum of the function has a negative value of $\Gamma$, then the value at $\Gamma=0$ is used instead.
 Since the likelihood ratio is expected to be $\chi^2$-distributed, to construct a 90\% confidence interval, we seek the values of $T_{1/2}$ corresponding to a log-likelihood ratio value of 2.7.
-In cases where the lower limit is found to be $<0$, a lower limit on the half-life is reported.
-\\
+In cases where the lower limit on $\gamma$ is found to be $<0$, a lower limit on $T_{1/2}$ is reported.
+
 After constructing confidence intervals for each peak and module individually, a combined confidence interval is constructed for each \bbes\ decay mode.
 A combined log-likelihood over all peak/module combinations $k$ is defined by
 \begin{equation}
-  \mathcal{L}(T_{1/2}) = \sum_{k=0}^{N} \mathrm{sup}_{T^*_k,b_k}(\mathrm{log}(\mathcal{L}(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau)))
+  \mathrm{log}\left(\mathcal{L}(T_{1/2})\right) = \sum_{k=0}^{N} \mathrm{sup}_{T^*_k,b_k}\left(\mathrm{log}\left(\mathcal{L}_k(T_{1/2},T^*_k,b_k|n_k,m_k,\langle T^*_k\rangle, \sigma_{T^*,k},\tau)\right)\right)
 \end{equation}
-This construction relies on the fact that the $T^*_k$ and $b_k$ values across each peak can be independantly maximized, enabling the continued use of the \texttt{TRolke} implementation.
-A combined likelihood ratio is constructed and used to compute a confidence interval as above.
+This construction relies on the fact that the $T^*_k$ and $b_k$ values across each peak can be independently maximized, enabling the continued use of the \texttt{TRolke} implementation.
+A combined likelihood ratio is constructed:
+\begin{equation}
+  \mathrm{log}\left(\mathrm{LR}(T_{1/2})\right)=\mathrm{log}\left(\mathcal{L}(T_{1/2})\right) - \mathrm{sup}_{T_{1/2}}\left(\mathrm{log}\left(\mathcal{L}(T_{1/2})\right)\right)
+\end{equation}
+and used to compute a confidence interval as above.
 Table~\ref{tab:alllimits} contains the limits constructed for each decay mode, peak and module.
 For all modes, a lower half-life limit is set.
-\\
-Note that each decay mode is analyzed independantly.
+
+Note that each decay mode is analyzed independently.
 The problem with this approach is that all decay modes have the 559~keV peak in common, meaning that the results will be correlated.
 For this result, since all modes only have a lower limit on half-life set, this approach is not problematic since for any individual mode, we would take the supremum over all other half-lives, which would be at or near infinity, resulting in the same sets of equations used here.
 However, if the \bbes\ to the \SP{0}{+}{1} mode is discovered, it will become necessary to perform a full combined analysis.
-\\
+
 The detection sensitivity is computed by constructing a toy Monte Carlo for each decay mode, assuming that each $T_{1/2}$ is infinite.
-For each sample $i$, a random $n_i$ and $m_i$ is drawn from a Poisson distribution with mean $n_k$ and $m_k$.
+For each sample $i$, a random $n_i$ and $m_i$ is drawn from a Poisson distribution with mean $b_k$ and $m_k$.
 The confidence interval for a measurement with these values is computed.
 The median sensitivity is extracted by taking the median lower half-life limit over all samples.
-For the results in table~\ref{tab:alllimits}, 100001 samples were used.
-\\
+For the results in Table~\ref{tab:alllimits}, 100001 samples were used.
+
 \subsection{Limits and Sensitivities}
 \begin{figure}[h]
   \centering
@@ -869,11 +928,11 @@ For the results in table~\ref{tab:alllimits}, 100001 samples were used.
     Events that pass all cuts for the \tnbb\ to \SP{0}{+}{1} decay mode. The ES and BG ROIs are highlighted. Note that these ROIs undergo small variations from dataset to dataset, and the ROIs drawn here are averaged over all datasets. The energies shown in this spectrum are the energies of the hit that places the event in the ROI. A single event will only be placed once into an ROI; however, as drawn here, if multiple hits in a single event fall into an ROI, they will all be drawn.
   }
 \end{figure}
-The limits and sensitivities for each peak and module individually, and the combination for each mode, are shown in table~\ref{tab:alllimits}.
+The limits and sensitivities for each peak and module individually, and the combination for each mode, are shown in Table~\ref{tab:alllimits}.
 Figure~\ref{fig:roievents} shows the event spectrum after all cuts have been applied with both ROIs highlighed.
 
 \begin{table}[h]
-  \footnotesize
+  \scriptsize
   \centering
   \input{../ch5/tables/table_alllimits.tex}
   \caption[Final results for all decay modes]{ \label{tab:alllimits}
@@ -881,6 +940,31 @@ Figure~\ref{fig:roievents} shows the event spectrum after all cuts have been app
   }
 \end{table}
 
+\section{Unblinding Plan}
+The result presented in this document uses only open data from DS1-6a.
+Data is blinded by administratively by forbidding access to built and gatified files to users; access to blinded data is provided through skim files.
+Unblinding proceeds in multiple stages; skim files produced in the first stage exclude high multiplicity events, events in the 400~keV ROI around \Qbb, and low energy events.
+Access to these events is provided individually to analyzers through inclusion in skim files accessible only by that individual.
+For this analysis, high multiplicity events will be needed.
+
+Prior to unblinding, several steps will be completed.
+First, subdatasets must be identified using \texttt{es\_get\_datasets}, requiring access to channel selection files that are produced during the first stage of unblinding.
+Next, the live time must be measured. Unfortunately, this requires access to detailed run information from built files, which are left blinded; as a result, \texttt{es\_livetime} must be run by someone with access to the mjd account.
+Next, background model and excited state simulations for each subdataset will be produced using \texttt{es\_skimsim}.
+Next, cut optimization must be performed using \texttt{es\_optimize\_cuts}.
+Because an estimate of a scaling required to get the actual background level from the simulations is required for this step, an estimate should be made using the already unblinded single-site events.
+Finally, cuts should be applied with \texttt{es\_apply\_cuts}, and the efficiencies and exposures estimated using \texttt{es\_get\_result} with the \texttt{--nodata} option.
+In addition to running this code, plots of the simulated data should be made, similar to those displayed in Appendix~\ref{app:allresults}.
+Once this is completed, the plots and efficiencies should be inspected; any discrepancies between the unblinded result and these blinded numbers should be understood prior to unblinding.
+
+Once the analysis is approved for unblinding and skim files with high multiplicity data have been produced, \texttt{es\_skim\_data} will be used to collect the high multiplicity events therein.
+\texttt{es\_get\_result} should be run using this data.
+The sanity checks discussed in Sections~\ref{sec:ratecheck} and~\ref{sec:bgcuteval} should be performed, and any discrepancies in the data rate or cut efficiencies should be explained, and any changes to the analysis resulting from these checks must be carefully documented.
+Finally, \texttt{es\_get\_limits} can be run to get the final limits.
+
+Unblinding will approximately double the exposure to $\sim$40~kg-y of isotopic exposure. Assuming identical backgrounds and efficiencies, the projected half-life sensitivity for the search to the first $0^+$ decay is $\sim1\cdot10^{24}$~yr. It should be noted that rerunning the cut optimization with a more exposure will result in a slightly more stringent set of cuts; as a result, the background rate and detection efficiency will both be lower.
+The cutoff at the end of DS6a is motivated by the fact that this encompasses all data in the \MJD\ 2018 \znbb\ release, and has been extensively vetted.
+In concert with the next major \znbb\ release, containing DS6b and 6c data, this analysis will add the additional exposure as well.
 
 \bibliographystyle{unsrt}
 \bibliography{../main}
@@ -1039,6 +1123,87 @@ Note that both the 559~and 563~keV peaks will be shown together since they use t
 \allmodeplots{0vBB_ES2_2_657}{\znbb\ to \SP{2}{+}{2}}{657~keV peak}
 \subsection{1216 keV peak}
 \allmodeplots{0vBB_ES2_2_1216}{\znbb\ to \SP{2}{+}{2}}{1216~keV peak}
+
+
+
+
+\section{Sensitivity and Discovery Potential}
+\label{app:sens}
+
+When performing rare event searches in the presence of backgrounds, it is often useful to select regions of interest and data cleaning cuts that optimize the experimental sensitivity.
+Median n-$\sigma$ count sensitivity, $\hat{S}(\overline{B}, n_\sigma)$ is defined as the median upper limit of an n-$\sigma$ confidence interval on the number of observed signal counts, assuming the presence of no signal and backgrounds sampled from a distribution based on measured background level $\overline{B}$.
+A similar quantity, n-$\sigma$ discovery sensitivity, is defined as the true strength of a signal that would produce a discovery with significance n-$\sigma$ 50\% of the time.
+Unlike median sensitivity, discovery sensitivity accounts for the distribution in the number of counts that would be seen based on the true rate.
+For this reason, discovery sensitivity is a slightly more useful quantity when projecting or optimizing an experiment's sensitivity, even though median (or mean) sensitivity is the quantity that is usually reported.
+For the purpose of this appendix, we will focus on discovery sensitivity.
+
+The sensitivity of the experiment to the total rate of the process being searched for is
+\begin{equation}
+  \hat{\Gamma}(\overline{B}, \epsilon, n_\sigma)\propto\frac{\hat{S}(\overline{B}, n_\sigma)}{\epsilon}
+\end{equation}
+where $\epsilon$ is the total detection efficiency of the signal being sought.
+Optimizing event selection for a search requires balancing the tradeoff between reducing backgrounds, which will decrease $\hat{S}(\overline{B})$, and improving signal detection efficiency.
+
+When optimizing a search, it is useful to use certain approximations when calculating sensitivity.
+In the high background limit, a common approximation is to assume the backgrounds measured will have a gaussian distribution with standard deviation of $\sqrt{\overline{B}}$.
+In this case, the discovery (and median) sensitivity will be
+\begin{equation}
+  \hat{S}(\overline{B}, n_\sigma)=n_\sigma * \sqrt{\overline{B}}
+\end{equation}
+
+This approximation fails, however, in the low background limit, where a better approximation is that the background will instead be sampled from a Poisson distribution with mean counts $\overline{B}$.
+Because the Poisson distribution is a PDF over a discrete variable, the resultent sensitivity will have step-like properties and must be solved for using a toy Monte Carlo, properties that are not ideal for performing sensitivity optimizations.
+For this reason, when computing the sensitivity we instead use the analytic continuation of the CDF of the poisson distribution, which is the lower incomplete gamma function
+\begin{equation}
+  \gamma(s, x)=\frac{1}{\Gamma(s)}\int_0^x t^{s-1} \mathrm{e}^{-t} \mathrm{d}t
+\end{equation}
+In this case, we can find the sensitivity, by first numerically solving for the number of counts required for an n-sigma discovery, $\hat{N}$, with expected backgrounds $\overline{B}$, where
+\begin{equation}
+  \gamma(\hat{N}+1, \overline{B}) = \mathrm{erfc}(\frac{n_\sigma}{\sqrt{2}})
+\end{equation}
+To get the median sensitivity, we then numerically solve
+\begin{equation}
+  \gamma(\hat{N}+1, \overline{B} + \hat{S}) = 0.5
+\end{equation}
+We define the function found by solving these equations to be the discovery potential\cite{2013CUORE},
+\begin{equation}
+  \hat{S}(\overline{B}, n_\sigma) = \mathrm{DP}(\overline{B}, n_\sigma)
+\end{equation}
+For the purposes of this dissertation, we always use the 3-sigma discovery potential
+\begin{equation}
+  \mathrm{DP}(\overline{B}) = \mathrm{DP}(\overline{B}, 3)
+\end{equation}
+Figure~\ref{fig:DPvSens} shows a comparison of the gaussian approximation for sensitivity to the discovery potential.
+This function is implemented in \texttt{GATPeakShapeUtils.hh} as \linebreak\texttt{GATPeakShapeFunction::DiscoveryLimit}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{DPvSens}
+  \caption{\label{fig:DPvSens}
+    A comparison of the Gaussian approximation for sensitivity and the discovery potential as a function of expected background level. Note that in the high background limit, both formulations for sensitivity converge, as expected.
+    }
+\end{figure}
+Next, we want to figure out how we will use these quantities to optimize our data selection.
+To determine whether it is worth adding a cut or modifying a cut, consider the efficiency and expected background counts before and after applying the cut ($\epsilon_i$, $\overline{B}_i$ and $\epsilon_f$, $\overline{B}_f$, respectively).
+A cut represents an improvement if
+\begin{equation}
+  \frac{\hat{S}(\overline{B}_f)}{\epsilon_f} <\frac{\hat{S}(\overline{B}_i)}{\epsilon_i}
+\end{equation}
+Rearranging this, we get
+\begin{equation}
+  \frac{\Delta \hat{S}(\overline{B})}{\hat{S}(\overline{B_i})} < \frac{\Delta\epsilon}{\epsilon_i}
+\end{equation}
+If we assume that a small number of events are cut, we can Taylor expand:
+\begin{equation} \label{eq:cutcriterion}
+  \frac{\partial\hat{S}}{\partial\overline{B}} \frac{\Delta\overline{B}}{\hat{S}(\overline{B})} < \frac{\Delta\epsilon}{\epsilon}
+\end{equation}
+\begin{equation}
+  \frac{\partial\log(\hat{S})}{\partial\log(\overline{B})} > \frac{\mathrm{False~Positive~Rate}}{\mathrm{True~Positive~Rate}}
+\end{equation}
+Looking at figure~\ref{fig:DPvSens}, we see that in the high background limit, using the Gaussian sensitivity approximation we will draw the same conclusion about whether or not a cut is worth applying regardless of the absolute background level.
+A cut is worth applying as long as the true positive rate of the cut is twice the true negative rate.
+On the other hand, in the low background limit, this is not the case; instead, as we approach zero background, we will be less aggressive in cutting events.
+For this reason, experiments approaching the background free limit will use wider regions of interest in peak searches.
 
 
 

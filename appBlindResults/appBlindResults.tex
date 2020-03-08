@@ -1,0 +1,210 @@
+\makeatletter
+\def\input@path{{../}}
+\makeatother
+
+\documentclass[/main.tex]{subfiles}
+\graphicspath{{./pics/}{appAllResults/pics/}}
+
+\newcommand{\allmodeplots}[3]{% inputs are file name modifier, description of mode, and discription of gamma
+  \FloatBarrier
+  \begin{sidewaystable}[p]
+    \caption[#3 of #2: Energy systematics table]{ \label{tab:energysystematics}
+      Table of energy estimation uncertainties for the #3.
+    }
+    \resizebox{\textwidth}{!}{%
+      \input{appBlindResults/tables/table_#1_pseff.tex} }
+  \end{sidewaystable}
+  
+  \begin{figure}[!htb]
+    \centering
+    \subfloat[Simulated BG Sum Energy Spectrum]{\includegraphics[width=.5\linewidth]{BGSumECuts_#1}}
+    \subfloat[Simulated ES Sum Energy Spectrum]{\includegraphics[width=.5\linewidth]{ESSumECuts_#1}}\\
+    \subfloat[Simulated BG Coincident Energy Spectrum]{\includegraphics[width=.5\linewidth]{BGCoinECuts_#1}}
+    \subfloat[Simulated ES Coincident Energy Spectrum]{\includegraphics[width=.5\linewidth]{ESCoinECuts_#1}}
+    \caption[#3 of #2: Sum and coincident simulated energy spectra with cuts]{
+      Sum energy and coincident energy spectra for the #3.
+    }
+  \end{figure}
+  
+  \begin{figure}[p]
+    \centering
+    \subfloat[Simulation]{\includegraphics[width=0.7\linewidth]{BG2Dcuts_#1}}\\
+    \subfloat[Data]{\includegraphics[width=0.7\linewidth]{Data2Dcuts_#1}}
+    \caption[#3 of #2: 2D plots of sum and coincident energy cuts in simulations and data]{
+      Simulated and measured multiplicity 2 energy spectrum with sum and coincident energy cuts included for the #3.
+    }
+  \end{figure}
+  
+  \begin{figure}[p]
+    \centering
+    \subfloat[Effect of all cuts on ROI]{\includegraphics[width=0.8\linewidth]{ESAllCuts_#1}}\\
+    \subfloat[Table of efficiencies]{\input{tables/table_#1_efficiency.tex}}
+    \caption[#3 of #2: Effect of all cuts in ROI]{Plot showing effect of cuts applied sequentially on ROI peak and table of detection efficiencies for the #3.}
+  \end{figure}
+
+
+  \begin{figure}[p]
+    \centering
+    \subfloat[Simulated BG Cuts]{\includegraphics[width=.5\linewidth]{BGAllCuts_#1}}
+    \subfloat[Data Cuts]{\includegraphics[width=.5\linewidth]{DataAllCuts_#1}}\\
+    \subfloat[Data ROIs]{\includegraphics[width=0.5\linewidth]{DataROIs_#1}}
+    \caption[#3 of #2: Cuts appliled to simulated and measured background data]{
+      Effect of all cuts applied to measured and simulated background data.
+    }
+  \end{figure}
+  
+  \begin{sidewaystable}[p]
+    \centering
+    \input{tables/table_#1_bgcuts.tex}
+    \caption[#3 of #2: Summary of cut efficiency in BG and data]{
+      Table of cut descriptions and efficiencies for simulated backgrounds and measured data for the #3.
+    }
+  \end{sidewaystable}
+  \FloatBarrier
+}
+
+\begin{document}
+\onlyinsubfile{\appendix}
+\chapter{Detailed Results for All Decay Modes}
+
+This appendix will present figures and tables detailing the simulations, cuts, efficiencies and results for each decay mode and peak, after unblinding.
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{BGsim}
+  \caption{
+    Simulation using early version of background model.
+    }
+\end{figure}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{Data2D}
+  \caption{
+    All 2-detector events, colored using a Gaussian density kernel.
+    }
+\end{figure}
+
+\begin{table}[!h]
+  \scriptsize
+  \centering
+  \input{tables/table_alllimits.tex}
+  \caption{Table of results. $n_{ROI}$ and $m_{BG}$ are the number of observed events, after all cuts, in the Signal ROI and BG counting regions, respectively. $T^*=\ln2 \frac{N_A}{m_{76}}\epsilon_kM_{iso}T_{live}$ is used to calculate the number of expected signal counts from a half-life: $\langle s_k\rangle = \frac{T^*}{T_{1/2}}$. Physically, it represents the half-life that is expected to produce one count, based on exposure and detection efficiency. Limits and sensitivities were computed using the Rolke Confidence Intervals, which are similar to Feldman-Cousins, but account for nuisance parameter uncertainties in detection efficiency and exposure.}
+\end{table}
+\FloatBarrier
+
+\section{Exposure}
+
+\scriptsize
+\begin{longtabu}{|c|c c|c|c c|c c|c|}
+  \hline
+  DS & M1 Detector Mask & M2 Detector Mask & \makecell{Run Time\\(days)} & \makecell{M1 L.T.\\(days)} & M1 Eff. & \makecell{M2 L.T.\\(days)} & M2 Eff. & \makecell{Exposure\\(kg$\cdot$y)} \\
+  \hline
+\endfirsthead
+  \hline
+  DS & M1 Detector Mask & M2 Detector Mask & \makecell{Run Time\\(days)} & \makecell{M1 L.T.\\(days)} & M1 Eff. & \makecell{M2 L.T.\\(days)} & M2 Eff. & \makecell{Exposure\\(kg$\cdot$y)} \\
+  \hline
+\endhead
+  \hline
+  \multicolumn{9}{r}{\textit{Continued on the next page}} \\
+  \caption{List of subdatasets}
+\endfoot
+  \hline
+  \caption[List of subdatasets, livetimes, efficiency and exposure]{\label{tab:subdatasets}
+    List of each subdataset with its livetime, detection efficiency measured for the \bbes to \SP{0}{+}{1} decay, and total isotopic exposure. Note the large variance in the detection efficiency.
+  }
+\endlastfoot
+\input{tables/sdsexposure.tex}
+\end{longtabu}
+\normalsize
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{M1datarate}
+  \caption{
+    Module~1 Background rate vs sensitive exposure, defined as the detection efficiency for the \bbes to \SP{0}{+}{1} decay multiplied by the integrated exposure over all \Ge{76} in module~1.
+    }
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{M2datarate}
+  \caption{
+    Module~2 Background rate vs sensitive exposure.
+    }
+\end{figure}
+
+\section{\tnbb\ to \SP{0}{+}{1}}
+Note that both the 559~and 563~keV peaks will be shown together since they use the same sets of cuts.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{ESsim_2vBB_ES0_1}
+  \caption[Simulation of \tnbb\ to \SP{0}{+}{1}]{
+    Simulated multiplicity 2 energy spectrum of the \tnbb\ to \SP{0}{+}{1} decay mode}
+\end{figure}
+
+\allmodeplots{2vBB_ES0_1}{\tnbb\ to \SP{0}{+}{1}}{559~and 563~keV peaks}
+
+\section{\tnbb\ to \SP{2}{+}{1}}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{ESsim_2vBB_ES2_1}
+  \caption[Simulation of \tnbb\ to \SP{2}{+}{1}]{
+    Simulated multiplicity 2 energy spectrum of the \tnbb\ to \SP{2}{+}{1} decay mode}
+\end{figure}
+
+\allmodeplots{2vBB_ES2_1}{\tnbb\ to \SP{2}{+}{1}}{559~keV peak}
+
+\section{\tnbb\ to \SP{2}{+}{2}}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{ESsim_2vBB_ES2_2}
+  \caption[Simulation of \tnbb\ to \SP{2}{+}{2}]{
+    Simulated multiplicity 2 energy spectrum of the \tnbb\ to \SP{2}{+}{2} decay mode}
+\end{figure}
+
+\subsection{559 keV peak}
+\allmodeplots{2vBB_ES2_2_559}{\tnbb\ to \SP{2}{+}{2}}{559~keV peak}
+\subsection{657 keV peak}
+\allmodeplots{2vBB_ES2_2_657}{\tnbb\ to \SP{2}{+}{2}}{657~keV peak}
+\subsection{1216 keV peak}
+\allmodeplots{2vBB_ES2_2_1216}{\tnbb\ to \SP{2}{+}{2}}{1216~keV peak}
+
+
+
+\section{\znbb\ to \SP{0}{+}{1}}
+Note that both the 559~and 563~keV peaks will be shown together since they use the same sets of cuts.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{ESsim_0vBB_ES0_1}
+  \caption[Simulation of \znbb\ to \SP{0}{+}{1}]{
+    Simulated multiplicity 2 energy spectrum of the \znbb\ to \SP{0}{+}{1} decay mode}
+\end{figure}
+
+\allmodeplots{0vBB_ES0_1}{\znbb\ to \SP{0}{+}{1}}{559~and 563~keV peaks}
+
+\section{\znbb\ to \SP{2}{+}{1}}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{ESsim_0vBB_ES2_1}
+  \caption[Simulation of \znbb\ to \SP{2}{+}{1}]{
+    Simulated multiplicity 2 energy spectrum of the \znbb\ to \SP{2}{+}{1} decay mode}
+\end{figure}
+
+\allmodeplots{0vBB_ES2_1}{\znbb\ to \SP{2}{+}{1}}{559~keV peak}
+
+\section{\znbb\ to \SP{2}{+}{2}}
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=.8\linewidth]{ESsim_0vBB_ES2_2}
+  \caption[Simulation of \znbb\ to \SP{2}{+}{2}]{
+    Simulated multiplicity 2 energy spectrum of the \znbb\ to \SP{2}{+}{2} decay mode}
+\end{figure}
+
+\subsection{559 keV peak}
+\allmodeplots{0vBB_ES2_2_559}{\znbb\ to \SP{2}{+}{2}}{559~keV peak}
+\subsection{657 keV peak}
+\allmodeplots{0vBB_ES2_2_657}{\znbb\ to \SP{2}{+}{2}}{657~keV peak}
+\subsection{1216 keV peak}
+\allmodeplots{0vBB_ES2_2_1216}{\znbb\ to \SP{2}{+}{2}}{1216~keV peak}
+
+
+\end{document}

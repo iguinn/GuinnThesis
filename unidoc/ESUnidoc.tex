@@ -95,7 +95,7 @@
 %%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\graphicspath{{./pics/}{../ch3/pics/}{../ch4/pics/}{../ch5/pics/}{../appAllResults/pics/}{../appSens/pics/}}
+\graphicspath{{./pics/}{../appBlindResults/pics/}{../ch3/pics/}{../ch4/pics/}{../ch5/pics/}{../appSens/pics/}}
 
 \title{Search for Double Beta Decay to Excited States}
 \author{I. Guinn}\affiliation{University of North Carolina at Chapel Hill, NC, USA}
@@ -744,15 +744,14 @@ Figure~\ref{fig:escuteffects} shows the effect of each cut as it is applied sequ
 
 \section{Double Beta Decay to Excited States Results}
 Now that we have found and characterized a specific detection signature for each decay mode, we can apply this search to data.
-This result will look at open runs from datasets 1~through 6a that were designated silver or gold in run quality.
+This result will look at open and blind runs from datasets 1~through 6a that were designated silver or gold in run quality.
 The duty cycle and changes that define each data set are shown in Figure~\ref{fig:dutycycle}.
-These were taken from January~12, 2016 to April~18, 2018, and contain a total of 13.4~kg~y of isotopic exposure for module~1 and 7.9~kg~y for module~2.
-Approximately half the data in these datasets is blinded, and is not included in this analysis.
+These were taken from January~12, 2016 to April~18, 2018, and contain a total of 49.1~kg~y of isotopic exposure.
+Approximately half the data in these datasets is blinded, and was not included in initial results.
 The \MJD\ uses a statistical blinding scheme in which 3/4 of runs are blinded administratively (i.e.~through file access) in cycles of 31~h of unblinded runs followed by 93~h of blinded runs.
 Unblinding data proceeds in a staged fashion, where first single-site events, not including any interesting physics regions are unblinded (i.e.~no background ROI, \znbb\ to the ground state ROI, low energy or multi-site data).
 This data is used for a variety of data validation checks prior to unblinding of any other data.
 The remaining data are separately unblinded after a collaboration review for individual analyses and users.
-For this analysis, the multi-site events have been left blinded.
 
 \begin{figure}[h]
   \centering
@@ -762,7 +761,7 @@ For this analysis, the multi-site events have been left blinded.
   }
 \end{figure}
 
-In the open multi-site data, 5558 multi-detector events were observed.
+9606 multi-detector events were observed.
 A histogram of the event multiplicities is shown in Figure~\ref{fig:datamult}, and a spectrum of all multiplicity~2 event energies is shown in Figure~\ref{fig:data2D}.
 \begin{figure}[h]
   \centering
@@ -791,9 +790,8 @@ For this reason, the rate of multi-site events with respect to the sensitive exp
 This quantity is interesting because the rate of observed \bbes\ events should be constant with respect to it.
 The changes in detection efficiency from one subdataset to another for both backgrounds and \bbes\ are highly correlated and driven by which detectors are enabled.
 For this reason, we can reasonably expect that the backgrounds should also have a nearly constant rate with respect to sensitive exposure, although differences between background source positions and the distribution of \Ge{76} in the detectors imply that some differences should be expected.
-Figure~\ref{fig:eventrate} indeed shows a slow reduction in the overall background rate over time.
-One possible explanation for this is that a significant quantity of \Ge{68} exists in natural HPGe detectors as a result of cosmogenic activation, and has a half-life of 271~days, which is observable on the timescale of the \MJD's operation.
-\iso{68}{Ga} is a $\beta^+$ emitter which is a part of the \Ge{68} decay chain, which produces two 511~keV $\gamma$s and has a high probability of producing multi-detector events.
+Figure~\ref{fig:eventrate} shows changes in rate consistent with changes in which detectors are enabled.
+In particular, enabling or disabling a natural detector can cause a large change in the background rate relative to sensitive exposure, since natural detector events largely do not contribute to detection efficiency.
 \begin{figure}[ht]
   \centering
   \subfloat{\includegraphics[width=.5\linewidth]{M1datarate}}
@@ -837,7 +835,7 @@ Figure~\ref{fig:cutsroi} shows the effects of cuts on events in the ROI in both 
 
 \begin{sidewaystable}[p]
   \centering
-  \input{../ch5/tables/bgcutstable.tex}
+  \input{../appBlindResults/tables/table_2vBB_ES0_1_bgcuts.tex}
   \caption[Detection efficiency summary for \tnbb\ to the \SP{0}{+}{1} state of \Se{76}]{\label{tab:bgcutstable}
     Table of detection efficiencies and uncertainties for \tnbb\ of \Ge{76} to the \SP{0}{+}{1} state of \Se{76}.
   }
@@ -934,14 +932,67 @@ Figure~\ref{fig:roievents} shows the event spectrum after all cuts have been app
 \begin{table}[h]
   \scriptsize
   \centering
-  \input{../ch5/tables/table_alllimits.tex}
+  \input{../appBlindResults/tables/table_alllimits.tex}
   \caption[Final results for all decay modes]{ \label{tab:alllimits}
     Results for all decay modes.
   }
 \end{table}
 
+\subsection{Background Model Discussion}
+Several interesting discrepencies exist between the data used for this result and the background model.
+It is important to keep in mind that the result only depends on the model for optimization; this means that these discrepencies make this result not-quite-optimal, but not incorrect.
+
+One discrepency is can be seen in table~\ref{tab:bgcutstable}, where the cut cut efficiency of the enriched coincident detector cut is much higher than expected.
+This suggests an excess of backgrounds from decays of cosmogenics in natural isotopic abundance detectors.
+Figure~\ref{fig:coincnatenr} shows a comparison of the multiplicity~2 event hit spectrum for hits in coincidence with natural and enriched detectors.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.4\linewidth]{coinc_enr}
+  \includegraphics[width=.4\linewidth]{coinc_nat}
+  \caption[Measured events after all cuts with ROIs drawn]{\label{fig:coincnatenr}
+    Energy spectrum of hits in coincidence with enriched (left, blue) and natural (right, red) detector hits. Note the excesses of 511, 1173 and 1333~keV events in coincidence with natural hits.
+  }
+\end{figure}
+There is a clear excess of 511~keV hits for events in coincidence with natural detectors, caused by cosmogenic $^{68}$Ge; this is accounted for in the background model.
+There is also a clear excess of 1173~and 1333~keV hits in coincidence with natural detectors, originating from cosmogenic $^{60}$Co, which is NOT included in the background model used.
+Figure~\ref{fig:} shows the hit spectrum for natural germanium events in coincidence with 1173~and 1333~keV hits.
+The $^{60}$Co $\beta$ spectrum, with a Q-value of 318~keV, is visible, along with pileup of $\beta$s and $\gamma$s at energies up to 1651~keV.
+Cosmogenic $^{60}$Co will be included in future versions of the background model.
+Fortunately, these events are cut with very high efficiency by the coincident enriched detector cut, both explaining the discrpency in table~\ref{tab:bgcutstable} and preventing a large contribution of these events towards backgrounds for this result.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.8\linewidth]{cosmogenic_60Co}
+  \caption[Measured events after all cuts with ROIs drawn]{\label{fig:60co}
+    Energy spectrum for natural detector hits in coincidence with 1173~and 1333~keV $\gamma$s.
+  }
+\end{figure}
+
+
+Another discrepency can be seen in figure~\ref{fig:cutsroi}, where the 511~keV peak is significantly wider than expected.
+This peak is also significantly wider than the 511~keV peak found in calibration data.
+Note that all other peaks visible in data have FWHMs consistent with expectations based on table~\ref{tab:energysystematics}.
+The width of the 511~keV peak can be explained by doppler broadening of annihilation electrons.
+Doppler broadening increases as the velocity of either the electron or positron involved in annihilation increases; as a result, annihilation with valence electrons results in a wider peak than annihilation with conduction band electrons.
+Most 511~keV $\gamma$s in high multiplicity MJD data are expected to originate from positron decay of $^{68}$Ge that is cosmogenically activated in natural isotopic abundance detectors.
+Because these detectors are depleted, these annihilations will involve valence band electrons instead of conduction band electrons resulting in a wider peak.
+A similar effect can be observed in calibration data by comparing the width of 511~keV $\gamma$s that occur as multiplicity~1 events, which likely originate from pair productions in surrounding copper, with an abundance of conduction band electrons, to those that occur in coincidence with DEP or SEP detector hits, which occur in the depleted regions of detectors.
+Figure~\ref{fig:511peakwidths} shows this comparison; the multiplicity~1 peak has a FWHM of 1.3~keV, while the SEP/DEP coincident peak has a FWHM of 2.4~keV.
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.8\linewidth]{511peaks}
+  \caption[Measured events after all cuts with ROIs drawn]{\label{fig:511peakwidths}
+    The 511~keV peak from single-detector events (blue) have a FWHM of 1.3~keV. The 511~keV peak in coincidence with SEP and DEP events has a FWHM of 2.4~keV.
+  }
+\end{figure}
+
+
+
 \section{Unblinding Plan}
-The result presented in this document uses only open data from DS1-6a.
+Previous results presented used only open data from DS1-6a; this document also includes blind data in these datasets.
+The plan that follows was written prior to unblinding and was followed.
+A bug that was quickly fixed resulted in incorrect detector selection for DS6a blind runs; this was discovered due to large spikes in the data rates from figure~\ref{fig:eventrate}.
+For the sake of posterity, the plan has been left in this document.
+
 Data is blinded by administratively by forbidding access to built and gatified files to users; access to blinded data is provided through skim files.
 Unblinding proceeds in multiple stages; skim files produced in the first stage exclude high multiplicity events, events in the 400~keV ROI around \Qbb, and low energy events.
 Access to these events is provided individually to analyzers through inclusion in skim files accessible only by that individual.
@@ -978,7 +1029,7 @@ In concert with the next major \znbb\ release, containing DS6b and 6c data, this
       Table of energy estimation uncertainties for the #3.
     }
     \resizebox{\textwidth}{!}{%
-      \input{../appAllResults/tables/table_#1_pseff.tex} }
+      \input{../appBlindResults/tables/table_#1_pseff.tex} }
   \end{sidewaystable}
   
   \begin{figure}[!htb]
@@ -1012,7 +1063,7 @@ In concert with the next major \znbb\ release, containing DS6b and 6c data, this
     \caption{Effect of all cuts applied sequentially on ROI for #3 of #2}
   \end{figure}
   \begin{figure}[!htb]
-    \subfloat{\input{../appAllResults/tables/table_#1_efficiency.tex}}
+    \subfloat{\input{../appBlindResults/tables/table_#1_efficiency.tex}}
     \caption{Table of detection efficiencies for the #3.}
   \end{figure}
 
@@ -1034,7 +1085,7 @@ In concert with the next major \znbb\ release, containing DS6b and 6c data, this
   
   \begin{sidewaystable}[p]
     \centering
-    \input{../appAllResults/tables/table_#1_bgcuts.tex}
+    \input{../appBlindResults/tables/table_#1_bgcuts.tex}
     \caption[#3 of #2: Summary of cut efficiency in BG and data]{
       Table of cut descriptions and efficiencies for simulated backgrounds and measured data for the #3.
     }
